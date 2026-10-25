@@ -1,0 +1,557 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Политика конфиденциальности — ODRA JET</title>
+<meta name="robots" content="noindex">
+<link rel="canonical" href="https://odrajet.github.io/ru/privacy/">
+<link rel="icon" href="../../favicon.svg" type="image/svg+xml">
+<meta name="theme-color" content="#e8ebe5">
+<style>
+  :root {
+    color-scheme: light;
+    --paper:      #e8ebe5;
+    --surface:    #f9faf7;
+    --surface-2:  #dbe0d6;
+    --ink:        #14201d;
+    --muted:      #566159;
+    --line:       #c5ccc0;
+    --line-2:     #a9b3a4;
+    --accent:     #12514b;
+    --accent-2:   #0d3c37;
+    --accent-ink: #f3f6f1;
+    --signal:     #b4501a;
+    --signal-bg:  #f5e6d8;
+    --signal-line:#dcac7e;
+    --focus:      #12514b;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      color-scheme: dark;
+      --paper:      #0f1614;
+      --surface:    #172020;
+      --surface-2:  #202b28;
+      --ink:        #e5ebe4;
+      --muted:      #98a69c;
+      --line:       #2b3733;
+      --line-2:     #3d4c46;
+      --accent:     #2b7f72;
+      --accent-2:   #55b3a2;
+      --accent-ink: #f2f6f1;
+      --signal:     #e08a4d;
+      --signal-bg:  #2c1f14;
+      --signal-line:#5b3f25;
+      --focus:      #55b3a2;
+    }
+  }
+
+  :root[data-theme="dark"] {
+    color-scheme: dark;
+    --paper:      #0f1614;
+    --surface:    #172020;
+    --surface-2:  #202b28;
+    --ink:        #e5ebe4;
+    --muted:      #98a69c;
+    --line:       #2b3733;
+    --line-2:     #3d4c46;
+    --accent:     #2b7f72;
+    --accent-2:   #55b3a2;
+    --accent-ink: #f2f6f1;
+    --signal:     #e08a4d;
+    --signal-bg:  #2c1f14;
+    --signal-line:#5b3f25;
+    --focus:      #55b3a2;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: "Noto Sans", system-ui, sans-serif;
+    font-size: 16.5px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  :root[lang="ka"] body { font-family: "Noto Sans Georgian", "Noto Sans", system-ui, sans-serif; }
+
+  h1, h2, h3 {
+    font-family: "Noto Serif", Georgia, serif;
+    text-wrap: balance;
+    margin: 0;
+  }
+
+  :root[lang="ka"] h1,
+  :root[lang="ka"] h2,
+  :root[lang="ka"] h3 { font-family: "Noto Serif Georgian", "Noto Serif", Georgia, serif; }
+
+  .num {
+    font-family: "Oswald", "Noto Sans Georgian", system-ui, sans-serif;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: 0.01em;
+  }
+
+  a { color: inherit; }
+  :focus-visible { outline: 2px solid var(--focus); outline-offset: 3px; border-radius: 2px; }
+  img { max-width: 100%; height: auto; display: block; }
+  [hidden] { display: none !important; }
+
+  .wrap { max-width: 940px; margin: 0 auto; padding: 0 20px; }
+
+  .label {
+    font-family: "Oswald", "Noto Sans Georgian", sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  /* ---------- setup notice (виден только владельцу, пока не заполнен CONFIG) ---------- */
+
+  #setup {
+    display: none;
+    background: var(--signal-bg);
+    border-bottom: 1px solid var(--signal-line);
+    color: var(--ink);
+    font-size: 14px;
+  }
+  #setup.on { display: block; }
+  #setup .wrap { padding-top: 14px; padding-bottom: 16px; display: grid; gap: 6px; }
+  #setup b { color: var(--signal); }
+  #setup ul { margin: 2px 0 0; padding-left: 20px; }
+  #setup li { margin-bottom: 3px; }
+  #setup code {
+    font-family: ui-monospace, monospace;
+    background: var(--surface);
+    border: 1px solid var(--signal-line);
+    border-radius: 3px;
+    padding: 1px 5px;
+    font-size: 12.5px;
+  }
+
+  /* ---------- topbar ---------- */
+
+  .topbar {
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    background: var(--paper);
+    border-bottom: 1px solid var(--line);
+  }
+
+  .topbar .wrap {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding-top: 12px;
+    padding-bottom: 12px;
+  }
+
+  .brand { display: grid; gap: 1px; }
+  .brand-name {
+    font-family: "Oswald", sans-serif;
+    font-size: 19px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+  }
+  .brand-sub { font-size: 12px; color: var(--muted); line-height: 1.2; }
+
+  .langs { display: flex; gap: 4px; }
+  .lang {
+    font-family: "Oswald", "Noto Sans Georgian", sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    background: none;
+    border: 1px solid var(--line);
+    color: var(--muted);
+    border-radius: 2px;
+    padding: 5px 9px;
+    cursor: pointer;
+  }
+  .lang:hover { border-color: var(--line-2); color: var(--ink); }
+  .lang[aria-pressed="true"] {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: var(--accent-ink);
+  }
+
+  /* ---------- hero ---------- */
+
+  .hero {
+    display: grid;
+    grid-template-columns: 0.92fr 1.08fr;
+    gap: 36px;
+    align-items: center;
+    padding: 56px 0 40px;
+  }
+
+  .hero h1 {
+    font-size: clamp(29px, 4.4vw, 42px);
+    font-weight: 800;
+    line-height: 1.12;
+    margin: 14px 0 16px;
+  }
+
+  .lede { font-size: 17.5px; color: var(--muted); max-width: 44ch; margin: 0 0 26px; }
+
+  .cta-row { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+
+  .btn {
+    font-family: "Oswald", "Noto Sans Georgian", sans-serif;
+    font-size: 15px;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+    padding: 13px 22px;
+    border-radius: 2px;
+    border: 1px solid var(--accent);
+    cursor: pointer;
+  }
+  .btn-primary { background: var(--accent); color: var(--accent-ink); }
+  .btn-primary:hover { background: var(--accent-2); border-color: var(--accent-2); }
+  .btn-ghost { background: none; color: var(--ink); border-color: var(--line-2); }
+  .btn-ghost:hover { border-color: var(--accent); color: var(--accent); }
+
+  .price-block { display: flex; align-items: baseline; gap: 10px; margin-top: 18px; flex-wrap: wrap; }
+  .price { font-family: "Oswald", sans-serif; font-size: 32px; font-weight: 600; color: var(--signal); }
+  .price-note { font-size: 13.5px; color: var(--muted); }
+
+  .photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+  .photo {
+    aspect-ratio: 4 / 3;
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    overflow: hidden;
+    background: var(--surface);
+  }
+
+  /* ---------- spec strip ---------- */
+
+  .specs {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    background: var(--line);
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    overflow: hidden;
+    margin-bottom: 20px;
+  }
+  .spec { background: var(--surface); padding: 16px 14px 18px; }
+  .spec-v {
+    font-family: "Oswald", "Noto Sans Georgian", sans-serif;
+    font-size: 23px;
+    font-weight: 600;
+    color: var(--accent);
+    line-height: 1.2;
+  }
+  :root[data-theme="dark"] .spec-v { color: var(--accent-2); }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) .spec-v { color: var(--accent-2); }
+  }
+  .spec-l { font-size: 13px; color: var(--muted); line-height: 1.35; margin-top: 3px; }
+
+  /* ---------- generic sections ---------- */
+
+  section { padding: 44px 0 0; }
+  section h2 { font-size: 23px; font-weight: 700; margin-bottom: 20px; }
+
+  .gallery { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+  .gallery figure {
+    margin: 0;
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    overflow: hidden;
+    background: var(--surface);
+  }
+  .gallery img { width: 100%; height: auto; display: block; }
+  .gallery figcaption { padding: 11px 15px 13px; font-size: 13.5px; color: var(--muted); }
+
+  .proof {
+    display: flex;
+    gap: 18px;
+    align-items: center;
+    background: var(--surface-2);
+    border-radius: 3px;
+    padding: 18px 22px;
+    margin-top: 22px;
+    flex-wrap: wrap;
+  }
+  .proof-n { font-family: "Oswald", sans-serif; font-size: 27px; font-weight: 600; color: var(--accent); }
+  :root[data-theme="dark"] .proof-n { color: var(--accent-2); }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) .proof-n { color: var(--accent-2); }
+  }
+  .proof p { margin: 0; font-size: 15px; max-width: 56ch; }
+
+  .who { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+  .card {
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    background: var(--surface);
+    padding: 18px 20px 20px;
+  }
+  .card h3 { font-size: 16px; font-weight: 700; margin-bottom: 7px; }
+  .card p { margin: 0; font-size: 14.5px; color: var(--muted); }
+
+  /* ---------- b2b ---------- */
+
+  .b2b {
+    border: 2px solid var(--accent);
+    border-radius: 3px;
+    background: var(--surface);
+    padding: 26px 26px 28px;
+    display: grid;
+    gap: 12px;
+  }
+  .b2b h2 { margin: 0; }
+  .b2b p { margin: 0; max-width: 60ch; }
+  .b2b-price {
+    font-family: "Oswald", "Noto Sans Georgian", sans-serif;
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--signal);
+  }
+  .b2b .btn { justify-self: start; margin-top: 4px; }
+
+  /* ---------- steps ---------- */
+
+  .steps { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; counter-reset: s; }
+  .steps li {
+    counter-increment: s;
+    display: grid;
+    grid-template-columns: 30px 1fr;
+    gap: 14px;
+    align-items: start;
+    font-size: 15.5px;
+  }
+  .steps li::before {
+    content: counter(s);
+    font-family: "Oswald", sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--accent);
+    border: 1px solid var(--line-2);
+    border-radius: 2px;
+    width: 30px; height: 30px;
+    display: flex; align-items: center; justify-content: center;
+  }
+  :root[data-theme="dark"] .steps li::before { color: var(--accent-2); }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) .steps li::before { color: var(--accent-2); }
+  }
+
+  .notice {
+    border-left: 3px solid var(--signal);
+    background: var(--signal-bg);
+    border-radius: 0 3px 3px 0;
+    padding: 15px 20px;
+    margin-top: 18px;
+  }
+  .notice h3 { font-size: 15px; font-weight: 700; margin-bottom: 4px; }
+  .notice p { margin: 0; font-size: 14.5px; }
+
+  .trust {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--line);
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    overflow: hidden;
+    margin-top: 26px;
+  }
+  .trust div { background: var(--surface); padding: 14px 16px; font-size: 14.5px; }
+
+  .video-wrap {
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    overflow: hidden;
+    background: #000;
+    max-width: 560px;
+  }
+  .video-wrap video { width: 100%; height: auto; display: block; }
+  .video-note { margin: 10px 0 0; font-size: 14px; color: var(--muted); }
+  .photo-note { margin: 8px 0 0; font-size: 12.5px; color: var(--muted); }
+
+  .inline-cta { margin: 0 0 26px; }
+  .inline-cta a:not(.btn) {
+    font-size: 15.5px;
+    color: var(--accent);
+    text-underline-offset: 4px;
+  }
+  :root[data-theme="dark"] .inline-cta a:not(.btn) { color: var(--accent-2); }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) .inline-cta a:not(.btn) { color: var(--accent-2); }
+  }
+
+  /* ---------- форма ---------- */
+
+  .lead-form {
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    background: var(--surface);
+    padding: 24px 24px 26px;
+    display: grid;
+    gap: 14px;
+    max-width: 560px;
+  }
+  .lead-form h2 { margin: 0; }
+  .lead-form p.sub { margin: 0; color: var(--muted); font-size: 15px; }
+  .lead-form label { display: grid; gap: 5px; font-size: 14px; color: var(--muted); }
+  .lead-form input[type="text"],
+  .lead-form input[type="tel"] {
+    font: inherit;
+    font-size: 16px;
+    color: var(--ink);
+    background: var(--paper);
+    border: 1px solid var(--line-2);
+    border-radius: 2px;
+    padding: 11px 12px;
+  }
+  .lead-form input::placeholder { color: var(--muted); opacity: 0.7; }
+  .prefer { display: flex; gap: 8px; flex-wrap: wrap; }
+  .prefer label {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    font-size: 14.5px;
+    color: var(--ink);
+    border: 1px solid var(--line-2);
+    border-radius: 2px;
+    padding: 9px 13px;
+    cursor: pointer;
+  }
+  .prefer input { accent-color: var(--accent); }
+  .lead-form .consent-note { margin: -4px 0 0; font-size: 12.5px; color: var(--muted); }
+  .form-msg { margin: 0; font-size: 15px; }
+
+  .lead-form--short { max-width: 100%; margin: 0 0 26px; gap: 10px; padding: 22px 24px 24px; }
+  .lead-form--short h2 { font-size: 20px; }
+  .short-row { display: grid; grid-template-columns: 1fr 1fr auto; gap: 10px; align-items: stretch; }
+  .short-row .btn { white-space: nowrap; }
+  .lead-form--short .sr span { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+  @media (max-width: 700px) {
+    .short-row { grid-template-columns: 1fr; }
+  }
+  .form-msg.err { color: var(--signal); }
+
+  /* ---------- contact ---------- */
+
+  .contact {
+    margin-top: 52px;
+    border-top: 2px solid var(--line-2);
+    padding: 40px 0 96px;
+    text-align: center;
+  }
+  .contact h2 { margin-bottom: 8px; }
+  .contact p { color: var(--muted); margin: 0 0 22px; }
+  .channels { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+
+  footer { border-top: 1px solid var(--line); padding: 20px 0 40px; font-size: 13px; color: var(--muted); }
+  footer p { margin: 0 0 8px; }
+  footer .legal-line { line-height: 1.5; max-width: 70ch; }
+  footer .privacy-link { color: var(--muted); text-underline-offset: 3px; }
+
+  /* ---------- mobile sticky bar ---------- */
+
+  .mobile-bar { display: none; }
+
+  @media (max-width: 860px) {
+    /* порядок первого экрана: сначала товар и цена, потом текст */
+    .hero { display: flex; flex-direction: column; gap: 16px; padding-top: 22px; }
+    .hero-text { display: contents; }
+    .hero .label { order: 1; margin-bottom: 0; }
+    .hero h1 { order: 2; margin: 0; font-size: clamp(24px, 6.4vw, 32px); }
+    .hero .photo { order: 3; }
+    .hero .price-block { order: 4; margin-top: 0; }
+    .hero .cta-row { order: 5; }
+    .hero .lede { order: 6; margin: 0; font-size: 16px; }
+    .topbar .wrap { padding-top: 9px; padding-bottom: 9px; }
+    .lang { padding: 4px 7px; font-size: 12px; }
+    .brand-sub { display: none; }
+    .specs { grid-template-columns: repeat(2, 1fr); }
+    .who { grid-template-columns: 1fr; }
+    .gallery { grid-template-columns: 1fr; }
+    .gallery figure { max-width: 420px; margin: 0 auto; }
+    .trust { grid-template-columns: 1fr; }
+    body { padding-bottom: 120px; }
+    .mobile-bar {
+      display: flex;
+      position: fixed;
+      left: 0; right: 0; bottom: 0;
+      z-index: 30;
+      gap: 8px;
+      padding: 10px 14px calc(10px + env(safe-area-inset-bottom));
+      background: var(--paper);
+      border-top: 1px solid var(--line);
+      align-items: center;
+      transition: transform 0.2s ease;
+    }
+    .mobile-bar.tucked { transform: translateY(130%); }
+    .mobile-bar .bar-price {
+      font-family: "Oswald", sans-serif;
+      font-size: 19px;
+      font-weight: 600;
+      color: var(--signal);
+      white-space: nowrap;
+      padding-left: 4px;
+    }
+    .mobile-bar .btn { flex: 1; justify-content: center; padding: 12px 8px; font-size: 14.5px; white-space: nowrap; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { animation: none !important; transition: none !important; }
+  }
+
+  .doc { max-width: 760px; margin: 0 auto; padding: 28px 20px 80px; }
+  .doc h1 { font-size: 28px; margin: 18px 0 10px; }
+  .doc h2 { font-size: 17px; margin: 26px 0 6px; }
+  .doc p { margin: 0; font-size: 15.5px; line-height: 1.6; }
+  .doc p + p { margin-top: 10px; }
+  .doc .lede { color: var(--muted); margin-bottom: 6px; }
+  .doc .back { font-size: 14px; color: var(--accent); text-underline-offset: 3px; }
+  .doc .updated { margin-top: 32px; font-size: 13px; color: var(--muted); }
+</style>
+</head>
+<body>
+<div class="doc">
+  <p><a class="back" href="../../ru/">← На главную</a></p>
+  <h1>Политика конфиденциальности</h1>
+  <p class="lede">Эта страница объясняет, какие данные собирает ODRA JET на сайте и в рекламе, зачем и кому они передаются.</p>
+  <h2>Кто обрабатывает данные</h2>
+<p>Individual Entrepreneur Rodion Sitko, идентификационный номер 304824581, зарегистрирован 07.08.2026 в LEPL National Agency of Public Registry. Юридический адрес: Georgia, Tbilisi, Mtatsminda District, 19 Erekle Tatishvili Street, Entrance 2. Магазин работает под названием ODRA JET.</p>
+<h2>Какие данные собираются</h2>
+<p>Имя и номер телефона, которые вы сами оставляете в форме на сайте, и способ связи, который вы выбираете. Кроме того, сайт собирает технические данные о посещении: адрес страницы, источник перехода, тип устройства и браузера, нажатия по кнопкам связи. Эти данные собираются через Meta Pixel. Если вы приняли cookie в баннере, то при нажатии кнопки в форме пиксель Meta считывает номер из поля, хеширует (зашифровывает) его прямо в вашем браузере и в таком виде отправляет в Meta — чтобы сопоставить визит с аккаунтом и оценить рекламу. В открытом виде номер Meta не получает. Если вы отклонили cookie, пиксель не загружается и номер в Meta не уходит.</p>
+<p>Имя и номер телефона могут поступить и другим путём: из рекламной лид-формы Meta, которую вы заполняете прямо в Facebook или Instagram, не переходя на сайт. В этом случае данные передаёт нам Meta. Обрабатывает их тот же продавец, что назван выше, и с той же целью — связаться с вами по вашему обращению.</p>
+<h2>Зачем</h2>
+<p>Чтобы связаться с вами по вашему же запросу: ответить на вопрос, согласовать заказ и доставку. Технические данные используются, чтобы понимать, какая реклама приводит людей, и не показывать её тем, кто уже написал.</p>
+<h2>Основание</h2>
+<p>Контактные данные, которые вы оставляете в форме, обрабатываются с вашего согласия. Вы даёте его, когда отправляете форму, и можете отозвать в любой момент — см. раздел ниже. То же относится к рекламной лид-форме Meta: согласие даётся отправкой этой формы.</p>
+<p>Технические данные о посещении собирает Meta Pixel, и он тоже работает только с вашего согласия. При первом заходе сайт показывает баннер: пока вы не нажали «Принять», пиксель не загружается и файлы cookie не ставит. Если вы нажали «Отклонить», сбора не происходит вовсе. Изменить выбор можно, очистив данные этого сайта в настройках браузера — баннер появится снова.</p>
+<h2>Кому передаются данные</h2>
+<p>Meta Platforms Ireland Ltd — технические данные о посещении сайта через Meta Pixel, а также, если вы приняли cookie, номер телефона из формы в хешированном виде, для показа и оценки рекламы. Курьерской службе — имя, телефон и адрес, когда вы оформляете доставку. Сервису приёма заявок Web3Forms — имя, телефон и выбранный способ связи из формы: через него заявка доходит до нашей почты. Никому больше данные не передаются и не продаются.</p>
+<p>В случае с рекламной лид-формой Meta выступает и передающей стороной: имя и номер телефона поступают к нам от неё.</p>
+<h2>Сколько хранятся</h2>
+<p>Контактные данные — до 12 месяцев с последнего обращения или до отзыва согласия. Технические данные — по правилам Meta.</p>
+<h2>Ваши права</h2>
+<p>Вы вправе узнать, какие ваши данные у нас есть, потребовать их исправить или удалить, отозвать согласие и подать жалобу в Службу государственного аудита Грузии (State Audit Office of Georgia) — со 2 марта 2026 года надзор за защитой персональных данных ведёт она, приём обращений на pdp.sao.ge. Права предусмотрены Законом Грузии «О защите персональных данных» №3144/2023.</p>
+<h2>Как отозвать согласие</h2>
+<p>Напишите нам на cmstorequest67@gmail.com. Мы удалим ваш номер и прекратим связь в течение 10 рабочих дней.</p>
+<h2>Пиксель и файлы cookie</h2>
+<p>Meta Pixel ставит файлы cookie в вашем браузере — но только после того, как вы согласились в баннере. Отказ ничего не ломает: сайт и форма работают полностью. Персонализацию рекламы можно отключить и в настройках вашего аккаунта Facebook или Instagram.</p>
+  <p class="updated">Последнее обновление: 31.08.2026.</p>
+</div>
+</body>
+</html>

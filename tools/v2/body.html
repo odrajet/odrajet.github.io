@@ -1,0 +1,212 @@
+<div class="page">
+
+<div class="strip" data-i18n="topStrip"></div>
+
+<header class="topbar">
+  <div class="brand">
+    <span class="brand-name" id="brand-name">{{BRAND}}</span>
+    <span class="brand-sub" data-i18n="brandSub"></span>
+  </div>
+  <div class="langs" role="group" aria-label="Language">
+    <a class="lang" href="{{L_KA}}" hreflang="ka" lang="ka" data-lang="ka" aria-pressed="{{P_KA}}" aria-label="ქართული">ქარ</a>
+    <a class="lang" href="{{L_RU}}" hreflang="ru" lang="ru" data-lang="ru" aria-pressed="{{P_RU}}" aria-label="Русский">РУС</a>
+    <a class="lang" href="{{L_EN}}" hreflang="en" lang="en" data-lang="en" aria-pressed="{{P_EN}}" aria-label="English">ENG</a>
+  </div>
+</header>
+
+<main>
+
+  <section class="hero">
+    <p class="eyebrow" data-i18n="heroEyebrow"></p>
+    <h1 class="display h1"><span data-i18n="heroA"></span> <mark data-i18n="heroB"></mark></h1>
+    <p class="lede" data-i18n="heroLede"></p>
+    <div class="price-block">
+      <div class="price-row">
+        <span class="price-old" id="price-old" data-old>{{OLD}}</span>
+        <span class="price" id="price-retail">{{RETAIL}}</span>
+        <span class="off-chip" data-off data-old>{{OFF}}</span>
+      </div>
+      <p class="inline-cta cta-stack">
+        <a class="pill pill--wide" data-cta="chat" href="#lead-top" data-i18n="ctaLeaveNumber"></a>
+        <a class="pill pill--ghost pill--wide" data-cta="phone" href="#" data-i18n="ctaCall" hidden></a>
+      </p>
+    </div>
+    <figure class="hero-media bleed">
+      <img id="img-hero" src="{{HERO}}" alt="" width="1080" height="1080" fetchpriority="high" data-i18n-alt="altUse">
+      <span class="burst" data-old><span data-off>{{OFF}}</span></span>
+      <span class="gift-chip"><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 10h18v11H3zM2 6h20v4H2zM12 6v15M12 6c-1.5-3-5-3.5-5.5-1.5S9 6 12 6zm0 0c1.5-3 5-3.5 5.5-1.5S15 6 12 6z" fill="none" stroke="#111" stroke-width="2" stroke-linejoin="round"/></svg><span data-i18n="giftChip"></span></span>
+    </figure>
+    <p class="price-note" data-i18n="priceNote"></p>
+  </section>
+
+  <section class="sec sec--tight">
+    <form class="lead-form lead-form--short card" id="lead-top" name="lead-top" method="POST">
+      <input type="checkbox" name="botcheck" tabindex="-1" autocomplete="off" aria-hidden="true" style="display:none">
+      <input type="hidden" name="lang" value="">
+      <input type="hidden" name="source" value="">
+      <input type="hidden" name="campaign" value="">
+      <input type="hidden" name="place" value="top">
+      <input type="hidden" name="variant" value="v2">
+      <h2 class="display h3" data-i18n="shortFormTitle"></h2>
+      <p class="sub" data-i18n="shortFormText"></p>
+      <div class="fields">
+        <label class="field"><span class="sr" data-i18n="fName"></span>
+          <input type="text" name="name" required autocomplete="name" data-ph="fName" placeholder="{{PH_NAME}}">
+        </label>
+        <label class="field"><span class="sr" data-i18n="fPhone"></span>
+          <input type="tel" name="phone" required autocomplete="tel" data-ph="fPhone" placeholder="{{PH_PHONE}}">
+        </label>
+        <button class="pill pill--wide" type="submit" data-i18n="fSubmit"></button>
+      </div>
+      <p class="consent-note"><span data-i18n="fConsent"></span> <a class="privacy-link" href="{{PRIV}}" data-i18n="privacyLink"></a></p>
+      <p class="form-msg" hidden></p>
+    </form>
+  </section>
+
+  <section class="sec">
+    <h2 class="display h2 center" data-i18n="annTitle"></h2>
+    <figure class="annot bleed">
+      <img src="{{R}}img/v2_annot.jpg" alt="" width="1200" height="1050" loading="lazy" data-i18n-alt="altHero">
+      <span class="dim dim--len" style="--x1:3.5%;--x2:96.5%;--y:15%"><b data-i18n="ann3"></b></span>
+      <span class="tag tag--up" style="--x:30%;--y:50%;--len:34px"><b data-i18n="ann1"></b></span>
+      <span class="tag tag--down" style="--x:35%;--y:64%;--len:32px"><b data-i18n="ann2"></b></span>
+      <span class="dim dim--h" style="--x:91%;--y1:58%;--y2:74.8%"><b data-i18n="ann4"></b></span>
+    </figure>
+    <p class="note center" data-i18n="annNote"></p>
+    <p class="inline-cta center"><a class="pill" data-cta="chat-book" href="#lead-form" data-i18n="ctaOrder"></a></p>
+  </section>
+
+  <section class="sec sec--soft">
+    <h2 class="display h2 center" data-i18n="b2Title"></h2>
+    <p class="copy center" data-i18n="b2Text"></p>
+    <figure class="card-media"><img id="img-b2" src="{{R}}img/b2.jpg" alt="" width="1300" height="939" loading="lazy" data-i18n-alt="altMattress"></figure>
+    <p class="inline-cta center"><a class="pill" data-cta="chat-book" href="#lead-form" data-i18n="ctaOrder"></a></p>
+  </section>
+
+  <section class="sec" id="video-section" hidden>
+    <h2 class="display h2 center" data-i18n="videoTitle"></h2>
+    <p class="copy center" data-i18n="videoLede"></p>
+    <div class="video-card"><video id="product-video" controls playsinline preload="metadata"></video></div>
+    <p class="note center" data-i18n="videoNote"></p>
+  </section>
+
+  <section class="sec">
+    <div class="panel">
+      <h2 class="display h2" data-i18n="chkTitle"></h2>
+      <ul class="checks">
+        <li data-i18n="chk1"></li>
+        <li data-i18n="chk2"></li>
+        <li data-i18n="chk3"></li>
+        <li data-i18n="chk4"></li>
+        <li data-i18n="giftChip"></li>
+      </ul>
+      <figure class="panel-media"><img id="img-b3" src="{{R}}img/b3.jpg" alt="" width="1300" height="867" loading="lazy" data-i18n-alt="altFrame"></figure>
+      <p class="inline-cta center"><a class="pill" data-cta="chat-book" href="#lead-form" data-i18n="ctaOrder"></a></p>
+    </div>
+  </section>
+
+  <section class="sec sec--soft">
+    <h2 class="display h2 center" data-i18n="b4Title"></h2>
+    <p class="copy center" data-i18n="b4Text"></p>
+    <figure class="card-media"><img id="img-b4" src="{{R}}img/b4.jpg" alt="" width="1300" height="1625" loading="lazy" data-i18n-alt="altCarry"></figure>
+    <p class="inline-cta center"><a class="pill" data-cta="chat-book" href="#lead-form" data-i18n="ctaOrder"></a></p>
+  </section>
+
+  <section class="sec" id="price">
+    <h2 class="display h2 center" data-i18n="offerTitle"></h2>
+    <div class="offer">
+      <img class="offer-img" src="{{R}}img/v2_thumb.jpg" alt="" width="520" height="390" loading="lazy">
+      <div class="offer-body">
+        <p class="offer-name" data-i18n="offer1Name"></p>
+        <p class="offer-price"><span class="price-old" data-money="priceOld" data-old>{{OLD}}</span><span data-money="priceRetail">{{RETAIL}}</span><span class="per" data-i18n="perUnit"></span></p>
+        <p class="offer-sub" data-i18n="offer1Sub"></p>
+        <p class="inline-cta"><a class="pill pill--sm" data-cta="chat-book" href="#lead-form" data-i18n="ctaOrder"></a></p>
+      </div>
+      <span class="burst burst--sm" data-old><span data-off>{{OFF}}</span></span>
+    </div>
+    <div class="offer">
+      <div class="offer-img offer-img--x5" aria-hidden="true"><span>×<span data-num="wholesaleMin">{{MIN}}</span></span></div>
+      <div class="offer-body">
+        <p class="offer-name" data-i18n="offer2Name"></p>
+        <p class="offer-price"><span data-money="priceWholesale">{{WHOLESALE}}</span><span class="per" data-i18n="perUnit"></span></p>
+        <p class="offer-sub" data-i18n="offer2Sub"></p>
+        <p class="inline-cta"><a class="pill pill--sm pill--dark" data-cta="chat-b2b" href="#lead-form" data-i18n="ctaLeaveNumber"></a></p>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec sec--soft">
+    <h2 class="display h2 center" data-i18n="orderTitle"></h2>
+    <ol class="steps">
+      <li><span class="num">1</span><p data-i18n="step1"></p></li>
+      <li><span class="num">2</span><p data-i18n="step2"></p></li>
+      <li><span class="num">3</span><p data-i18n="step3"></p></li>
+    </ol>
+    <ul class="trust">
+      <li data-i18n="trust1"></li>
+      <li data-i18n="trust2"></li>
+      <li data-i18n="trust3"></li>
+    </ul>
+  </section>
+
+  <section class="sec">
+    <form class="lead-form card card--lime" name="lead" method="POST" id="lead-form">
+      <input type="checkbox" name="botcheck" tabindex="-1" autocomplete="off" aria-hidden="true" style="display:none">
+      <input type="hidden" name="lang" id="f-lang" value="">
+      <input type="hidden" name="source" id="f-source" value="">
+      <input type="hidden" name="campaign" id="f-campaign" value="">
+      <input type="hidden" name="place" value="bottom">
+      <input type="hidden" name="variant" value="v2">
+      <h2 class="display h2" data-i18n="formTitle"></h2>
+      <p class="sub" data-i18n="formText"></p>
+      <label class="field"><span class="flabel" data-i18n="fName"></span>
+        <input type="text" name="name" required autocomplete="name">
+      </label>
+      <label class="field"><span class="flabel" data-i18n="fPhone"></span>
+        <input type="tel" name="phone" required autocomplete="tel" placeholder="+995 ">
+      </label>
+      <div class="field">
+        <p class="flabel" data-i18n="fPrefer"></p>
+        <div class="prefer">
+          <label><input type="radio" name="prefer" value="viber"><span data-i18n="fViber"></span></label>
+          <label><input type="radio" name="prefer" value="whatsapp" checked><span data-i18n="fWa"></span></label>
+          <label><input type="radio" name="prefer" value="call"><span data-i18n="fCall"></span></label>
+        </div>
+      </div>
+      <button class="pill pill--wide" type="submit" data-i18n="fSubmit"></button>
+      <p class="consent-note"><span data-i18n="fConsent"></span> <a class="privacy-link" href="{{PRIV}}" data-i18n="privacyLink"></a></p>
+      <p class="form-msg" id="form-msg" hidden></p>
+    </form>
+  </section>
+
+  <section class="sec sec--dark">
+    <h2 class="display h2" data-i18n="b2bTitle"></h2>
+    <p class="b2b-price" id="b2b-price">{{B2BPRICE}}</p>
+    <p class="copy" data-i18n="b2bText"></p>
+    <p class="inline-cta"><a class="pill" data-cta="chat-b2b" href="#lead-form" data-i18n="b2bCta"></a></p>
+  </section>
+
+</main>
+
+<footer class="foot">
+  <p class="foot-brand" id="footer-text">{{FOOTER}}</p>
+  <p class="legal-line" id="legal-line">{{LEGAL}}</p>
+  <p><a class="privacy-link" href="{{PRIV}}" data-i18n="privacyLink"></a></p>
+</footer>
+
+</div>
+
+<div class="mobile-bar" id="mobile-bar">
+  <span class="bar-prices"><span class="bar-price-old" id="bar-price-old" data-old>{{OLD}}</span><span class="bar-price" id="bar-price">{{RETAIL}}</span></span>
+  <a class="pill" data-cta="chat-sticky" href="#lead-top" data-i18n="ctaLeaveNumber"></a>
+  <a class="pill" id="bar-form" href="#lead-top" data-i18n="ctaLeaveNumber" hidden></a>
+</div>
+
+<!-- Consent banner. The Meta pixel is not initialised until the visitor presses "accept". -->
+<div class="cookie-bar" id="cookie-bar" role="region" aria-label="cookie" hidden>
+  <p><span data-i18n="cookieText"></span> <a class="privacy-link" href="{{PRIV}}" data-i18n="privacyLink"></a></p>
+  <div class="cookie-actions">
+    <button class="pill pill--ghost" type="button" id="cookie-no" data-i18n="cookieNo"></button>
+    <button class="pill" type="button" id="cookie-yes" data-i18n="cookieYes"></button>
+  </div>
+</div>
