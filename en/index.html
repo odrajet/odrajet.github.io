@@ -99,6 +99,11 @@
   .gallery .slide { flex: 0 0 100%; scroll-snap-align: start; position: relative; aspect-ratio: 1 / 1; }
   .gallery .slide img, .gallery .slide video { width: 100%; height: 100%; object-fit: cover; }
   .gallery .slide.contain img { object-fit: contain; background: #fff; }
+  .gallery .snd {
+    position: absolute; right: 12px; bottom: 12px; width: 44px; height: 44px; border-radius: 50%;
+    border: 0; background: rgba(0,0,0,.6); color: #fff; font-size: 20px; cursor: pointer;
+    display: grid; place-items: center;
+  }
   .slogan {
     position: absolute; left: 14px; top: 14px; max-width: 80%; pointer-events: none;
     background: rgba(255,255,255,.82); padding: 6px 12px 8px; border-radius: 12px;
@@ -395,7 +400,7 @@
         <div class="slide"><img src="../v3/form/ka/p3.jpg" data-src-lang="../v3/form/{lang}/p3.jpg" alt="" loading="lazy"></div>
         <div class="slide"><img src="../v3/form/ka/p4.jpg" data-src-lang="../v3/form/{lang}/p4.jpg" alt="" loading="lazy"></div>
         <div class="slide"><img src="../v3/form/ka/p5.jpg" data-src-lang="../v3/form/{lang}/p5.jpg" alt="" loading="lazy"></div>
-        <div class="slide"><video src="../video/odra.mp4" poster="../video/odra-poster.jpg" muted loop playsinline preload="none"></video></div>
+        <div class="slide"><video src="../video/odra.mp4" poster="../video/odra-poster.jpg" muted loop playsinline preload="none"></video><button type="button" class="snd" aria-label="Sound">🔇</button></div>
       </div>
       <div class="thumbs" id="thumbs">
         <button type="button"><img src="../v3/form/ka/hero.jpg" data-src-lang="../v3/form/{lang}/hero.jpg" alt=""></button>
@@ -505,7 +510,7 @@
     </div>
     <div class="warn" data-i18n-html="warn"></div>
     <div class="video-box">
-      <video src="../video/odra.mp4" poster="../video/odra-poster.jpg" controls muted playsinline preload="none"></video>
+      <video src="../video/odra.mp4" poster="../video/odra-poster.jpg" controls playsinline preload="none"></video>
     </div>
   </section>
 
@@ -1177,6 +1182,12 @@ const I18N = {
     });
   }, { passive: true });
   markThumb(0);
+  /* звук ролика в галерее: автозапуск только без звука, включается кнопкой */
+  $$("#slides .snd").forEach(b => b.addEventListener("click", () => {
+    const v = b.parentElement.querySelector("video");
+    v.muted = !v.muted; b.textContent = v.muted ? "🔇" : "🔊";
+    if (v.paused) v.play().catch(() => {});
+  }));
 
   /* ---------- фото покупателей: лайтбокс ---------- */
   /* лайтбокс-карусель: листается свайпом, стрелками и клавишами */
