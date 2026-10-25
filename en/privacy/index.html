@@ -523,6 +523,7 @@
   .doc .lede { color: var(--muted); margin-bottom: 6px; }
   .doc .back { font-size: 14px; color: var(--accent); text-underline-offset: 3px; }
   .doc .updated { margin-top: 32px; font-size: 13px; color: var(--muted); }
+  .doc .px-off { border: 1px solid currentColor; background: transparent; color: inherit; border-radius: 8px; padding: 8px 14px; font: inherit; cursor: pointer; }
 </style>
 </head>
 <body>
@@ -533,15 +534,15 @@
   <h2>Who processes the data</h2>
 <p>Individual Entrepreneur Rodion Sitko, identification number 304824581, registered on 07.08.2026 with LEPL National Agency of Public Registry. Legal address: Georgia, Tbilisi, Mtatsminda District, 19 Erekle Tatishvili Street, Entrance 2. The shop trades under the name ODRA JET.</p>
 <h2>What is collected</h2>
-<p>The name and phone number you leave in the form on this site, and the reply channel you choose. The site also collects technical data about the visit: page address, referral source, device and browser type, clicks on contact buttons. This is collected through the Meta Pixel. If you accepted cookies in the banner, then when you press the button in the form the Meta Pixel reads the number from the field, hashes (encrypts) it inside your own browser and sends it to Meta in that form, so the visit can be matched to an account and our advertising measured. Meta does not receive the number in plain text. If you declined cookies, the pixel is not loaded and the number is not sent to Meta.</p>
+<p>The name and phone number you leave in the form on this site, and the reply channel you choose. The site also collects technical data about the visit: page address, referral source, device and browser type, clicks on contact buttons. This is collected through the Meta Pixel. Unless you opted out of cookies in the banner, when you press the button in the form the Meta Pixel reads the number from the field, hashes (encrypts) it inside your own browser and sends it to Meta in that form, so the visit can be matched to an account and our advertising measured. Meta does not receive the number in plain text. If you pressed “Opt out”, the pixel is switched off and the number is not sent to Meta.</p>
 <p>The name and phone number may also reach us another way: from a Meta lead form you fill in inside Facebook or Instagram, without going to this site. In that case the data is passed to us by Meta. It is processed by the same seller named above and for the same purpose — to contact you about your enquiry.</p>
 <h2>Why</h2>
 <p>To contact you at your own request: answer a question, agree an order and a delivery. Technical data helps us see which ads bring people and avoid showing ads to those who already wrote to us.</p>
 <h2>Legal basis</h2>
 <p>The contact details you leave in the form are processed with your consent. You give it when you submit the form, and you may withdraw it at any time — see below. The same applies to a Meta lead form: consent is given by submitting that form.</p>
-<p>Technical data about the visit is collected by the Meta Pixel, and it too runs only with your consent. On your first visit the site shows a banner: until you press “Accept”, the pixel is not loaded and sets no cookies. If you press “Decline”, nothing is collected at all. To change your choice, clear this site’s data in your browser settings — the banner will appear again.</p>
+<p>Technical data about the visit is collected by the Meta Pixel. It starts as soon as you open the site, and a notice at the bottom of the page tells you so. If you press “Opt out” there (or the button in the “Pixel and cookies” section below), the pixel is switched off, sends nothing more to Meta and is not loaded on later visits: your choice is remembered in your browser. To undo it, clear this site’s data in your browser settings.</p>
 <h2>Who receives the data</h2>
-<p>Meta Platforms Ireland Ltd — technical visit data through the Meta Pixel, and, if you accepted cookies, the phone number from the form in hashed form, to deliver and measure advertising. The courier company — your name, phone and address when a delivery is arranged. The form provider Web3Forms — your name, phone and chosen reply channel from the form: this is how an enquiry reaches our mailbox. Your data is not shared with anyone else and is never sold.</p>
+<p>Meta Platforms Ireland Ltd — technical visit data through the Meta Pixel, and, unless you opted out of cookies, the phone number from the form in hashed form, to deliver and measure advertising. The courier company — your name, phone and address when a delivery is arranged. The form provider Web3Forms — your name, phone and chosen reply channel from the form: this is how an enquiry reaches our mailbox. Your data is not shared with anyone else and is never sold.</p>
 <p>With a Meta lead form, Meta is also the party passing data on: the name and phone number reach us from Meta.</p>
 <h2>How long it is kept</h2>
 <p>Contact details — up to 12 months from your last message, or until consent is withdrawn. Technical data — according to Meta&#x27;s own retention rules.</p>
@@ -550,8 +551,17 @@
 <h2>How to withdraw consent</h2>
 <p>Write to cmstorequest67@gmail.com. We will delete your number and stop contacting you within 10 working days.</p>
 <h2>Pixel and cookies</h2>
-<p>The Meta Pixel sets cookies in your browser — but only after you have agreed in the banner. Declining breaks nothing: the site and the form work in full. You can also turn off ad personalisation in your Facebook or Instagram account settings.</p>
-  <p class="updated">Last updated: 31.08.2026.</p>
+<p>The Meta Pixel sets cookies in your browser to deliver and measure advertising. You can opt out in the notice on the site or here. Opting out breaks nothing: the site and the form work in full. You can also turn off ad personalisation in your Facebook or Instagram account settings.</p>
+<p><button type="button" class="px-off" id="px-off">Opt out of the Meta Pixel</button> <span id="px-state" data-off="The Meta Pixel is switched off on this site for your browser."></span></p>
+  <p class="updated">Last updated: 25.10.2026.</p>
 </div>
+<script>
+(function () {
+  var K = "odra.consent.ads", b = document.getElementById("px-off"), st = document.getElementById("px-state");
+  function show() { var c = null; try { c = localStorage.getItem(K); } catch (e) {} if (c === "no") { b.hidden = true; st.textContent = st.getAttribute("data-off"); } }
+  b.addEventListener("click", function () { try { localStorage.setItem(K, "no"); } catch (e) {} show(); });
+  show();
+})();
+</script>
 </body>
 </html>
