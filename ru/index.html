@@ -443,13 +443,13 @@
       <div class="packs-title" data-i18n="packsTitle"></div>
       <div class="packs" role="radiogroup">
         <label class="pack">
-          <input type="radio" name="pack" value="1">
+          <input type="radio" name="pack" value="1" checked>
           <span><span class="nm" data-i18n="p1n"></span><span class="ds" data-i18n="p1d"></span></span>
           <span class="pr"><span data-price="retail"></span></span>
         </label>
         <label class="pack">
           <span class="flag" data-i18n="p2flag"></span>
-          <input type="radio" name="pack" value="2" checked>
+          <input type="radio" name="pack" value="2">
           <span><span class="nm" data-i18n="p2n"></span><span class="ds" data-i18n="p2d"></span></span>
           <span class="pr"><s data-price="retail2"></s><span data-price="pairTotal"></span></span>
         </label>
@@ -619,33 +619,13 @@
     <div class="dr-head"><b data-i18n="drTitle"></b><button type="button" class="x" data-close aria-label="Close">×</button></div>
     <div class="dr-body" id="dr-body">
       <div class="dr-strip" data-dr="deadline"></div>
-      <div class="dr-loved">
-        <div class="avatars">
-          <img src="../v3/form/r1.jpg" alt="">
-          <img src="../v3/form/r2.jpg" alt="">
-          <img src="../v3/form/r3.jpg" alt="">
-        </div>
-        <span data-i18n-html="loved"></span>
-      </div>
-      <div class="score-card">
-        <div><span class="stars part" style="font-size:20px">★★★★★</span><small data-i18n="ozonCard"></small></div>
-      </div>
       <div class="line-item">
         <img src="../v3/form/ka/hero.jpg" data-src-lang="../v3/form/{lang}/hero.jpg" alt="">
         <div>
           <div class="t" data-i18n="itemName"></div>
-          <div class="qty">
-            <button type="button" data-q="-1" aria-label="−">−</button>
-            <output id="q">2</output>
-            <button type="button" data-q="1" aria-label="+">+</button>
-          </div>
+          
         </div>
         <div class="pr"><s id="li-old"></s><span id="li-sum"></span></div>
-      </div>
-      <div class="upsell" id="upsell">
-        <div id="up-text"></div>
-        <div class="track"><i id="up-bar"></i></div>
-        <button type="button" id="up-btn"></button>
       </div>
       <div class="totals">
         <div><span data-i18n="tGoods"></span><span id="t-goods"></span></div>
@@ -656,7 +636,7 @@
 
       <form class="lead-form" id="lead-form" novalidate>
         <label><span data-i18n="fName"></span><input name="name" autocomplete="given-name" required maxlength="60"></label>
-        <label><span data-i18n="fPhone"></span><input name="phone" type="tel" inputmode="tel" autocomplete="tel" required placeholder="+995 5__ __ __ __"></label>
+        <label><span data-i18n="fPhone"></span><input name="phone" type="tel" inputmode="tel" autocomplete="tel" required placeholder="+995 XXX XX XX XX"></label>
         <label><span data-i18n="fCity"></span>
           <select name="city">
             <option value="Tbilisi" data-i18n="cityTbilisi"></option>
@@ -1067,7 +1047,7 @@ const I18N = {
     return "ka";
   }
   let lang = pickLang();
-  let qty = 2;
+  let qty = 1;
 
   /* цена за штуку от количества: 1 — розница, 2–4 — акция, 5+ — опт */
   const unit = q => q >= CONFIG.wholesaleMin ? CONFIG.priceWholesale : q >= 2 ? CONFIG.pricePair : CONFIG.priceRetail;
@@ -1244,7 +1224,6 @@ const I18N = {
   function renderCart() {
     const t = I18N[lang], u = unit(qty), goods = u * qty, full = CONFIG.priceRetail * qty;
     const save = full - goods, sum = goods + CONFIG.delivery;
-    $("#q").textContent = qty;
     $("#li-sum").textContent = money(goods);
     $("#li-old").textContent = save ? money(full) : "";
     $("#t-goods").textContent = money(full);
@@ -1253,22 +1232,9 @@ const I18N = {
     $("#t-del").textContent = money(CONFIG.delivery);
     $("#t-sum").textContent = money(sum);
     $("#btn-sum").textContent = money(sum);
-    const upT = $("#up-text"), upB = $("#up-btn"), bar = $("#up-bar");
-    if (qty === 1) {
-      upT.innerHTML = ""; upT.textContent = fill(t.upAdd1);
-      upB.hidden = false; upB.textContent = t.upBtn; bar.style.setProperty("--w", "50%");
-    } else if (qty < CONFIG.wholesaleMin) {
-      upT.textContent = fill(t.upPair) + " · " + fill(t.upToWholesale, { n: CONFIG.wholesaleMin - qty });
-      upB.hidden = true; bar.style.setProperty("--w", Math.round(qty / CONFIG.wholesaleMin * 100) + "%");
-    } else {
-      upT.textContent = fill(t.upWholesale);
-      upB.hidden = true; bar.style.setProperty("--w", "100%");
-    }
     const r = $('input[name="pack"][value="' + (qty >= CONFIG.wholesaleMin ? 5 : qty >= 2 ? 2 : 1) + '"]');
     if (r) r.checked = true;
   }
-  $$("[data-q]").forEach(b => b.addEventListener("click", () => { qty = Math.max(1, Math.min(50, qty + Number(b.dataset.q))); renderCart(); }));
-  $("#up-btn").addEventListener("click", () => { qty += 1; renderCart(); });
 
   $$("[data-open-order]").forEach(b => b.addEventListener("click", () => {
     if (b.dataset.qty) qty = Math.max(qty, Number(b.dataset.qty));
