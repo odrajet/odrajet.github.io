@@ -1263,7 +1263,11 @@ const I18N = {
       });
       const data = await r.json().catch(() => ({}));
       if (!r.ok || data.success !== true) throw new Error(data.message || r.status);
-      track("Lead", "order-v3");
+      /* заказ ушёл → страница «Спасибо» (там пиксель шлёт Purchase — цель рекламы, один раз на заказ) */
+      const oid = Date.now().toString(36) + Math.random().toString(36).slice(2, 6);
+      const ty = { ka: "/spasibo/", ru: "/ru/spasibo/", en: "/en/spasibo/" }[lang] || "/spasibo/";
+      const tq = new URLSearchParams({ id: oid, n: qty, v: sum, src: SRC, c: CAMPAIGN || "none" });
+      try { location.assign(ty + "?" + tq); return; } catch (e) {}
       const done = document.createElement("div"); done.className = "done";
       done.innerHTML = '<div class="ok">✅</div><h3></h3><p class="muted"></p><a class="btn btn-wa" target="_blank" rel="noopener"></a>';
       done.querySelector("h3").textContent = t.okTitle;
