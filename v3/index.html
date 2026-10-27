@@ -1219,7 +1219,7 @@ const I18N = {
     if (b.dataset.qty) qty = Math.max(qty, Number(b.dataset.qty));
     renderCart(); renderDelivery();
     dlg.showModal();
-    track("InitiateCheckout", b.id || "cta");
+    track("OpenOrderForm", b.id || "cta");
   }));
   $$("[data-close]").forEach(b => b.addEventListener("click", () => dlg.close()));
   dlg.addEventListener("click", e => { if (e.target === dlg) dlg.close(); });
@@ -1235,8 +1235,30 @@ const I18N = {
     const meta = { content_name: channel, source: SRC, lang: lang, campaign: CAMPAIGN || "none", page: PAGE };
     if (event === "Lead") { meta.value = unit(qty) * qty; meta.currency = "GEL"; meta.num_items = qty; }
     let c = null; try { c = localStorage.getItem("odra.consent.ads"); } catch (e) {}
-    if (window.fbq && c !== "no") window.fbq("track", event, meta);
+    if (window.fbq && c !== "no") window.fbq(STD_EVENTS.includes(event) ? "track" : "trackCustom", event, meta);
   }
+  const STD_EVENTS = ["InitiateCheckout", "Lead", "Purchase"];
+
+  /* InitiateCheckout = человек ввёл имя и настоящий грузинский мобильный (5XX XX XX XX), а не просто открыл форму.
+     На это событие оптимизируется реклама, поэтому пустые нажатия «Заказать» сюда не попадают. Один раз за визит. */
+  function realPhone(v) {
+    let d = String(v).replace(/\D/g, "");
+    if (d.length === 12 && d.startsWith("995")) d = d.slice(3);
+    if (d.length !== 9 || d[0] !== "5") return false;
+    if (/^(\d)\1+$/.test(d.slice(1)) || "123456789".includes(d) || "987654321".includes(d)) return false;
+    return true;
+  }
+  let checkoutSent = false;
+  function checkCheckout() {
+    const F = $("#lead-form").elements;
+    if (checkoutSent || F.name.value.trim().length < 2 || !realPhone(F.phone.value)) return;
+    checkoutSent = true;
+    track("InitiateCheckout", "phone");
+  }
+  ["input", "change", "blur"].forEach(t => {
+    $("#lead-form").elements.phone.addEventListener(t, checkCheckout);
+    $("#lead-form").elements.name.addEventListener(t, checkCheckout);
+  });
 
   /* ---------- отправка заказа (Web3Forms, как на основном сайте) ---------- */
   const form = $("#lead-form"), msg = form.querySelector(".form-msg");
