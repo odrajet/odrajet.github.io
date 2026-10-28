@@ -37,7 +37,7 @@
   <p class="sum" id="sum" hidden></p>
   <a class="btn btn-wa" href="https://wa.me/995599703991?text=Hello%21%20I%20placed%20an%20order%20for%20the%20folding%20bed%20on%20the%20website." target="_blank" rel="noopener">Message us on WhatsApp</a>
   <section class="up" id="up">
-    <h2>Need more? 2 sets for 318 ₾</h2>
+    <h2>Need more? 2 sets for 358 ₾</h2>
     <p>2 folding beds with mattresses and covers. Free delivery.</p>
     <a class="btn btn-up" id="up-btn" href="https://wa.me/995599703991" target="_blank" rel="noopener">Change my order</a>
   </section>
@@ -52,8 +52,8 @@
   if (ok) { const el = document.getElementById("sum"); el.textContent = (dl === 0 ? "{n} pcs · {v} ₾ · free delivery · cash to the courier" : "{n} pcs · {v} ₾ incl. delivery · cash to the courier").replace("{n}", n).replace("{v}", v); el.hidden = false; }
   /* допродажа: открывает WhatsApp с готовым текстом (заказ уже отправлен, второй заказ в форме не создаём) */
   const upBtn = document.getElementById("up-btn");
-  upBtn.href = "https://wa.me/995599703991?text=" + encodeURIComponent("Hello! My order №{id}. I would like 2 sets (2 beds + mattresses + covers) for 318 ₾ with free delivery.".replace("{id}", id || "—"));
-  upBtn.addEventListener("click", function () { if (window.fbq) fbq("trackCustom", "UpsellClick", { value: 318, currency: "GEL", lang: "en" }); });
+  upBtn.href = "https://wa.me/995599703991?text=" + encodeURIComponent("Hello! My order №{id}. I would like 2 sets (2 beds + mattresses + covers) for 358 ₾ with free delivery.".replace("{id}", id || "—"));
+  upBtn.addEventListener("click", function () { if (window.fbq) fbq("trackCustom", "UpsellClick", { value: 358, currency: "GEL", lang: "en" }); });
 
   
   /* пиксель Meta: как на сайте — работает, если человек не нажал «Отказаться» */

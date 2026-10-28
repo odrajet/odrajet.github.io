@@ -43,7 +43,7 @@ T = {
         "home": "../",
     },
 }
-UPSELL_PRICE = 318  # = 2 × 159: цена за две, доставка бесплатно (допродажа только здесь, Родион 28.10)
+UPSELL_PRICE = 358  # = 2 × 179: два комплекта (матрас + чехол), доставка бесплатно (Родион 28.10)
 UPSELL = {'ka': ('გსურთ მეტი? 2 კომპლექტი — {price} ₾', '2 დასაკეცი საწოლი მატრასებითა და ჩანთებით. მიწოდება უფასოა.', 'შეკვეთის შეცვლა', 'გამარჯობა! ჩემი შეკვეთა №{id}. მინდა 2 კომპლექტი (2 საწოლი + მატრასები + ჩანთები) {price} ₾-ად, უფასო მიწოდებით.', '{n} ც. · {v} ₾ · მიწოდება უფასოა · გადახდა კურიერთან, ნაღდი ფულით'), 'ru': ('Нужно больше? 2 комплекта — {price} ₾', '2 раскладушки с матрасами и чехлами. Доставка бесплатно.', 'Изменить заказ', 'Здравствуйте! Мой заказ №{id}. Хочу 2 комплекта (2 раскладушки + матрасы + чехлы) за {price} ₾ с бесплатной доставкой.', '{n} шт. · {v} ₾ · доставка бесплатно · оплата курьеру наличными'), 'en': ('Need more? 2 sets for {price} ₾', '2 folding beds with mattresses and covers. Free delivery.', 'Change my order', 'Hello! My order №{id}. I would like 2 sets (2 beds + mattresses + covers) for {price} ₾ with free delivery.', '{n} pcs · {v} ₾ · free delivery · cash to the courier')}
 DRAFT = "--draft" in sys.argv
 OUT = {"ka": "spasibo/index.html", "ru": "ru/spasibo/index.html", "en": "en/spasibo/index.html"}

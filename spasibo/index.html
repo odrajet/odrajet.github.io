@@ -37,7 +37,7 @@
   <p class="sum" id="sum" hidden></p>
   <a class="btn btn-wa" href="https://wa.me/995599703991?text=%E1%83%92%E1%83%90%E1%83%9B%E1%83%90%E1%83%A0%E1%83%AF%E1%83%9D%E1%83%91%E1%83%90%21%20%E1%83%A1%E1%83%90%E1%83%98%E1%83%A2%E1%83%96%E1%83%94%20%E1%83%A8%E1%83%94%E1%83%95%E1%83%A3%E1%83%99%E1%83%95%E1%83%94%E1%83%97%E1%83%94%20%E1%83%93%E1%83%90%E1%83%A1%E1%83%90%E1%83%99%E1%83%94%E1%83%AA%E1%83%98%20%E1%83%A1%E1%83%90%E1%83%AC%E1%83%9D%E1%83%9A%E1%83%98." target="_blank" rel="noopener">მოგვწერეთ WhatsApp-ში</a>
   <section class="up" id="up">
-    <h2>გსურთ მეტი? 2 კომპლექტი — 318 ₾</h2>
+    <h2>გსურთ მეტი? 2 კომპლექტი — 358 ₾</h2>
     <p>2 დასაკეცი საწოლი მატრასებითა და ჩანთებით. მიწოდება უფასოა.</p>
     <a class="btn btn-up" id="up-btn" href="https://wa.me/995599703991" target="_blank" rel="noopener">შეკვეთის შეცვლა</a>
   </section>
@@ -52,8 +52,8 @@
   if (ok) { const el = document.getElementById("sum"); el.textContent = (dl === 0 ? "{n} ც. · {v} ₾ · მიწოდება უფასოა · გადახდა კურიერთან, ნაღდი ფულით" : "{n} ც. · {v} ₾ მიტანის ჩათვლით · გადახდა კურიერთან, ნაღდი ფულით").replace("{n}", n).replace("{v}", v); el.hidden = false; }
   /* допродажа: открывает WhatsApp с готовым текстом (заказ уже отправлен, второй заказ в форме не создаём) */
   const upBtn = document.getElementById("up-btn");
-  upBtn.href = "https://wa.me/995599703991?text=" + encodeURIComponent("გამარჯობა! ჩემი შეკვეთა №{id}. მინდა 2 კომპლექტი (2 საწოლი + მატრასები + ჩანთები) 318 ₾-ად, უფასო მიწოდებით.".replace("{id}", id || "—"));
-  upBtn.addEventListener("click", function () { if (window.fbq) fbq("trackCustom", "UpsellClick", { value: 318, currency: "GEL", lang: "ka" }); });
+  upBtn.href = "https://wa.me/995599703991?text=" + encodeURIComponent("გამარჯობა! ჩემი შეკვეთა №{id}. მინდა 2 კომპლექტი (2 საწოლი + მატრასები + ჩანთები) 358 ₾-ად, უფასო მიწოდებით.".replace("{id}", id || "—"));
+  upBtn.addEventListener("click", function () { if (window.fbq) fbq("trackCustom", "UpsellClick", { value: 358, currency: "GEL", lang: "ka" }); });
 
   
   /* пиксель Meta: как на сайте — работает, если человек не нажал «Отказаться» */
