@@ -144,7 +144,11 @@
   .pack:has(input:checked) { border-color: var(--accent); background: #fffaf8; box-shadow: 0 0 0 1px var(--accent) inset; }
   .pack .nm { font-weight: 700; display: block; }
   .pack .ds { font-size: 13px; color: var(--muted); }
-  .packs .pack .ds { display: block; color: var(--ink); font-weight: 700; font-size: inherit; }
+  .pack .rows { display: grid; gap: 4px; grid-column: 2 / 4; }
+  .pack .row { display: flex; justify-content: space-between; align-items: center; gap: 12px; font-weight: 700; }
+  .pack .row .pr { white-space: nowrap; }
+  .buy2 h2 { margin: 14px 0 0; }
+  .gallery2 .main { margin-top: 0; }
   .pack .pr { text-align: right; font-weight: 800; }
   .pack .pr s { display: block; font-weight: 400; color: var(--muted); font-size: 13px; }
   .pack .flag {
@@ -416,19 +420,24 @@
       <div class="packs" role="radiogroup">
         <label class="pack">
           <input type="radio" name="pack" value="bed">
-          <span><span class="nm" data-i18n="o1n"></span><span class="ds dk" data-i18n="o1d"></span></span>
-          <span class="pr"><span data-price="bed"></span></span>
+          <span class="rows">
+            <span class="row"><span class="nm" data-i18n="o1n"></span><span class="pr" data-price="bed"></span></span>
+            <span class="row"><span class="nm" data-i18n="o1d"></span><span class="pr" data-price="delivery"></span></span>
+          </span>
         </label>
         <label class="pack">
           <input type="radio" name="pack" value="mat">
-          <span><span class="nm" data-i18n="o2n"></span><span class="ds dk" data-i18n="o2d"></span></span>
-          <span class="pr"><span data-price="mat"></span></span>
+          <span class="rows">
+            <span class="row"><span class="nm" data-i18n="o2n"></span><span class="pr" data-price="mat"></span></span>
+            <span class="row"><span class="nm" data-i18n="o2d"></span><span class="pr" data-price="delivery"></span></span>
+          </span>
         </label>
         <label class="pack">
           <span class="flag" data-i18n="o3flag"></span>
           <input type="radio" name="pack" value="set" checked>
-          <span><span class="nm" data-i18n="o3n"></span><span class="ds" data-i18n="o3d"></span></span>
-          <span class="pr"><span data-price="set"></span></span>
+          <span class="rows">
+            <span class="row"><span class="nm"><span data-i18n="o3n"></span> <span data-i18n="o3d"></span></span><span class="pr" data-price="set"></span></span>
+          </span>
         </label>
       </div>
 
@@ -545,6 +554,52 @@
       </div>
     </div>
     <div class="reviews" id="reviews-list"></div>
+  </section>
+
+  <!-- ======= повтор карточки товара + выбор варианта ======= -->
+  <section style="padding-top:8px">
+    <div class="product">
+      <div class="gallery gallery2">
+        <div class="main" id="slides2">
+        <div class="slide"><img src="form/ka/hero.jpg" data-src-lang="form/{lang}/hero.jpg" alt="" loading="lazy"></div>
+        <div class="slide"><img src="form/ka/p1.jpg" data-src-lang="form/{lang}/p1.jpg" alt="" loading="lazy"></div>
+        <div class="slide"><img src="form/ka/p2.jpg" data-src-lang="form/{lang}/p2.jpg" alt="" loading="lazy"></div>
+        <div class="slide"><img src="form/ka/p3.jpg" data-src-lang="form/{lang}/p3.jpg" alt="" loading="lazy"></div>
+        <div class="slide"><img src="form/ka/p4.jpg" data-src-lang="form/{lang}/p4.jpg" alt="" loading="lazy"></div>
+        <div class="slide"><img src="form/ka/p5.jpg" data-src-lang="form/{lang}/p5.jpg" alt="" loading="lazy"></div>
+        </div>
+      </div>
+      <div class="buy buy2">
+        <h2 data-i18n="h1"></h2>
+        <div class="packs-title" data-i18n="packsTitle"></div>
+      <div class="packs" role="radiogroup">
+        <label class="pack">
+          <input type="radio" name="pack2" value="bed">
+          <span class="rows">
+            <span class="row"><span class="nm" data-i18n="o1n"></span><span class="pr" data-price="bed"></span></span>
+            <span class="row"><span class="nm" data-i18n="o1d"></span><span class="pr" data-price="delivery"></span></span>
+          </span>
+        </label>
+        <label class="pack">
+          <input type="radio" name="pack2" value="mat">
+          <span class="rows">
+            <span class="row"><span class="nm" data-i18n="o2n"></span><span class="pr" data-price="mat"></span></span>
+            <span class="row"><span class="nm" data-i18n="o2d"></span><span class="pr" data-price="delivery"></span></span>
+          </span>
+        </label>
+        <label class="pack">
+          <span class="flag" data-i18n="o3flag"></span>
+          <input type="radio" name="pack2" value="set">
+          <span class="rows">
+            <span class="row"><span class="nm"><span data-i18n="o3n"></span> <span data-i18n="o3d"></span></span><span class="pr" data-price="set"></span></span>
+          </span>
+        </label>
+      </div>
+        <div class="stock" data-i18n="stock"></div>
+        <button type="button" class="btn" data-open-order id="cta2"><span data-i18n="cta"></span></button>
+        <p class="pay-note" data-i18n="payNote"></p>
+      </div>
+    </div>
   </section>
 
   <!-- ======= опт ======= -->
@@ -722,8 +777,8 @@ const I18N = {
     loved: "<b>1995 მყიდველმა</b> 5 ვარსკვლავი დაუსვა",
     offer: "აიღეთ ორი — <b>თითო {pair}</b>. ეკონომია {save}",
     packsTitle: "აირჩიეთ ვარიანტი",
-    o1n: "დასაკეცი საწოლი მატრასის გარეშე", o1d: "+ მიწოდება {delivery}",
-    o2n: "დასაკეცი საწოლი მატრასით", o2d: "+ მიწოდება {delivery}",
+    o1n: "დასაკეცი საწოლი მატრასის გარეშე", o1d: "+ მიწოდება",
+    o2n: "დასაკეცი საწოლი მატრასით", o2d: "+ მიწოდება",
     o3flag: "ყველაზე მომგებიანი", o3n: "დასაკეცი საწოლი მატრასით + შესანახი ჩანთა", o3d: "+ უფასო მიწოდება თბილისში",
     ow: "დასაკეცი საწოლი მატრასით, საბითუმო ({min} ც.)", free: "უფასო",
     stock: "მარაგშია თბილისის საწყობში",
@@ -820,8 +875,8 @@ const I18N = {
     loved: "<b>1995 покупателей</b> поставили 5 звёзд",
     offer: "Возьмите две — <b>по {pair}</b> за штуку. Экономия {save}",
     packsTitle: "Выберите вариант",
-    o1n: "Раскладушка без матраса", o1d: "+ доставка {delivery}",
-    o2n: "Раскладушка с матрасом", o2d: "+ доставка {delivery}",
+    o1n: "Раскладушка без матраса", o1d: "+ доставка",
+    o2n: "Раскладушка с матрасом", o2d: "+ доставка",
     o3flag: "Выгоднее всего", o3n: "Раскладушка с матрасом + чехол для хранения", o3d: "+ бесплатная доставка по Тбилиси",
     ow: "Раскладушка с матрасом, опт ({min} шт.)", free: "Бесплатно",
     stock: "В наличии на складе в Тбилиси",
@@ -918,8 +973,8 @@ const I18N = {
     loved: "<b>1,995 buyers</b> gave it 5 stars",
     offer: "Take two — <b>{pair} each</b>. You save {save}",
     packsTitle: "Choose your option",
-    o1n: "Folding bed, no mattress", o1d: "+ delivery {delivery}",
-    o2n: "Folding bed with mattress", o2d: "+ delivery {delivery}",
+    o1n: "Folding bed, no mattress", o1d: "+ delivery",
+    o2n: "Folding bed with mattress", o2d: "+ delivery",
     o3flag: "Best value", o3n: "Folding bed with mattress + storage cover", o3d: "+ free delivery in Tbilisi",
     ow: "Folding bed with mattress, wholesale ({min} pcs)", free: "Free",
     stock: "In stock at our Tbilisi warehouse",
@@ -1087,7 +1142,7 @@ const I18N = {
   function renderPrices() {
     const P = {
       bed: money(CONFIG.priceBed), mat: money(CONFIG.priceMat), set: money(CONFIG.priceSet),
-      cur: money(OFFERS[pick].price), wholesale: money(CONFIG.priceWholesale)
+      cur: money(OFFERS[pick].price), delivery: money(CONFIG.delivery), wholesale: money(CONFIG.priceWholesale)
     };
     $$("[data-price]").forEach(el => { el.textContent = P[el.dataset.price]; });
   }
@@ -1208,7 +1263,9 @@ const I18N = {
   galImgs.forEach((im, i) => im.addEventListener("click", () => openLb(galImgs.map(x => x.src), i)));
 
   /* ---------- пакеты ---------- */
-  $$('input[name="pack"]').forEach(r => r.addEventListener("change", () => { pick = offer = r.value; renderPrices(); renderCart(); }));
+  $$('input[name="pack"], input[name="pack2"]').forEach(r => r.addEventListener("change", () => { pick = offer = r.value; renderPrices(); renderCart(); }));
+  const gal2 = $$("#slides2 img");
+  gal2.forEach((im, i) => im.addEventListener("click", () => openLb(gal2.map(x => x.src), i)));
 
   /* ---------- корзина ---------- */
   const dlg = $("#order");
@@ -1221,7 +1278,7 @@ const I18N = {
     $("#t-del").textContent = c.dl ? money(c.dl) : t.free;
     $("#t-sum").textContent = money(c.sum);
     $("#btn-sum").textContent = money(c.sum);
-    $$('input[name="pack"]').forEach(x => { x.checked = x.value === offer; });
+    $$('input[name="pack"], input[name="pack2"]').forEach(x => { x.checked = x.value === offer; });
   }
 
   $$("[data-open-order]").forEach(b => b.addEventListener("click", () => {
