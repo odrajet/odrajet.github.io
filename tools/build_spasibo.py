@@ -4,8 +4,10 @@
 Форма заказа (v3/index.html) после успешной отправки переводит сюда с ?id=&n=&v=.
 Здесь пиксель шлёт Purchase (цель холодных кампаний) — один раз на заказ (id запоминается в браузере).
 Запуск из корня репозитория: python3 tools/build_spasibo.py
+Черновик (без пикселя, в v3/spasibo-draft/): python3 tools/build_spasibo.py --draft
 """
 import json
+import sys
 from urllib.parse import quote
 from pathlib import Path
 
@@ -41,7 +43,12 @@ T = {
         "home": "../",
     },
 }
+UPSELL_PRICE = 318  # = 2 × 159: цена за две, доставка бесплатно (допродажа только здесь, Родион 28.10)
+UPSELL = {'ka': ('გსურთ მეტი? 2 კომპლექტი — {price} ₾', '2 დასაკეცი საწოლი მატრასებითა და ჩანთებით. მიწოდება უფასოა.', 'შეკვეთის შეცვლა', 'გამარჯობა! ჩემი შეკვეთა №{id}. მინდა 2 კომპლექტი (2 საწოლი + მატრასები + ჩანთები) {price} ₾-ად, უფასო მიწოდებით.', '{n} ც. · {v} ₾ · მიწოდება უფასოა · გადახდა კურიერთან, ნაღდი ფულით'), 'ru': ('Нужно больше? 2 комплекта — {price} ₾', '2 раскладушки с матрасами и чехлами. Доставка бесплатно.', 'Изменить заказ', 'Здравствуйте! Мой заказ №{id}. Хочу 2 комплекта (2 раскладушки + матрасы + чехлы) за {price} ₾ с бесплатной доставкой.', '{n} шт. · {v} ₾ · доставка бесплатно · оплата курьеру наличными'), 'en': ('Need more? 2 sets for {price} ₾', '2 folding beds with mattresses and covers. Free delivery.', 'Change my order', 'Hello! My order №{id}. I would like 2 sets (2 beds + mattresses + covers) for {price} ₾ with free delivery.', '{n} pcs · {v} ₾ · free delivery · cash to the courier')}
+DRAFT = "--draft" in sys.argv
 OUT = {"ka": "spasibo/index.html", "ru": "ru/spasibo/index.html", "en": "en/spasibo/index.html"}
+if DRAFT:
+    OUT = {"ka": "v3/spasibo-draft/index.html", "ru": "v3/spasibo-draft/ru/index.html", "en": "v3/spasibo-draft/en/index.html"}
 
 TPL = """<!doctype html>
 <html lang="__LANG__">
@@ -67,16 +74,25 @@ TPL = """<!doctype html>
   .sum { color: var(--ink); font-weight: 600; background: var(--bg); border-radius: 10px; padding: 10px 12px; }
   .btn { display: block; padding: 15px 18px; border-radius: 12px; font-weight: 800; text-decoration: none; margin-top: 8px; }
   .btn-wa { background: var(--wa); color: #fff; }
+  .up { margin-top: 20px; padding: 18px 16px; border: 2px dashed var(--ok); border-radius: 14px; background: #f3fbf6; }
+  .up h2 { font-size: 19px; line-height: 1.25; margin: 0 0 6px; }
+  .up p { margin: 0 0 4px; }
+  .btn-up { background: var(--ok); color: #fff; }
   .back { display: inline-block; margin-top: 16px; color: var(--muted); font-size: 14px; }
 </style>
 </head>
 <body>
-<main class="card">
+__DRAFTBAR__<main class="card">
   <div class="ok" aria-hidden="true">✓</div>
   <h1>__TITLE__</h1>
   <p>__TEXT__</p>
   <p class="sum" id="sum" hidden></p>
   <a class="btn btn-wa" href="https://wa.me/__WA__?text=__WATEXT__" target="_blank" rel="noopener">__WABTN__</a>
+  <section class="up" id="up">
+    <h2>__UPTITLE__</h2>
+    <p>__UPTEXT__</p>
+    <a class="btn btn-up" id="up-btn" href="https://wa.me/__WA__" target="_blank" rel="noopener">__UPBTN__</a>
+  </section>
   <a class="back" href="__HOME__">__BACK__</a>
 </main>
 <script>
@@ -84,8 +100,14 @@ TPL = """<!doctype html>
   const q = new URLSearchParams(location.search);
   const id = (q.get("id") || "").slice(0, 40), n = parseInt(q.get("n"), 10), v = parseFloat(q.get("v"));
   const ok = id && n > 0 && n < 100 && v > 0 && v < 100000;
-  if (ok) { const el = document.getElementById("sum"); el.textContent = __SUM__.replace("{n}", n).replace("{v}", v); el.hidden = false; }
+  const dl = parseFloat(q.get("dl"));
+  if (ok) { const el = document.getElementById("sum"); el.textContent = (dl === 0 ? __SUMFREE__ : __SUM__).replace("{n}", n).replace("{v}", v); el.hidden = false; }
+  /* допродажа: открывает WhatsApp с готовым текстом (заказ уже отправлен, второй заказ в форме не создаём) */
+  const upBtn = document.getElementById("up-btn");
+  upBtn.href = "https://wa.me/__WA__?text=" + encodeURIComponent(__UPWA__.replace("{id}", id || "—"));
+  upBtn.addEventListener("click", function () { if (window.fbq) fbq("trackCustom", "UpsellClick", { value: __UPPRICE__, currency: "GEL", lang: "__LANG__" }); });
 
+  __DRAFTRET__
   /* пиксель Meta: как на сайте — работает, если человек не нажал «Отказаться» */
   let c = null; try { c = localStorage.getItem("odra.consent.ads"); } catch (e) {}
   if (c === "no") return;
@@ -115,12 +137,25 @@ TPL = """<!doctype html>
 for lang, out in OUT.items():
     t = T[lang]
     up = "../" if lang == "ka" else "../../"
+    home = t["home"]
+    if DRAFT:
+        up = "../../" if lang == "ka" else "../../../"
+        home = "/v3/draft.html?lang=" + lang
     s = TPL
     for k, val in {
         "__LANG__": lang, "__TITLE__": t["title"], "__TEXT__": t["text"], "__UP__": up,
         "__WA__": WA, "__WATEXT__": quote(t["waText"]), "__WABTN__": t["wa"],
-        "__HOME__": t["home"], "__BACK__": t["back"], "__SUM__": json.dumps(t["sum"], ensure_ascii=False),
+        "__HOME__": home, "__BACK__": t["back"], "__SUM__": json.dumps(t["sum"], ensure_ascii=False),
         "__PIXEL__": PIXEL,
+    }.items():
+        s = s.replace(k, val)
+    u = UPSELL[lang]
+    for k, val in {
+        "__UPTITLE__": u[0].format(price=UPSELL_PRICE), "__UPTEXT__": u[1], "__UPBTN__": u[2],
+        "__UPWA__": json.dumps(u[3].replace("{price}", str(UPSELL_PRICE)), ensure_ascii=False),
+        "__SUMFREE__": json.dumps(u[4], ensure_ascii=False), "__UPPRICE__": str(UPSELL_PRICE),
+        "__DRAFTRET__": "return;  /* черновик: пикселя нет */" if DRAFT else "",
+        "__DRAFTBAR__": '<div style="position:fixed;top:0;left:0;right:0;background:#111;color:#ffd24d;font:700 13px system-ui;text-align:center;padding:6px">ЧЕРНОВИК · страница «Спасибо» · пиксель выключен</div>\n' if DRAFT else "",
     }.items():
         s = s.replace(k, val)
     p = ROOT / out
