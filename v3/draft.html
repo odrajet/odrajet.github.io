@@ -151,7 +151,6 @@
   .gallery2 .main { margin-top: 0; }
   .pack .pr { text-align: right; font-weight: 800; }
   .pack .pr s { display: block; font-weight: 400; color: var(--muted); font-size: 13px; }
-  .pack.prem { background: #faf7f0; }
   .pack .flag {
     position: absolute; top: -10px; right: 12px; background: var(--accent); color: #fff;
     font-size: 11px; font-weight: 800; border-radius: 999px; padding: 2px 9px; letter-spacing: .03em;
@@ -363,7 +362,7 @@
 </head>
 <body>
 
-<div id="draft-bar" style="background:#111;color:#ffd24d;font:700 13px/1.3 system-ui,sans-serif;text-align:center;padding:6px 10px;position:relative;z-index:99">ЧЕРНОВИК · Премиум 269 ₾ сверху · заказы тестовые, пиксель выключен</div>
+<div id="draft-bar" style="background:#111;color:#ffd24d;font:700 13px/1.3 system-ui,sans-serif;text-align:center;padding:6px 10px;position:relative;z-index:99">ЧЕРНОВИК · 269 / 179 / 159 · заказы тестовые, пиксель выключен</div>
 <div class="promo" data-i18n-html="promo"></div>
 
 <header class="top">
@@ -382,7 +381,7 @@
   <div class="product">
     <div class="gallery">
       <div class="main" id="slides">
-        <div class="slide"><img src="form/ka/hero.jpg" data-src-lang="form/{lang}/hero.jpg" alt="" fetchpriority="high"></div>
+        <div class="slide"><img src="form2/ka/hero.jpg" data-src-lang="form2/{lang}/hero.jpg" alt="" fetchpriority="high"></div>
         <div class="slide"><img src="form/ka/p1.jpg" data-src-lang="form/{lang}/p1.jpg" alt="" loading="lazy"></div>
         <div class="slide"><img src="form/ka/p2.jpg" data-src-lang="form/{lang}/p2.jpg" alt="" loading="lazy"></div>
         <div class="slide"><img src="form/ka/p3.jpg" data-src-lang="form/{lang}/p3.jpg" alt="" loading="lazy"></div>
@@ -391,7 +390,7 @@
         <div class="slide"><video src="../video/odra.mp4" poster="../video/odra-poster.jpg" muted loop playsinline preload="none"></video><button type="button" class="snd" aria-label="Sound">🔇</button></div>
       </div>
       <div class="thumbs" id="thumbs">
-        <button type="button"><img src="form/ka/hero.jpg" data-src-lang="form/{lang}/hero.jpg" alt=""></button>
+        <button type="button"><img src="form2/ka/hero.jpg" data-src-lang="form2/{lang}/hero.jpg" alt=""></button>
         <button type="button"><img src="form/ka/p1.jpg" data-src-lang="form/{lang}/p1.jpg" alt=""></button>
         <button type="button"><img src="form/ka/p2.jpg" data-src-lang="form/{lang}/p2.jpg" alt=""></button>
         <button type="button"><img src="form/ka/p3.jpg" data-src-lang="form/{lang}/p3.jpg" alt=""></button>
@@ -430,13 +429,6 @@
           <input type="radio" name="pack" value="set" checked>
           <span class="rows">
             <span class="row"><span class="nm"><span data-i18n="o3n"></span> <span data-i18n="o3d"></span></span><span class="pr" data-price="set"></span></span>
-          </span>
-        </label>
-        <label class="pack">
-          <input type="radio" name="pack" value="mat">
-          <span class="rows">
-            <span class="row"><span class="nm" data-i18n="o2n"></span><span class="pr" data-price="mat"></span></span>
-            <span class="row"><span class="nm" data-i18n="o2d"></span><span class="pr" data-price="delivery"></span></span>
           </span>
         </label>
         <label class="pack">
@@ -568,7 +560,7 @@
     <div class="product">
       <div class="gallery gallery2">
         <div class="main" id="slides2">
-        <div class="slide"><img src="form/ka/hero.jpg" data-src-lang="form/{lang}/hero.jpg" alt="" loading="lazy"></div>
+        <div class="slide"><img src="form2/ka/hero.jpg" data-src-lang="form2/{lang}/hero.jpg" alt="" loading="lazy"></div>
         <div class="slide"><img src="form/ka/p1.jpg" data-src-lang="form/{lang}/p1.jpg" alt="" loading="lazy"></div>
         <div class="slide"><img src="form/ka/p2.jpg" data-src-lang="form/{lang}/p2.jpg" alt="" loading="lazy"></div>
         <div class="slide"><img src="form/ka/p3.jpg" data-src-lang="form/{lang}/p3.jpg" alt="" loading="lazy"></div>
@@ -591,13 +583,6 @@
           <input type="radio" name="pack2" value="set">
           <span class="rows">
             <span class="row"><span class="nm"><span data-i18n="o3n"></span> <span data-i18n="o3d"></span></span><span class="pr" data-price="set"></span></span>
-          </span>
-        </label>
-        <label class="pack">
-          <input type="radio" name="pack2" value="mat">
-          <span class="rows">
-            <span class="row"><span class="nm" data-i18n="o2n"></span><span class="pr" data-price="mat"></span></span>
-            <span class="row"><span class="nm" data-i18n="o2d"></span><span class="pr" data-price="delivery"></span></span>
           </span>
         </label>
         <label class="pack">
@@ -659,7 +644,7 @@
     <div class="dr-body" id="dr-body">
       <div class="dr-strip" data-dr="deadline"></div>
       <div class="line-item">
-        <img src="form/ka/hero.jpg" data-src-lang="form/{lang}/hero.jpg" alt="">
+        <img src="form2/ka/hero.jpg" data-src-lang="form2/{lang}/hero.jpg" alt="">
         <div>
           <div class="t" id="li-name"></div>
           
@@ -844,7 +829,7 @@ const I18N = {
       ["რა ღირს მიწოდება?", "{delivery} თბილისსა და რუსთავში. კომპლექტით {set} მიწოდება თბილისში უფასოა."],
       ["გამიძლებს?", "კარკასი 150 კგ-მდე დატვირთვას უძლებს. საძინებელი ადგილი 190×68 სმ."],
       ["მატრასი თხელი ხომ არ არის?", "მატრასი 6 სმ-ია, სინთეპონის შიგთავსით, რბილი ქსოვილით."],
-      ["რა შედის კომპლექტში?", "დამოკიდებულია ვარიანტზე: საწოლი მატრასის გარეშე ({bed}); საწოლი მატრასით ({mat}); საწოლი, მატრასი და ჩანთა ({set}, მიწოდება თბილისში უფასოა)."],
+      ["რა შედის კომპლექტში?", "დამოკიდებულია ვარიანტზე: საწოლი მატრასის გარეშე ({bed}); საწოლი, მატრასი და ჩანთა ({set}, მიწოდება თბილისში უფასოა); პრემიუმი — იგივე + პლედი და თეთრეული ({prem}, მიწოდება თბილისში უფასოა)."],
       ["როგორ დაგიკავშირდებით?", "შეკვეთის შემდეგ მოგწერთ WhatsApp-ში, დავაზუსტებთ მისამართსა და დროს."]
     ],
     finalTitle: "შეუკვეთეთ დღეს — გადაიხდით მიღებისას",
@@ -943,7 +928,7 @@ const I18N = {
       ["Сколько стоит доставка?", "{delivery} по Тбилиси и Рустави. С комплектом за {set} доставка по Тбилиси бесплатная."],
       ["Выдержит ли меня?", "Каркас рассчитан на нагрузку до 150 кг. Спальное место 190×68 см."],
       ["Матрас не тонкий?", "Матрас 6 см, наполнитель синтепон, мягкая ткань."],
-      ["Что в комплекте?", "Зависит от варианта: раскладушка без матраса ({bed}); раскладушка с матрасом ({mat}); раскладушка, матрас и чехол для переноски ({set}, доставка по Тбилиси бесплатно)."],
+      ["Что в комплекте?", "Зависит от варианта: раскладушка без матраса ({bed}); раскладушка, матрас и чехол для переноски ({set}, доставка по Тбилиси бесплатно); премиум — то же + плед и постельное бельё ({prem}, доставка по Тбилиси бесплатно)."],
       ["Как со мной свяжутся?", "После заказа напишем вам в WhatsApp и уточним адрес и время."]
     ],
     finalTitle: "Закажите сегодня — платите при получении",
@@ -1042,7 +1027,7 @@ const I18N = {
       ["How much is delivery?", "{delivery} in Tbilisi and Rustavi. With the {set} set, delivery in Tbilisi is free."],
       ["Will it hold me?", "The frame is rated for up to 150 kg. Sleeping area 190×68 cm."],
       ["Is the mattress thin?", "It is 6 cm, filled with polyester fibre, with a soft fabric cover."],
-      ["What's in the box?", "Depends on the option: bed without mattress ({bed}); bed with mattress ({mat}); bed + mattress + carry cover ({set}, free delivery in Tbilisi)."],
+      ["What's in the box?", "Depends on the option: bed without mattress ({bed}); bed + mattress + carry cover ({set}, free delivery in Tbilisi); premium: the same + blanket and bed linen ({prem}, free delivery in Tbilisi)."],
       ["How will you contact me?", "After you order we message you on WhatsApp to confirm the address and time."]
     ],
     finalTitle: "Order today — pay on delivery",
