@@ -144,6 +144,7 @@
   .pack:has(input:checked) { border-color: var(--accent); background: #fffaf8; box-shadow: 0 0 0 1px var(--accent) inset; }
   .pack .nm { font-weight: 700; display: block; }
   .pack .ds { font-size: 13px; color: var(--muted); }
+  .pack .ds.dk { color: var(--ink); font-weight: 600; font-size: 14px; }
   .pack .pr { text-align: right; font-weight: 800; }
   .pack .pr s { display: block; font-weight: 400; color: var(--muted); font-size: 13px; }
   .pack .flag {
@@ -419,12 +420,12 @@
       <div class="packs" role="radiogroup">
         <label class="pack">
           <input type="radio" name="pack" value="bed">
-          <span><span class="nm" data-i18n="o1n"></span><span class="ds" data-i18n="o1d"></span></span>
+          <span><span class="nm" data-i18n="o1n"></span><span class="ds dk" data-i18n="o1d"></span></span>
           <span class="pr"><span data-price="bed"></span></span>
         </label>
         <label class="pack">
           <input type="radio" name="pack" value="mat">
-          <span><span class="nm" data-i18n="o2n"></span><span class="ds" data-i18n="o2d"></span></span>
+          <span><span class="nm" data-i18n="o2n"></span><span class="ds dk" data-i18n="o2d"></span></span>
           <span class="pr"><span data-price="mat"></span></span>
         </label>
         <label class="pack">
@@ -726,9 +727,9 @@ const I18N = {
     loved: "<b>1995 მყიდველმა</b> 5 ვარსკვლავი დაუსვა",
     offer: "აიღეთ ორი — <b>თითო {pair}</b>. ეკონომია {save}",
     packsTitle: "აირჩიეთ ვარიანტი",
-    o1n: "დასაკეცი საწოლი მატრასის გარეშე", o1d: "მიწოდება {delivery}",
-    o2n: "დასაკეცი საწოლი მატრასით", o2d: "6 სმ მატრასი · მიწოდება {delivery}",
-    o3flag: "ყველაზე მომგებიანი", o3n: "საწოლი + მატრასი + ჩანთა", o3d: "მიწოდება თბილისში უფასოა",
+    o1n: "დასაკეცი საწოლი მატრასის გარეშე", o1d: "+ მიწოდება {delivery}",
+    o2n: "დასაკეცი საწოლი მატრასით", o2d: "+ მიწოდება {delivery}",
+    o3flag: "ყველაზე მომგებიანი", o3n: "დასაკეცი საწოლი მატრასით + შესანახი ჩანთა", o3d: "+ უფასო მიწოდება თბილისში",
     ow: "დასაკეცი საწოლი მატრასით, საბითუმო ({min} ც.)", free: "უფასო",
     stock: "მარაგშია თბილისის საწყობში",
     cta: "შეკვეთა — გადახდა მიღებისას", ctaShort: "შეკვეთა",
@@ -824,9 +825,9 @@ const I18N = {
     loved: "<b>1995 покупателей</b> поставили 5 звёзд",
     offer: "Возьмите две — <b>по {pair}</b> за штуку. Экономия {save}",
     packsTitle: "Выберите вариант",
-    o1n: "Раскладушка без матраса", o1d: "доставка {delivery}",
-    o2n: "Раскладушка с матрасом", o2d: "матрас 6 см · доставка {delivery}",
-    o3flag: "Выгоднее всего", o3n: "Раскладушка + матрас + чехол", o3d: "доставка по Тбилиси бесплатно",
+    o1n: "Раскладушка без матраса", o1d: "+ доставка {delivery}",
+    o2n: "Раскладушка с матрасом", o2d: "+ доставка {delivery}",
+    o3flag: "Выгоднее всего", o3n: "Раскладушка с матрасом + чехол для хранения", o3d: "+ бесплатная доставка по Тбилиси",
     ow: "Раскладушка с матрасом, опт ({min} шт.)", free: "Бесплатно",
     stock: "В наличии на складе в Тбилиси",
     cta: "Заказать — оплата при получении", ctaShort: "Заказать",
@@ -922,9 +923,9 @@ const I18N = {
     loved: "<b>1,995 buyers</b> gave it 5 stars",
     offer: "Take two — <b>{pair} each</b>. You save {save}",
     packsTitle: "Choose your option",
-    o1n: "Folding bed, no mattress", o1d: "delivery {delivery}",
-    o2n: "Folding bed with mattress", o2d: "6 cm mattress · delivery {delivery}",
-    o3flag: "Best value", o3n: "Bed + mattress + cover", o3d: "free delivery in Tbilisi",
+    o1n: "Folding bed, no mattress", o1d: "+ delivery {delivery}",
+    o2n: "Folding bed with mattress", o2d: "+ delivery {delivery}",
+    o3flag: "Best value", o3n: "Folding bed with mattress + storage cover", o3d: "+ free delivery in Tbilisi",
     ow: "Folding bed with mattress, wholesale ({min} pcs)", free: "Free",
     stock: "In stock at our Tbilisi warehouse",
     cta: "Order — pay on delivery", ctaShort: "Order",
