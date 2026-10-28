@@ -4,8 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>ЧЕРНОВИК — ODRA JET</title>
-<meta name="robots" content="noindex">
 <script>window.__DRAFT__ = true;</script>
+<meta name="robots" content="noindex">
 <meta name="theme-color" content="#ffffff">
 <link rel="icon" href="../favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -151,6 +151,7 @@
   .gallery2 .main { margin-top: 0; }
   .pack .pr { text-align: right; font-weight: 800; }
   .pack .pr s { display: block; font-weight: 400; color: var(--muted); font-size: 13px; }
+  .pack.prem { background: #faf7f0; }
   .pack .flag {
     position: absolute; top: -10px; right: 12px; background: var(--accent); color: #fff;
     font-size: 11px; font-weight: 800; border-radius: 999px; padding: 2px 9px; letter-spacing: .03em;
@@ -361,8 +362,8 @@
 </style>
 </head>
 <body>
-<div id="draft-bar" style="background:#111;color:#ffd24d;font:700 13px/1.3 system-ui,sans-serif;text-align:center;padding:6px 10px;position:relative;z-index:99">ЧЕРНОВИК · три оффера · заказы тестовые, пиксель выключен</div>
 
+<div id="draft-bar" style="background:#111;color:#ffd24d;font:700 13px/1.3 system-ui,sans-serif;text-align:center;padding:6px 10px;position:relative;z-index:99">ЧЕРНОВИК · Премиум 269 ₾ сверху · заказы тестовые, пиксель выключен</div>
 <div class="promo" data-i18n-html="promo"></div>
 
 <header class="top">
@@ -418,11 +419,17 @@
 
       <div class="packs-title" data-i18n="packsTitle"></div>
       <div class="packs" role="radiogroup">
-        <label class="pack">
-          <input type="radio" name="pack" value="bed">
+        <label class="pack prem">
+          <input type="radio" name="pack" value="prem">
           <span class="rows">
-            <span class="row"><span class="nm" data-i18n="o1n"></span><span class="pr" data-price="bed"></span></span>
-            <span class="row"><span class="nm" data-i18n="o1d"></span><span class="pr" data-price="delivery"></span></span>
+            <span class="row"><span class="nm"><span data-i18n="o4n"></span> <span data-i18n="o4d"></span></span><span class="pr" data-price="prem"></span></span>
+          </span>
+        </label>
+        <label class="pack">
+          <span class="flag" data-i18n="o3flag"></span>
+          <input type="radio" name="pack" value="set" checked>
+          <span class="rows">
+            <span class="row"><span class="nm"><span data-i18n="o3n"></span> <span data-i18n="o3d"></span></span><span class="pr" data-price="set"></span></span>
           </span>
         </label>
         <label class="pack">
@@ -433,10 +440,10 @@
           </span>
         </label>
         <label class="pack">
-          <span class="flag" data-i18n="o3flag"></span>
-          <input type="radio" name="pack" value="set" checked>
+          <input type="radio" name="pack" value="bed">
           <span class="rows">
-            <span class="row"><span class="nm"><span data-i18n="o3n"></span> <span data-i18n="o3d"></span></span><span class="pr" data-price="set"></span></span>
+            <span class="row"><span class="nm" data-i18n="o1n"></span><span class="pr" data-price="bed"></span></span>
+            <span class="row"><span class="nm" data-i18n="o1d"></span><span class="pr" data-price="delivery"></span></span>
           </span>
         </label>
       </div>
@@ -573,11 +580,17 @@
         <h2 data-i18n="h1"></h2>
         <div class="packs-title" data-i18n="packsTitle"></div>
       <div class="packs" role="radiogroup">
-        <label class="pack">
-          <input type="radio" name="pack2" value="bed">
+        <label class="pack prem">
+          <input type="radio" name="pack2" value="prem">
           <span class="rows">
-            <span class="row"><span class="nm" data-i18n="o1n"></span><span class="pr" data-price="bed"></span></span>
-            <span class="row"><span class="nm" data-i18n="o1d"></span><span class="pr" data-price="delivery"></span></span>
+            <span class="row"><span class="nm"><span data-i18n="o4n"></span> <span data-i18n="o4d"></span></span><span class="pr" data-price="prem"></span></span>
+          </span>
+        </label>
+        <label class="pack">
+          <span class="flag" data-i18n="o3flag"></span>
+          <input type="radio" name="pack2" value="set">
+          <span class="rows">
+            <span class="row"><span class="nm"><span data-i18n="o3n"></span> <span data-i18n="o3d"></span></span><span class="pr" data-price="set"></span></span>
           </span>
         </label>
         <label class="pack">
@@ -588,10 +601,10 @@
           </span>
         </label>
         <label class="pack">
-          <span class="flag" data-i18n="o3flag"></span>
-          <input type="radio" name="pack2" value="set">
+          <input type="radio" name="pack2" value="bed">
           <span class="rows">
-            <span class="row"><span class="nm"><span data-i18n="o3n"></span> <span data-i18n="o3d"></span></span><span class="pr" data-price="set"></span></span>
+            <span class="row"><span class="nm" data-i18n="o1n"></span><span class="pr" data-price="bed"></span></span>
+            <span class="row"><span class="nm" data-i18n="o1d"></span><span class="pr" data-price="delivery"></span></span>
           </span>
         </label>
       </div>
@@ -706,6 +719,7 @@ const CONFIG = {
   priceBed: 159,            // раскладушка без матраса + доставка
   priceMat: 169,            // раскладушка с матрасом + доставка
   priceSet: 179,            // раскладушка + матрас + чехол, доставка по Тбилиси бесплатно
+  pricePremium: 269,        // премиум: комплект + плед + постельное бельё, доставка по Тбилиси бесплатно
   priceSetTwo: 339,         // допродажа на «Спасибо»: 2 комплекта, доставка бесплатно
   priceWholesale: 145,
   wholesaleMin: 5,
@@ -780,6 +794,7 @@ const I18N = {
     o1n: "დასაკეცი საწოლი მატრასის გარეშე", o1d: "+ მიწოდება",
     o2n: "დასაკეცი საწოლი მატრასით", o2d: "+ მიწოდება",
     o3flag: "ყველაზე მომგებიანი", o3n: "დასაკეცი საწოლი მატრასით + შესანახი ჩანთა", o3d: "+ უფასო მიწოდება თბილისში",
+    o4n: "პრემიუმი: საწოლი მატრასით + შესანახი ჩანთა + პლედი + თეთრეული", o4d: "+ უფასო მიწოდება თბილისში",
     ow: "დასაკეცი საწოლი მატრასით, საბითუმო ({min} ც.)", free: "უფასო",
     stock: "მარაგშია თბილისის საწყობში",
     cta: "შეკვეთა — გადახდა მიღებისას", ctaShort: "შეკვეთა",
@@ -878,6 +893,7 @@ const I18N = {
     o1n: "Раскладушка без матраса", o1d: "+ доставка",
     o2n: "Раскладушка с матрасом", o2d: "+ доставка",
     o3flag: "Выгоднее всего", o3n: "Раскладушка с матрасом + чехол для хранения", o3d: "+ бесплатная доставка по Тбилиси",
+    o4n: "Премиум: раскладушка с матрасом + чехол + плед + постельное бельё", o4d: "+ бесплатная доставка по Тбилиси",
     ow: "Раскладушка с матрасом, опт ({min} шт.)", free: "Бесплатно",
     stock: "В наличии на складе в Тбилиси",
     cta: "Заказать — оплата при получении", ctaShort: "Заказать",
@@ -976,6 +992,7 @@ const I18N = {
     o1n: "Folding bed, no mattress", o1d: "+ delivery",
     o2n: "Folding bed with mattress", o2d: "+ delivery",
     o3flag: "Best value", o3n: "Folding bed with mattress + storage cover", o3d: "+ free delivery in Tbilisi",
+    o4n: "Premium: folding bed with mattress + storage cover + blanket + bed linen", o4d: "+ free delivery in Tbilisi",
     ow: "Folding bed with mattress, wholesale ({min} pcs)", free: "Free",
     stock: "In stock at our Tbilisi warehouse",
     cta: "Order — pay on delivery", ctaShort: "Order",
@@ -1081,10 +1098,11 @@ const I18N = {
     bed: { price: CONFIG.priceBed, qty: 1, free: false },
     mat: { price: CONFIG.priceMat, qty: 1, free: false },
     set: { price: CONFIG.priceSet, qty: 1, free: true },
+    prem: { price: CONFIG.pricePremium, qty: 1, free: true },
     wholesale: { price: CONFIG.priceWholesale, qty: CONFIG.wholesaleMin, free: false }
   };
-  const OFFER_NAME_KEY = { bed: "o1n", mat: "o2n", set: "o3n", wholesale: "ow" };
-  const OFFER_RU = { bed: "раскладушка БЕЗ матраса", mat: "раскладушка С МАТРАСОМ", set: "КОМПЛЕКТ раскладушка+матрас+чехол", wholesale: "ОПТ" };
+  const OFFER_NAME_KEY = { bed: "o1n", mat: "o2n", set: "o3n", prem: "o4n", wholesale: "ow" };
+  const OFFER_RU = { bed: "раскладушка БЕЗ матраса", mat: "раскладушка С МАТРАСОМ", set: "КОМПЛЕКТ раскладушка+матрас+чехол", prem: "ПРЕМИУМ комплект+плед+бельё", wholesale: "ОПТ" };
   let pick = "set";      // выбранный вариант на странице
   let offer = "set";     // вариант в корзине (pick или wholesale)
   function calc() {
@@ -1096,7 +1114,7 @@ const I18N = {
 
   function fill(str, extra) {
     const v = Object.assign({
-      bed: money(CONFIG.priceBed), mat: money(CONFIG.priceMat), set: money(CONFIG.priceSet),
+      bed: money(CONFIG.priceBed), mat: money(CONFIG.priceMat), set: money(CONFIG.priceSet), prem: money(CONFIG.pricePremium),
       wholesale: money(CONFIG.priceWholesale), min: String(CONFIG.wholesaleMin),
       delivery: money(CONFIG.delivery), cutoff: CONFIG.cutoff,
       seller: CONFIG.legal.seller, id: CONFIG.legal.id, address: CONFIG.legal.address
@@ -1141,7 +1159,7 @@ const I18N = {
 
   function renderPrices() {
     const P = {
-      bed: money(CONFIG.priceBed), mat: money(CONFIG.priceMat), set: money(CONFIG.priceSet),
+      bed: money(CONFIG.priceBed), mat: money(CONFIG.priceMat), set: money(CONFIG.priceSet), prem: money(CONFIG.pricePremium),
       cur: money(OFFERS[pick].price), delivery: money(CONFIG.delivery), wholesale: money(CONFIG.priceWholesale)
     };
     $$("[data-price]").forEach(el => { el.textContent = P[el.dataset.price]; });
