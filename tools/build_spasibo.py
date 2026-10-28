@@ -43,8 +43,9 @@ T = {
         "home": "../",
     },
 }
-UPSELL_PRICE = 358  # = 2 × 179: два комплекта (матрас + чехол), доставка бесплатно (Родион 28.10)
-UPSELL = {'ka': ('გსურთ მეტი? 2 კომპლექტი — {price} ₾', '2 დასაკეცი საწოლი მატრასებითა და ჩანთებით. მიწოდება უფასოა.', 'შეკვეთის შეცვლა', 'გამარჯობა! ჩემი შეკვეთა №{id}. მინდა 2 კომპლექტი (2 საწოლი + მატრასები + ჩანთები) {price} ₾-ად, უფასო მიწოდებით.', '{n} ც. · {v} ₾ · მიწოდება უფასოა · გადახდა კურიერთან, ნაღდი ფულით'), 'ru': ('Нужно больше? 2 комплекта — {price} ₾', '2 раскладушки с матрасами и чехлами. Доставка бесплатно.', 'Изменить заказ', 'Здравствуйте! Мой заказ №{id}. Хочу 2 комплекта (2 раскладушки + матрасы + чехлы) за {price} ₾ с бесплатной доставкой.', '{n} шт. · {v} ₾ · доставка бесплатно · оплата курьеру наличными'), 'en': ('Need more? 2 sets for {price} ₾', '2 folding beds with mattresses and covers. Free delivery.', 'Change my order', 'Hello! My order №{id}. I would like 2 sets (2 beds + mattresses + covers) for {price} ₾ with free delivery.', '{n} pcs · {v} ₾ · free delivery · cash to the courier')}
+UPSELL_PRICE = 339  # 2 комплекта (матрас + чехол) вместо 2 × 179 = 358, доставка по Тбилиси бесплатно (Родион 28.10)
+UPSELL_FULL = 358
+UPSELL = {'ka': ('2 კომპლექტი — {price} ₾ <s>{full} ₾</s>', '2 დასაკეცი საწოლი მატრასებითა და შესანახი ჩანთებით + უფასო მიწოდება თბილისში. ეკონომია {save} ₾.', 'შეკვეთის შეცვლა', 'გამარჯობა! ჩემი შეკვეთა №{id}. მინდა 2 კომპლექტი (2 საწოლი + მატრასები + ჩანთები) {price} ₾-ად, უფასო მიწოდებით თბილისში.', '{n} ც. · {v} ₾ · მიწოდება უფასოა · გადახდა კურიერთან, ნაღდი ფულით'), 'ru': ('2 комплекта — {price} ₾ <s>{full} ₾</s>', '2 раскладушки с матрасами и чехлами для хранения + бесплатная доставка по Тбилиси. Экономия {save} ₾.', 'Изменить заказ', 'Здравствуйте! Мой заказ №{id}. Хочу 2 комплекта (2 раскладушки + матрасы + чехлы) за {price} ₾ с бесплатной доставкой по Тбилиси.', '{n} шт. · {v} ₾ · доставка бесплатно · оплата курьеру наличными'), 'en': ('2 sets for {price} ₾ <s>{full} ₾</s>', '2 folding beds with mattresses and storage covers + free delivery in Tbilisi. You save {save} ₾.', 'Change my order', 'Hello! My order №{id}. I would like 2 sets (2 beds + mattresses + covers) for {price} ₾ with free delivery in Tbilisi.', '{n} pcs · {v} ₾ · free delivery · cash to the courier')}
 DRAFT = "--draft" in sys.argv
 OUT = {"ka": "spasibo/index.html", "ru": "ru/spasibo/index.html", "en": "en/spasibo/index.html"}
 if DRAFT:
@@ -77,6 +78,7 @@ TPL = """<!doctype html>
   .up { margin-top: 20px; padding: 18px 16px; border: 2px dashed var(--ok); border-radius: 14px; background: #f3fbf6; }
   .up h2 { font-size: 19px; line-height: 1.25; margin: 0 0 6px; }
   .up p { margin: 0 0 4px; }
+  .up h2 s { color: var(--muted); font-weight: 600; font-size: 16px; margin-left: 4px; }
   .btn-up { background: var(--ok); color: #fff; }
   .back { display: inline-block; margin-top: 16px; color: var(--muted); font-size: 14px; }
 </style>
@@ -151,7 +153,7 @@ for lang, out in OUT.items():
         s = s.replace(k, val)
     u = UPSELL[lang]
     for k, val in {
-        "__UPTITLE__": u[0].format(price=UPSELL_PRICE), "__UPTEXT__": u[1], "__UPBTN__": u[2],
+        "__UPTITLE__": u[0].format(price=UPSELL_PRICE, full=UPSELL_FULL), "__UPTEXT__": u[1].format(save=UPSELL_FULL - UPSELL_PRICE), "__UPBTN__": u[2],
         "__UPWA__": json.dumps(u[3].replace("{price}", str(UPSELL_PRICE)), ensure_ascii=False),
         "__SUMFREE__": json.dumps(u[4], ensure_ascii=False), "__UPPRICE__": str(UPSELL_PRICE),
         "__DRAFTRET__": "return;  /* черновик: пикселя нет */" if DRAFT else "",
