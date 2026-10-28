@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>ODRA JET — Thank you! Order received</title>
+<title>ODRA JET — Thank you for your order!</title>
 <meta name="robots" content="noindex">
 <link rel="icon" href="../../favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -33,8 +33,8 @@
 <body>
 <main class="card">
   <div class="ok" aria-hidden="true">✓</div>
-  <h1>Thank you! Order received</h1>
-  <p>We will message you on WhatsApp from +995 599 703 991 soon to confirm the order and delivery. Don't want to wait? Message us yourself.</p>
+  <h1>Thank you for your order!</h1>
+  <p>We will contact you on WhatsApp shortly.</p>
   <p class="sum" id="sum" hidden></p>
   <a class="btn btn-wa" href="https://wa.me/995599703991?text=Hello%21%20I%20placed%20an%20order%20for%20the%20folding%20bed%20on%20the%20website." target="_blank" rel="noopener">Message us on WhatsApp</a>
   <section class="up" id="up">
@@ -50,7 +50,7 @@
   const id = (q.get("id") || "").slice(0, 40), n = parseInt(q.get("n"), 10), v = parseFloat(q.get("v"));
   const ok = id && n > 0 && n < 100 && v > 0 && v < 100000;
   const dl = parseFloat(q.get("dl"));
-  if (ok) { const el = document.getElementById("sum"); el.textContent = (dl === 0 ? "{n} pcs · {v} ₾ · free delivery · cash to the courier" : "{n} pcs · {v} ₾ incl. delivery · cash to the courier").replace("{n}", n).replace("{v}", v); el.hidden = false; }
+  /* состав и сумму заказа не показываем: одна общая страница для всех вариантов (Родион 28.10) */
   /* допродажа: открывает WhatsApp с готовым текстом (заказ уже отправлен, второй заказ в форме не создаём) */
   const upBtn = document.getElementById("up-btn");
   upBtn.href = "https://wa.me/995599703991?text=" + encodeURIComponent("Hello! My order №{id}. I would like 2 sets (2 beds + mattresses + covers) for 339 ₾ with free delivery in Tbilisi.".replace("{id}", id || "—"));

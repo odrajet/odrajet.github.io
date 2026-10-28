@@ -16,8 +16,8 @@ PIXEL = "1047116104717565"
 WA = "995599703991"
 T = {
     "ka": {
-        "title": "მადლობა! შეკვეთა მიღებულია",
-        "text": "მალე მოგწერთ WhatsApp-ში ნომრიდან +995 599 703 991, რომ დავადასტუროთ შეკვეთა და მიტანა. არ გინდათ ლოდინი? მოგვწერეთ თავად.",
+        "title": "გმადლობთ შეკვეთისთვის!",
+        "text": "მალე დაგიკავშირდებით WhatsApp-ში.",
         "sum": "{n} ც. · {v} ₾ მიტანის ჩათვლით · გადახდა კურიერთან, ნაღდი ფულით",
         "wa": "მოგვწერეთ WhatsApp-ში",
         "waText": "გამარჯობა! საიტზე შევუკვეთე დასაკეცი საწოლი.",
@@ -25,8 +25,8 @@ T = {
         "home": "../",
     },
     "ru": {
-        "title": "Спасибо! Заказ принят",
-        "text": "Скоро напишем вам в WhatsApp с номера +995 599 703 991, чтобы подтвердить заказ и доставку. Не хотите ждать? Напишите нам сами.",
+        "title": "Спасибо за заказ!",
+        "text": "Мы свяжемся с вами в WhatsApp в ближайшее время.",
         "sum": "{n} шт. · {v} ₾ с доставкой · оплата курьеру наличными",
         "wa": "Написать в WhatsApp",
         "waText": "Здравствуйте! Я оформил(а) заказ раскладушки на сайте.",
@@ -34,8 +34,8 @@ T = {
         "home": "../",
     },
     "en": {
-        "title": "Thank you! Order received",
-        "text": "We will message you on WhatsApp from +995 599 703 991 soon to confirm the order and delivery. Don't want to wait? Message us yourself.",
+        "title": "Thank you for your order!",
+        "text": "We will contact you on WhatsApp shortly.",
         "sum": "{n} pcs · {v} ₾ incl. delivery · cash to the courier",
         "wa": "Message us on WhatsApp",
         "waText": "Hello! I placed an order for the folding bed on the website.",
@@ -103,7 +103,7 @@ __DRAFTBAR__<main class="card">
   const id = (q.get("id") || "").slice(0, 40), n = parseInt(q.get("n"), 10), v = parseFloat(q.get("v"));
   const ok = id && n > 0 && n < 100 && v > 0 && v < 100000;
   const dl = parseFloat(q.get("dl"));
-  if (ok) { const el = document.getElementById("sum"); el.textContent = (dl === 0 ? __SUMFREE__ : __SUM__).replace("{n}", n).replace("{v}", v); el.hidden = false; }
+  /* состав и сумму заказа не показываем: одна общая страница для всех вариантов (Родион 28.10) */
   /* допродажа: открывает WhatsApp с готовым текстом (заказ уже отправлен, второй заказ в форме не создаём) */
   const upBtn = document.getElementById("up-btn");
   upBtn.href = "https://wa.me/__WA__?text=" + encodeURIComponent(__UPWA__.replace("{id}", id || "—"));
