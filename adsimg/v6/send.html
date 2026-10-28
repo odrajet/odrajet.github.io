@@ -1,0 +1,5 @@
+<!doctype html><meta charset=utf-8><title>send</title><body>sending…<script>
+const F=["ru/RU-1-cena-159_9x16.jpg","ru/RU-2-deficit-159_9x16.jpg","ru/RU-3-bez-riska-159_9x16.jpg","ka/KA-1-cena-159_9x16.jpg","ka/KA-2-deficit-159_9x16.jpg","ka/KA-3-bez-riska-159_9x16.jpg","en/EN-1-cena-159_9x16.jpg","en/EN-2-deficit-159_9x16.jpg","en/EN-3-bez-riska-159_9x16.jpg"];
+(async()=>{const out=[];for(const f of F){const b=await (await fetch(f)).blob();out.push({name:f.split('/')[1],blob:b})}
+window.opener.postMessage({odraFiles:out},"https://adsmanager.facebook.com");document.body.textContent="sent "+out.length})();
+</script>
