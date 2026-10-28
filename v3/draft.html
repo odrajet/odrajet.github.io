@@ -111,7 +111,7 @@
   }
 
   .rating-line { display: flex; align-items: center; gap: 8px; font-size: 14px; flex-wrap: wrap; }
-  .rating-line a { color: var(--muted); }
+  .rating-line span:last-child { color: var(--muted); }
   .buy h1 { font-size: clamp(26px, 5.4vw, 38px); font-weight: 800; margin: 8px 0 6px; }
   :root[lang="ka"] .buy h1 { font-size: clamp(22px, 4.8vw, 32px); }
   .buy .sub { color: var(--muted); margin: 0 0 14px; }
@@ -399,7 +399,7 @@
     <div class="buy" id="buy">
       <div class="rating-line">
         <span class="stars part">★★★★★</span>
-        <a href="#reviews" data-i18n="ratingLink"></a>
+        <span data-i18n="ratingLink"></span>
       </div>
       <h1 data-i18n="h1"></h1>
       <p class="sub" data-i18n="sub"></p>
