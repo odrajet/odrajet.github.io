@@ -130,7 +130,7 @@
   }
 
   .rating-line { display: flex; align-items: center; gap: 8px; font-size: 14px; flex-wrap: wrap; }
-  .rating-line a { color: var(--muted); }
+  .rating-line span:last-child { color: var(--muted); }
   .buy h1 { font-size: clamp(26px, 5.4vw, 38px); font-weight: 800; margin: 8px 0 6px; }
   :root[lang="ka"] .buy h1 { font-size: clamp(22px, 4.8vw, 32px); }
   .buy .sub { color: var(--muted); margin: 0 0 14px; }
@@ -163,6 +163,11 @@
   .pack:has(input:checked) { border-color: var(--accent); background: #fffaf8; box-shadow: 0 0 0 1px var(--accent) inset; }
   .pack .nm { font-weight: 700; display: block; }
   .pack .ds { font-size: 13px; color: var(--muted); }
+  .pack .rows { display: grid; gap: 4px; grid-column: 2 / 4; }
+  .pack .row { display: flex; justify-content: space-between; align-items: center; gap: 12px; font-weight: 700; }
+  .pack .row .pr { white-space: nowrap; }
+  .buy2 h2 { margin: 14px 0 0; }
+  .gallery2 .main { margin-top: 0; }
   .pack .pr { text-align: right; font-weight: 800; }
   .pack .pr s { display: block; font-weight: 400; color: var(--muted); font-size: 13px; }
   .pack .flag {
@@ -416,16 +421,10 @@
     <div class="buy" id="buy">
       <div class="rating-line">
         <span class="stars part">★★★★★</span>
-        <a href="#reviews" data-i18n="ratingLink"></a>
+        <span data-i18n="ratingLink"></span>
       </div>
       <h1 data-i18n="h1"></h1>
       <p class="sub" data-i18n="sub"></p>
-      <div class="price-row">
-        <span class="price-old" data-price="old"></span>
-        <span class="price-now" data-price="retail"></span>
-        <span class="tag-sale" data-i18n="sale"></span>
-      </div>
-
       <div class="loved">
         <div class="avatars">
           <img src="v3/form/r1.jpg" alt="">
@@ -435,28 +434,28 @@
         <span data-i18n-html="loved"></span>
       </div>
 
-      <div class="offer">
-        <span class="pill">2 = <span data-price="pairTotal"></span></span>
-        <span data-i18n-html="offer"></span>
-      </div>
-
       <div class="packs-title" data-i18n="packsTitle"></div>
       <div class="packs" role="radiogroup">
         <label class="pack">
-          <input type="radio" name="pack" value="1" checked>
-          <span><span class="nm" data-i18n="p1n"></span><span class="ds" data-i18n="p1d"></span></span>
-          <span class="pr"><span data-price="retail"></span></span>
+          <input type="radio" name="pack" value="bed">
+          <span class="rows">
+            <span class="row"><span class="nm" data-i18n="o1n"></span><span class="pr" data-price="bed"></span></span>
+            <span class="row"><span class="nm" data-i18n="o1d"></span><span class="pr" data-price="delivery"></span></span>
+          </span>
         </label>
         <label class="pack">
-          <span class="flag" data-i18n="p2flag"></span>
-          <input type="radio" name="pack" value="2">
-          <span><span class="nm" data-i18n="p2n"></span><span class="ds" data-i18n="p2d"></span></span>
-          <span class="pr"><s data-price="retail2"></s><span data-price="pairTotal"></span></span>
+          <input type="radio" name="pack" value="mat">
+          <span class="rows">
+            <span class="row"><span class="nm" data-i18n="o2n"></span><span class="pr" data-price="mat"></span></span>
+            <span class="row"><span class="nm" data-i18n="o2d"></span><span class="pr" data-price="delivery"></span></span>
+          </span>
         </label>
         <label class="pack">
-          <input type="radio" name="pack" value="5">
-          <span><span class="nm" data-i18n="p5n"></span><span class="ds" data-i18n="p5d"></span></span>
-          <span class="pr"><span data-price="wholesale"></span><span class="ds" data-i18n="perUnit"></span></span>
+          <span class="flag" data-i18n="o3flag"></span>
+          <input type="radio" name="pack" value="set" checked>
+          <span class="rows">
+            <span class="row"><span class="nm"><span data-i18n="o3n"></span> <span data-i18n="o3d"></span></span><span class="pr" data-price="set"></span></span>
+          </span>
         </label>
       </div>
 
@@ -575,13 +574,59 @@
     <div class="reviews" id="reviews-list"></div>
   </section>
 
+  <!-- ======= повтор карточки товара + выбор варианта ======= -->
+  <section style="padding-top:8px">
+    <div class="product">
+      <div class="gallery gallery2">
+        <div class="main" id="slides2">
+        <div class="slide"><img src="v3/form/ka/hero.jpg" data-src-lang="v3/form/{lang}/hero.jpg" alt="" loading="lazy"></div>
+        <div class="slide"><img src="v3/form/ka/p1.jpg" data-src-lang="v3/form/{lang}/p1.jpg" alt="" loading="lazy"></div>
+        <div class="slide"><img src="v3/form/ka/p2.jpg" data-src-lang="v3/form/{lang}/p2.jpg" alt="" loading="lazy"></div>
+        <div class="slide"><img src="v3/form/ka/p3.jpg" data-src-lang="v3/form/{lang}/p3.jpg" alt="" loading="lazy"></div>
+        <div class="slide"><img src="v3/form/ka/p4.jpg" data-src-lang="v3/form/{lang}/p4.jpg" alt="" loading="lazy"></div>
+        <div class="slide"><img src="v3/form/ka/p5.jpg" data-src-lang="v3/form/{lang}/p5.jpg" alt="" loading="lazy"></div>
+        </div>
+      </div>
+      <div class="buy buy2">
+        <h2 data-i18n="h1"></h2>
+        <div class="packs-title" data-i18n="packsTitle"></div>
+      <div class="packs" role="radiogroup">
+        <label class="pack">
+          <input type="radio" name="pack2" value="bed">
+          <span class="rows">
+            <span class="row"><span class="nm" data-i18n="o1n"></span><span class="pr" data-price="bed"></span></span>
+            <span class="row"><span class="nm" data-i18n="o1d"></span><span class="pr" data-price="delivery"></span></span>
+          </span>
+        </label>
+        <label class="pack">
+          <input type="radio" name="pack2" value="mat">
+          <span class="rows">
+            <span class="row"><span class="nm" data-i18n="o2n"></span><span class="pr" data-price="mat"></span></span>
+            <span class="row"><span class="nm" data-i18n="o2d"></span><span class="pr" data-price="delivery"></span></span>
+          </span>
+        </label>
+        <label class="pack">
+          <span class="flag" data-i18n="o3flag"></span>
+          <input type="radio" name="pack2" value="set">
+          <span class="rows">
+            <span class="row"><span class="nm"><span data-i18n="o3n"></span> <span data-i18n="o3d"></span></span><span class="pr" data-price="set"></span></span>
+          </span>
+        </label>
+      </div>
+        <div class="stock" data-i18n="stock"></div>
+        <button type="button" class="btn" data-open-order id="cta2"><span data-i18n="cta"></span></button>
+        <p class="pay-note" data-i18n="payNote"></p>
+      </div>
+    </div>
+  </section>
+
   <!-- ======= опт ======= -->
   <section style="padding-top:8px">
     <div class="b2b">
       <h2 data-i18n="b2bTitle"></h2>
       <div class="px" data-i18n="b2bPrice"></div>
       <p data-i18n="b2bText"></p>
-      <button type="button" class="btn" data-open-order data-qty="5" style="max-width:360px"><span data-i18n="b2bCta"></span></button>
+      <button type="button" class="btn" data-open-order data-offer="wholesale" style="max-width:360px"><span data-i18n="b2bCta"></span></button>
     </div>
   </section>
 
@@ -609,7 +654,6 @@
 </footer>
 
 <div class="sticky" id="sticky">
-  <div class="p"><s data-price="old"></s><b data-price="retail"></b></div>
   <button type="button" class="btn" data-open-order><span data-i18n="ctaShort"></span></button>
 </div>
 
@@ -622,14 +666,14 @@
       <div class="line-item">
         <img src="v3/form/ka/hero.jpg" data-src-lang="v3/form/{lang}/hero.jpg" alt="">
         <div>
-          <div class="t" data-i18n="itemName"></div>
+          <div class="t" id="li-name"></div>
           
         </div>
         <div class="pr"><s id="li-old"></s><span id="li-sum"></span></div>
       </div>
       <div class="totals">
         <div><span data-i18n="tGoods"></span><span id="t-goods"></span></div>
-        <div class="save" id="t-save-row"><span data-i18n="tSave"></span><span id="t-save"></span></div>
+        <div class="save" id="t-save-row" hidden style="display:none"><span data-i18n="tSave"></span><span id="t-save"></span></div>
         <div><span data-i18n="tDelivery"></span><span id="t-del"></span></div>
         <div class="sum"><span data-i18n="tTotal"></span><span id="t-sum"></span></div>
       </div>
@@ -644,7 +688,7 @@
           </select>
         </label>
         <input type="checkbox" name="botcheck" class="bot" tabindex="-1" autocomplete="off">
-        <input type="hidden" name="qty"><input type="hidden" name="total"><input type="hidden" name="lang"><input type="hidden" name="source"><input type="hidden" name="campaign">
+        <input type="hidden" name="qty"><input type="hidden" name="offer"><input type="hidden" name="total"><input type="hidden" name="lang"><input type="hidden" name="source"><input type="hidden" name="campaign">
         <p class="form-msg" hidden></p>
         <button class="btn" type="submit"><span data-i18n="fSubmit"></span> · <span id="btn-sum"></span></button>
         <p class="consent" data-i18n="fConsent"></p>
@@ -677,9 +721,10 @@ const CONFIG = {
   pixelId: "1047116104717565",
   formEndpoint: "https://api.web3forms.com/submit",
   formKey: "e10cfa26-080d-46a5-9d72-45ee5bd1d8b3",
-  priceRetail: 179,
-  priceOld: 249,
-  pricePair: 159,
+  priceBed: 159,            // раскладушка без матраса + доставка
+  priceMat: 169,            // раскладушка с матрасом + доставка
+  priceSet: 179,            // раскладушка + матрас + чехол, доставка по Тбилиси бесплатно
+  priceSetTwo: 318,         // допродажа на «Спасибо»: 2 комплекта, доставка бесплатно
   priceWholesale: 145,
   wholesaleMin: 5,
   delivery: 15,
@@ -739,7 +784,7 @@ const REVIEWS = [
 const I18N = {
   ka: {
     pageTitle: "ODRA JET — დასაკეცი საწოლი მატრასით · თბილისი",
-    promo: "აქცია: 2 საწოლი — <b>თითო {pair}</b> · გადახდა კურიერთან, მიღებისას",
+    promo: "<strong>აქცია!</strong> საწოლი მატრასით + შესანახი ჩანთა + უფასო მიწოდება თბილისში — <b>{set}</b>",
     slogan: "სტუმრისთვის. ერთ წუთში.",
     kgLabel: "კგ-მდე",
     altMain: "დასაკეცი საწოლი მატრასით ოთახში",
@@ -749,22 +794,23 @@ const I18N = {
     sale: "აქცია",
     loved: "<b>1995 მყიდველმა</b> 5 ვარსკვლავი დაუსვა",
     offer: "აიღეთ ორი — <b>თითო {pair}</b>. ეკონომია {save}",
-    packsTitle: "აირჩიეთ რაოდენობა",
-    p1n: "1 საწოლი", p1d: "ერთი სტუმრისთვის",
-    p2flag: "ყველაზე მომგებიანი", p2n: "2 საწოლი", p2d: "თითო {pair} · ეკონომია {save}",
-    p5n: "{min}+ საწოლი · საბითუმო", p5d: "ჰოსტელი, სასტუმრო, ბანაკი", perUnit: "ცალი",
+    packsTitle: "აირჩიეთ ვარიანტი",
+    o1n: "დასაკეცი საწოლი მატრასის გარეშე", o1d: "+ მიწოდება",
+    o2n: "დასაკეცი საწოლი მატრასით", o2d: "+ მიწოდება",
+    o3flag: "ყველაზე მომგებიანი", o3n: "დასაკეცი საწოლი მატრასით + შესანახი ჩანთა", o3d: "+ უფასო მიწოდება თბილისში",
+    ow: "დასაკეცი საწოლი მატრასით, საბითუმო ({min} ც.)", free: "უფასო",
     stock: "მარაგშია თბილისის საწყობში",
     cta: "შეკვეთა — გადახდა მიღებისას", ctaShort: "შეკვეთა",
     payNote: "წინასწარი გადახდა არ არის · ნაღდი ფულით კურიერთან",
     tl1: "შეკვეთა", tl2: "თბილისი", tl3: "რუსთავი",
     today: "დღეს", tomorrow: "ხვალ", rustaviEta: "2–3 სამუშაო დღე",
     c1: "იშლება ერთი მოძრაობით, აწყობა არ სჭირდება",
-    c2: "6 სმ მატრასი უკვე კომპლექტშია",
+    c2: "6 სმ მატრასი — ვარიანტებში „მატრასით“ და „კომპლექტი“",
     c3: "მეტალის კარკასი 150 კგ-მდე, არ იღუნება",
     kitTitle: "კომპლექტში",
     kit1: "დასაკეცი საწოლი", kit1s: "ლითონის კარკასი, 150\u00a0კგ-მდე",
-    kit2: "მატრასი", kit2s: "6 სმ, სინთეპონი",
-    kit3: "ჩანთა", kit3s: "საჩუქრად, 21×17×101 სმ",
+    kit2: "მატრასი", kit2s: "6 სმ, სინთეპონი · მატრასიან ვარიანტებში",
+    kit3: "ჩანთა", kit3s: "მხოლოდ კომპლექტში {set} · 21×17×101 სმ",
     mediaTitle: "მყიდველების ფოტოები და ვიდეოები",
     mediaSub: "ნამდვილი ფოტოები და ვიდეოები მყიდველებისგან. დააჭირეთ სანახავად.",
     paybox: "გადახდა მხოლოდ ნაღდი ფულით, კურიერთან მიღებისას",
@@ -798,14 +844,14 @@ const I18N = {
     faq: [
       ["როგორ გადავიხადო?", "ნაღდი ფულით კურიერთან, მიღებისას. წინასწარი გადახდა არ არის."],
       ["როდის მოიტანთ?", "თბილისში: დღესვე, თუ შეკვეთას {cutoff}-მდე გააფორმებთ (ორშ–შაბ), სხვა შემთხვევაში ხვალ. კვირას არ ვატარებთ. რუსთავში 2–3 სამუშაო დღე."],
-      ["რა ღირს მიწოდება?", "{delivery} თბილისსა და რუსთავში."],
+      ["რა ღირს მიწოდება?", "{delivery} თბილისსა და რუსთავში. კომპლექტით {set} მიწოდება თბილისში უფასოა."],
       ["გამიძლებს?", "კარკასი 150 კგ-მდე დატვირთვას უძლებს. საძინებელი ადგილი 190×68 სმ."],
       ["მატრასი თხელი ხომ არ არის?", "მატრასი 6 სმ-ია, სინთეპონის შიგთავსით, რბილი ქსოვილით."],
-      ["რა შედის კომპლექტში?", "საწოლი, მატრასი და გადასატანი ჩანთა (საჩუქრად)."],
+      ["რა შედის კომპლექტში?", "დამოკიდებულია ვარიანტზე: საწოლი მატრასის გარეშე ({bed}); საწოლი მატრასით ({mat}); საწოლი, მატრასი და ჩანთა ({set}, მიწოდება თბილისში უფასოა)."],
       ["როგორ დაგიკავშირდებით?", "შეკვეთის შემდეგ მოგწერთ WhatsApp-ში, დავაზუსტებთ მისამართსა და დროს."]
     ],
     finalTitle: "შეუკვეთეთ დღეს — გადაიხდით მიღებისას",
-    finalText: "ორი საწოლი — თითო {pair}. მიწოდება თბილისსა და რუსთავში {delivery}.",
+    finalText: "საწოლი {bed}-დან. საწოლი + მატრასი + ჩანთა — {set}, მიწოდება თბილისში უფასოა. სხვა შემთხვევაში მიწოდება {delivery}.",
     drTitle: "თქვენი შეკვეთა",
     deadlineToday: "⏱ გააფორმეთ {left}-ში — მოგიტანთ დღესვე (თბილისი)",
     deadlineTomorrow: "🚚 მიწოდება თბილისში: {day}",
@@ -836,7 +882,7 @@ const I18N = {
   },
   ru: {
     pageTitle: "ODRA JET — раскладушка с матрасом · Тбилиси",
-    promo: "Акция: 2 раскладушки — <b>по {pair}</b> · оплата курьеру при получении",
+    promo: "<strong>АКЦИЯ!</strong> Раскладушка с матрасом + чехол для хранения + бесплатная доставка по Тбилиси — <b>{set}</b>",
     slogan: "Гостю. За минуту.",
     kgLabel: "кг нагрузка",
     altMain: "Раскладушка с матрасом в комнате",
@@ -846,22 +892,23 @@ const I18N = {
     sale: "Акция",
     loved: "<b>1995 покупателей</b> поставили 5 звёзд",
     offer: "Возьмите две — <b>по {pair}</b> за штуку. Экономия {save}",
-    packsTitle: "Выберите количество",
-    p1n: "1 раскладушка", p1d: "для одного гостя",
-    p2flag: "Выгоднее всего", p2n: "2 раскладушки", p2d: "по {pair} · экономия {save}",
-    p5n: "от {min} шт. · опт", p5d: "хостел, гостиница, лагерь", perUnit: "за шт.",
+    packsTitle: "Выберите вариант",
+    o1n: "Раскладушка без матраса", o1d: "+ доставка",
+    o2n: "Раскладушка с матрасом", o2d: "+ доставка",
+    o3flag: "Выгоднее всего", o3n: "Раскладушка с матрасом + чехол для хранения", o3d: "+ бесплатная доставка по Тбилиси",
+    ow: "Раскладушка с матрасом, опт ({min} шт.)", free: "Бесплатно",
     stock: "В наличии на складе в Тбилиси",
     cta: "Заказать — оплата при получении", ctaShort: "Заказать",
     payNote: "Без предоплаты · наличными курьеру",
     tl1: "Заказ", tl2: "Тбилиси", tl3: "Рустави",
     today: "сегодня", tomorrow: "завтра", rustaviEta: "2–3 рабочих дня",
     c1: "Раскладывается одним движением, без сборки",
-    c2: "Матрас 6 см уже в комплекте",
+    c2: "Матрас 6 см — в вариантах «с матрасом» и «комплект»",
     c3: "Металлический каркас до 150 кг, не прогибается",
     kitTitle: "В комплекте",
     kit1: "Раскладушка", kit1s: "металлический каркас, до 150\u00a0кг",
-    kit2: "Матрас", kit2s: "6 см, синтепон",
-    kit3: "Сумка-чехол", kit3s: "в подарок, 21×17×101 см",
+    kit2: "Матрас", kit2s: "6 см, синтепон · в вариантах с матрасом",
+    kit3: "Чехол", kit3s: "только в комплекте за {set} · 21×17×101 см",
     mediaTitle: "Фото и видео покупателей",
     mediaSub: "Настоящие фото и видео от покупателей. Нажмите, чтобы посмотреть.",
     paybox: "Оплата только наличными курьеру при получении",
@@ -895,14 +942,14 @@ const I18N = {
     faq: [
       ["Как оплатить?", "Наличными курьеру при получении. Без предоплаты."],
       ["Когда привезёте?", "По Тбилиси сегодня, если оформите заказ до {cutoff} (пн–сб), иначе завтра. В воскресенье не возим. В Рустави 2–3 рабочих дня."],
-      ["Сколько стоит доставка?", "{delivery} по Тбилиси и Рустави."],
+      ["Сколько стоит доставка?", "{delivery} по Тбилиси и Рустави. С комплектом за {set} доставка по Тбилиси бесплатная."],
       ["Выдержит ли меня?", "Каркас рассчитан на нагрузку до 150 кг. Спальное место 190×68 см."],
       ["Матрас не тонкий?", "Матрас 6 см, наполнитель синтепон, мягкая ткань."],
-      ["Что в комплекте?", "Раскладушка, матрас и чехол для переноски (в подарок)."],
+      ["Что в комплекте?", "Зависит от варианта: раскладушка без матраса ({bed}); раскладушка с матрасом ({mat}); раскладушка, матрас и чехол для переноски ({set}, доставка по Тбилиси бесплатно)."],
       ["Как со мной свяжутся?", "После заказа напишем вам в WhatsApp и уточним адрес и время."]
     ],
     finalTitle: "Закажите сегодня — платите при получении",
-    finalText: "Две раскладушки — по {pair}. Доставка по Тбилиси и Рустави {delivery}.",
+    finalText: "Раскладушка от {bed}. Комплект с матрасом и чехлом — {set}, доставка по Тбилиси бесплатно. Иначе доставка {delivery}.",
     drTitle: "Ваш заказ",
     deadlineToday: "⏱ Оформите за {left} — привезём сегодня (Тбилиси)",
     deadlineTomorrow: "🚚 Доставка по Тбилиси: {day}",
@@ -933,7 +980,7 @@ const I18N = {
   },
   en: {
     pageTitle: "ODRA JET — folding bed with mattress · Tbilisi",
-    promo: "Offer: 2 beds — <b>{pair} each</b> · pay the courier on delivery",
+    promo: "<strong>SALE!</strong> Folding bed with mattress + storage cover + free delivery in Tbilisi — <b>{set}</b>",
     slogan: "For guests. In a minute.",
     kgLabel: "kg max load",
     altMain: "Folding bed with mattress in a room",
@@ -943,22 +990,23 @@ const I18N = {
     sale: "Sale",
     loved: "<b>1,995 buyers</b> gave it 5 stars",
     offer: "Take two — <b>{pair} each</b>. You save {save}",
-    packsTitle: "Choose quantity",
-    p1n: "1 bed", p1d: "for one guest",
-    p2flag: "Best value", p2n: "2 beds", p2d: "{pair} each · save {save}",
-    p5n: "{min}+ beds · wholesale", p5d: "hostel, hotel, camp", perUnit: "each",
+    packsTitle: "Choose your option",
+    o1n: "Folding bed, no mattress", o1d: "+ delivery",
+    o2n: "Folding bed with mattress", o2d: "+ delivery",
+    o3flag: "Best value", o3n: "Folding bed with mattress + storage cover", o3d: "+ free delivery in Tbilisi",
+    ow: "Folding bed with mattress, wholesale ({min} pcs)", free: "Free",
     stock: "In stock at our Tbilisi warehouse",
     cta: "Order — pay on delivery", ctaShort: "Order",
     payNote: "No prepayment · cash to the courier",
     tl1: "Order", tl2: "Tbilisi", tl3: "Rustavi",
     today: "today", tomorrow: "tomorrow", rustaviEta: "2–3 working days",
     c1: "Opens in one move, no assembly",
-    c2: "6 cm mattress included",
+    c2: "6 cm mattress in the “with mattress” and “set” options",
     c3: "Metal frame holds up to 150 kg, doesn't sag",
     kitTitle: "In the box",
     kit1: "Folding bed", kit1s: "metal frame, up to 150\u00a0kg",
-    kit2: "Mattress", kit2s: "6 cm, polyester fibre",
-    kit3: "Carry bag", kit3s: "free, 21×17×101 cm",
+    kit2: "Mattress", kit2s: "6 cm, polyester fibre · with-mattress options",
+    kit3: "Carry cover", kit3s: "set option only ({set}) · 21×17×101 cm",
     mediaTitle: "Buyer photos and videos",
     mediaSub: "Real photos and videos from buyers. Tap to view.",
     paybox: "Cash only, paid to the courier on delivery",
@@ -992,14 +1040,14 @@ const I18N = {
     faq: [
       ["How do I pay?", "Cash to the courier on delivery. No prepayment."],
       ["When will it arrive?", "In Tbilisi today if you order before {cutoff} (Mon–Sat), otherwise tomorrow. No deliveries on Sunday. Rustavi takes 2–3 working days."],
-      ["How much is delivery?", "{delivery} in Tbilisi and Rustavi."],
+      ["How much is delivery?", "{delivery} in Tbilisi and Rustavi. With the {set} set, delivery in Tbilisi is free."],
       ["Will it hold me?", "The frame is rated for up to 150 kg. Sleeping area 190×68 cm."],
       ["Is the mattress thin?", "It is 6 cm, filled with polyester fibre, with a soft fabric cover."],
-      ["What's in the box?", "The bed, the mattress and a carry bag (free)."],
+      ["What's in the box?", "Depends on the option: bed without mattress ({bed}); bed with mattress ({mat}); bed + mattress + carry cover ({set}, free delivery in Tbilisi)."],
       ["How will you contact me?", "After you order we message you on WhatsApp to confirm the address and time."]
     ],
     finalTitle: "Order today — pay on delivery",
-    finalText: "Two beds — {pair} each. Delivery in Tbilisi and Rustavi {delivery}.",
+    finalText: "Folding bed from {bed}. Bed + mattress + cover for {set} with free delivery in Tbilisi; otherwise delivery is {delivery}.",
     drTitle: "Your order",
     deadlineToday: "⏱ Order within {left} — delivered today (Tbilisi)",
     deadlineTomorrow: "🚚 Tbilisi delivery: {day}",
@@ -1047,14 +1095,27 @@ const I18N = {
     return "ka";
   }
   let lang = pickLang();
-  let qty = 1;
-
-  /* цена за штуку от количества: 1 — розница, 2–4 — акция, 5+ — опт */
-  const unit = q => q >= CONFIG.wholesaleMin ? CONFIG.priceWholesale : q >= 2 ? CONFIG.pricePair : CONFIG.priceRetail;
+  /* варианты: bed — без матраса, mat — с матрасом, set — матрас + чехол (доставка по Тбилиси бесплатно), wholesale — опт через блок внизу */
+  const OFFERS = {
+    bed: { price: CONFIG.priceBed, qty: 1, free: false },
+    mat: { price: CONFIG.priceMat, qty: 1, free: false },
+    set: { price: CONFIG.priceSet, qty: 1, free: true },
+    wholesale: { price: CONFIG.priceWholesale, qty: CONFIG.wholesaleMin, free: false }
+  };
+  const OFFER_NAME_KEY = { bed: "o1n", mat: "o2n", set: "o3n", wholesale: "ow" };
+  const OFFER_RU = { bed: "раскладушка БЕЗ матраса", mat: "раскладушка С МАТРАСОМ", set: "КОМПЛЕКТ раскладушка+матрас+чехол", wholesale: "ОПТ" };
+  let pick = "set";      // выбранный вариант на странице
+  let offer = "set";     // вариант в корзине (pick или wholesale)
+  function calc() {
+    const o = OFFERS[offer], goods = o.price * o.qty;
+    const sel = document.querySelector('#lead-form select[name="city"]');
+    const dl = o.free && (!sel || sel.value === "Tbilisi") ? 0 : CONFIG.delivery;
+    return { qty: o.qty, unit: o.price, goods: goods, dl: dl, sum: goods + dl };
+  }
 
   function fill(str, extra) {
     const v = Object.assign({
-      pair: money(CONFIG.pricePair), save: money(2 * (CONFIG.priceRetail - CONFIG.pricePair)),
+      bed: money(CONFIG.priceBed), mat: money(CONFIG.priceMat), set: money(CONFIG.priceSet),
       wholesale: money(CONFIG.priceWholesale), min: String(CONFIG.wholesaleMin),
       delivery: money(CONFIG.delivery), cutoff: CONFIG.cutoff,
       seller: CONFIG.legal.seller, id: CONFIG.legal.id, address: CONFIG.legal.address
@@ -1097,6 +1158,14 @@ const I18N = {
       : fill(t.deadlineTomorrow, { day: d.tomorrow ? t.tomorrow + ", " + fmtDate(d.date) : fmtDate(d.date) });
   }
 
+  function renderPrices() {
+    const P = {
+      bed: money(CONFIG.priceBed), mat: money(CONFIG.priceMat), set: money(CONFIG.priceSet),
+      cur: money(OFFERS[pick].price), delivery: money(CONFIG.delivery), wholesale: money(CONFIG.priceWholesale)
+    };
+    $$("[data-price]").forEach(el => { el.textContent = P[el.dataset.price]; });
+  }
+
   function render() {
     const t = I18N[lang];
     document.documentElement.lang = lang;
@@ -1105,11 +1174,7 @@ const I18N = {
     $$("[data-i18n-html]").forEach(el => { const k = el.dataset.i18nHtml; if (t[k] != null) el.innerHTML = fill(t[k]); });
     $$("[data-i18n-alt]").forEach(el => { el.alt = t[el.dataset.i18nAlt] || ""; });
     $$("[data-src-lang]").forEach(el => { el.src = el.dataset.srcLang.replace("{lang}", lang); });
-    const P = {
-      retail: money(CONFIG.priceRetail), old: money(CONFIG.priceOld), pairTotal: money(2 * CONFIG.pricePair),
-      retail2: money(2 * CONFIG.priceRetail), wholesale: money(CONFIG.priceWholesale)
-    };
-    $$("[data-price]").forEach(el => { el.textContent = P[el.dataset.price]; });
+    renderPrices();
     $$(".langs button").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.lang === lang)));
 
     const list = $("#reviews-list"); list.textContent = "";
@@ -1217,27 +1282,26 @@ const I18N = {
   galImgs.forEach((im, i) => im.addEventListener("click", () => openLb(galImgs.map(x => x.src), i)));
 
   /* ---------- пакеты ---------- */
-  $$('input[name="pack"]').forEach(r => r.addEventListener("change", () => { qty = Number(r.value); renderCart(); }));
+  $$('input[name="pack"], input[name="pack2"]').forEach(r => r.addEventListener("change", () => { pick = offer = r.value; renderPrices(); renderCart(); }));
+  const gal2 = $$("#slides2 img");
+  gal2.forEach((im, i) => im.addEventListener("click", () => openLb(gal2.map(x => x.src), i)));
 
   /* ---------- корзина ---------- */
   const dlg = $("#order");
   function renderCart() {
-    const t = I18N[lang], u = unit(qty), goods = u * qty, full = CONFIG.priceRetail * qty;
-    const save = full - goods, sum = goods + CONFIG.delivery;
-    $("#li-sum").textContent = money(goods);
-    $("#li-old").textContent = save ? money(full) : "";
-    $("#t-goods").textContent = money(full);
-    $("#t-save").textContent = "− " + money(save);
-    $("#t-save-row").hidden = !save;
-    $("#t-del").textContent = money(CONFIG.delivery);
-    $("#t-sum").textContent = money(sum);
-    $("#btn-sum").textContent = money(sum);
-    const r = $('input[name="pack"][value="' + (qty >= CONFIG.wholesaleMin ? 5 : qty >= 2 ? 2 : 1) + '"]');
-    if (r) r.checked = true;
+    const t = I18N[lang], c = calc();
+    $("#li-name").textContent = fill(t[OFFER_NAME_KEY[offer]]);
+    $("#li-sum").textContent = money(c.goods);
+    $("#li-old").textContent = "";
+    $("#t-goods").textContent = money(c.goods);
+    $("#t-del").textContent = c.dl ? money(c.dl) : t.free;
+    $("#t-sum").textContent = money(c.sum);
+    $("#btn-sum").textContent = money(c.sum);
+    $$('input[name="pack"], input[name="pack2"]').forEach(x => { x.checked = x.value === offer; });
   }
 
   $$("[data-open-order]").forEach(b => b.addEventListener("click", () => {
-    if (b.dataset.qty) qty = Math.max(qty, Number(b.dataset.qty));
+    offer = b.dataset.offer || pick;
     renderCart(); renderDelivery();
     dlg.showModal();
     track("OpenOrderForm", b.id || "cta");
@@ -1254,7 +1318,7 @@ const I18N = {
   /* ---------- аналитика ---------- */
   function track(event, channel) {
     const meta = { content_name: channel, source: SRC, lang: lang, campaign: CAMPAIGN || "none", page: PAGE };
-    if (event === "Lead") { meta.value = unit(qty) * qty; meta.currency = "GEL"; meta.num_items = qty; }
+    if (event === "Lead") { const c = calc(); meta.value = c.goods; meta.currency = "GEL"; meta.num_items = c.qty; meta.offer = offer; }
     let c = null; try { c = localStorage.getItem("odra.consent.ads"); } catch (e) {}
     if (window.fbq && c !== "no") window.fbq(STD_EVENTS.includes(event) ? "track" : "trackCustom", event, meta);
   }
@@ -1276,6 +1340,7 @@ const I18N = {
     checkoutSent = true;
     track("InitiateCheckout", "phone");
   }
+  $("#lead-form").elements.city.addEventListener("change", renderCart);
   ["input", "change", "blur"].forEach(t => {
     $("#lead-form").elements.phone.addEventListener(t, checkCheckout);
     $("#lead-form").elements.name.addEventListener(t, checkCheckout);
@@ -1290,13 +1355,14 @@ const I18N = {
     if (!name || phone.replace(/\D/g, "").length < 9) {
       msg.className = "form-msg err"; msg.textContent = t.fNeed; msg.hidden = false; return;
     }
-    const u = unit(qty), sum = u * qty + CONFIG.delivery;
-    F.qty.value = qty; F.total.value = sum + " GEL (" + qty + " x " + u + " + " + CONFIG.delivery + ")";
+    const c = calc(), sum = c.sum;
+    F.qty.value = c.qty; F.offer.value = offer;
+    F.total.value = sum + " GEL (" + c.qty + " x " + c.unit + " + доставка " + c.dl + ")";
     F.lang.value = lang; F.source.value = SRC; F.campaign.value = CAMPAIGN || "none";
     const fd = new FormData(form);
     fd.set("access_key", CONFIG.formKey);
-    fd.set("from_name", CONFIG.brand + " — сайт v3");
-    fd.set("subject", CONFIG.brand + ": ЗАКАЗ с сайта [" + lang + "] " + qty + " шт., " + sum + " GEL, " + fd.get("city"));
+    fd.set("from_name", CONFIG.brand + " — сайт v3" + (window.__DRAFT__ ? " ЧЕРНОВИК-ТЕСТ" : ""));
+    fd.set("subject", CONFIG.brand + (window.__DRAFT__ ? " ЧЕРНОВИК-ТЕСТ" : "") + ": ЗАКАЗ с сайта [" + lang + "] " + OFFER_RU[offer] + ", " + sum + " GEL, " + fd.get("city"));
     const btn = form.querySelector('button[type="submit"]'); btn.disabled = true;
     try {
       const r = await fetch(CONFIG.formEndpoint, {
@@ -1308,8 +1374,8 @@ const I18N = {
       if (!r.ok || data.success !== true) throw new Error(data.message || r.status);
       /* заказ ушёл → страница «Спасибо» (там пиксель шлёт Purchase — цель рекламы, один раз на заказ) */
       const oid = Date.now().toString(36) + Math.random().toString(36).slice(2, 6);
-      const ty = { ka: "/spasibo/", ru: "/ru/spasibo/", en: "/en/spasibo/" }[lang] || "/spasibo/";
-      const tq = new URLSearchParams({ id: oid, n: qty, v: sum, src: SRC, c: CAMPAIGN || "none" });
+      const ty = (window.__DRAFT__ ? { ka: "/v3/spasibo-draft/", ru: "/v3/spasibo-draft/ru/", en: "/v3/spasibo-draft/en/" } : { ka: "/spasibo/", ru: "/ru/spasibo/", en: "/en/spasibo/" })[lang];
+      const tq = new URLSearchParams({ id: oid, n: c.qty, v: sum, dl: c.dl, o: offer, src: SRC, c: CAMPAIGN || "none" });
       try { location.assign(ty + "?" + tq); return; } catch (e) {}
       const done = document.createElement("div"); done.className = "done";
       done.innerHTML = '<div class="ok">✅</div><h3></h3><p class="muted"></p><a class="btn btn-wa" target="_blank" rel="noopener"></a>';
@@ -1317,7 +1383,7 @@ const I18N = {
       done.querySelector("p").textContent = t.okText;
       const wa = done.querySelector("a");
       wa.textContent = t.okWa;
-      wa.href = "https://wa.me/" + CONFIG.whatsapp + "?text=" + encodeURIComponent(fill(t.waText, { qty: qty }));
+      wa.href = "https://wa.me/" + CONFIG.whatsapp + "?text=" + encodeURIComponent(fill(t.waText, { qty: c.qty }));
       form.replaceWith(done);
     } catch (e) {
       btn.disabled = false;
@@ -1336,7 +1402,7 @@ const I18N = {
   /* ---------- пиксель Meta: включён сразу, плашка-уведомление с кнопкой «Отказаться» ---------- */
   const CONSENT_KEY = "odra.consent.ads";
   function startPixel() {
-    if (!CONFIG.pixelId || window.fbq) return;
+    if (!CONFIG.pixelId || window.fbq || window.__DRAFT__) return;
     !function (f, b, e, v, n, t, s) {
       if (f.fbq) return; n = f.fbq = function () { n.callMethod ? n.callMethod.apply(n, arguments) : n.queue.push(arguments) };
       if (!f._fbq) f._fbq = n; n.push = n; n.loaded = !0; n.version = "2.0"; n.queue = [];

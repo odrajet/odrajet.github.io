@@ -22,6 +22,10 @@
   .sum { color: var(--ink); font-weight: 600; background: var(--bg); border-radius: 10px; padding: 10px 12px; }
   .btn { display: block; padding: 15px 18px; border-radius: 12px; font-weight: 800; text-decoration: none; margin-top: 8px; }
   .btn-wa { background: var(--wa); color: #fff; }
+  .up { margin-top: 20px; padding: 18px 16px; border: 2px dashed var(--ok); border-radius: 14px; background: #f3fbf6; }
+  .up h2 { font-size: 19px; line-height: 1.25; margin: 0 0 6px; }
+  .up p { margin: 0 0 4px; }
+  .btn-up { background: var(--ok); color: #fff; }
   .back { display: inline-block; margin-top: 16px; color: var(--muted); font-size: 14px; }
 </style>
 </head>
@@ -32,6 +36,11 @@
   <p>Скоро напишем вам в WhatsApp с номера +995 599 703 991, чтобы подтвердить заказ и доставку. Не хотите ждать? Напишите нам сами.</p>
   <p class="sum" id="sum" hidden></p>
   <a class="btn btn-wa" href="https://wa.me/995599703991?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5%21%20%D0%AF%20%D0%BE%D1%84%D0%BE%D1%80%D0%BC%D0%B8%D0%BB%28%D0%B0%29%20%D0%B7%D0%B0%D0%BA%D0%B0%D0%B7%20%D1%80%D0%B0%D1%81%D0%BA%D0%BB%D0%B0%D0%B4%D1%83%D1%88%D0%BA%D0%B8%20%D0%BD%D0%B0%20%D1%81%D0%B0%D0%B9%D1%82%D0%B5." target="_blank" rel="noopener">Написать в WhatsApp</a>
+  <section class="up" id="up">
+    <h2>Нужно больше? 2 комплекта — 318 ₾</h2>
+    <p>2 раскладушки с матрасами и чехлами. Доставка бесплатно.</p>
+    <a class="btn btn-up" id="up-btn" href="https://wa.me/995599703991" target="_blank" rel="noopener">Изменить заказ</a>
+  </section>
   <a class="back" href="../">Вернуться на сайт</a>
 </main>
 <script>
@@ -39,8 +48,14 @@
   const q = new URLSearchParams(location.search);
   const id = (q.get("id") || "").slice(0, 40), n = parseInt(q.get("n"), 10), v = parseFloat(q.get("v"));
   const ok = id && n > 0 && n < 100 && v > 0 && v < 100000;
-  if (ok) { const el = document.getElementById("sum"); el.textContent = "{n} шт. · {v} ₾ с доставкой · оплата курьеру наличными".replace("{n}", n).replace("{v}", v); el.hidden = false; }
+  const dl = parseFloat(q.get("dl"));
+  if (ok) { const el = document.getElementById("sum"); el.textContent = (dl === 0 ? "{n} шт. · {v} ₾ · доставка бесплатно · оплата курьеру наличными" : "{n} шт. · {v} ₾ с доставкой · оплата курьеру наличными").replace("{n}", n).replace("{v}", v); el.hidden = false; }
+  /* допродажа: открывает WhatsApp с готовым текстом (заказ уже отправлен, второй заказ в форме не создаём) */
+  const upBtn = document.getElementById("up-btn");
+  upBtn.href = "https://wa.me/995599703991?text=" + encodeURIComponent("Здравствуйте! Мой заказ №{id}. Хочу 2 комплекта (2 раскладушки + матрасы + чехлы) за 318 ₾ с бесплатной доставкой.".replace("{id}", id || "—"));
+  upBtn.addEventListener("click", function () { if (window.fbq) fbq("trackCustom", "UpsellClick", { value: 318, currency: "GEL", lang: "ru" }); });
 
+  
   /* пиксель Meta: как на сайте — работает, если человек не нажал «Отказаться» */
   let c = null; try { c = localStorage.getItem("odra.consent.ads"); } catch (e) {}
   if (c === "no") return;

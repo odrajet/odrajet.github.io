@@ -22,6 +22,10 @@
   .sum { color: var(--ink); font-weight: 600; background: var(--bg); border-radius: 10px; padding: 10px 12px; }
   .btn { display: block; padding: 15px 18px; border-radius: 12px; font-weight: 800; text-decoration: none; margin-top: 8px; }
   .btn-wa { background: var(--wa); color: #fff; }
+  .up { margin-top: 20px; padding: 18px 16px; border: 2px dashed var(--ok); border-radius: 14px; background: #f3fbf6; }
+  .up h2 { font-size: 19px; line-height: 1.25; margin: 0 0 6px; }
+  .up p { margin: 0 0 4px; }
+  .btn-up { background: var(--ok); color: #fff; }
   .back { display: inline-block; margin-top: 16px; color: var(--muted); font-size: 14px; }
 </style>
 </head>
@@ -32,6 +36,11 @@
   <p>We will message you on WhatsApp from +995 599 703 991 soon to confirm the order and delivery. Don't want to wait? Message us yourself.</p>
   <p class="sum" id="sum" hidden></p>
   <a class="btn btn-wa" href="https://wa.me/995599703991?text=Hello%21%20I%20placed%20an%20order%20for%20the%20folding%20bed%20on%20the%20website." target="_blank" rel="noopener">Message us on WhatsApp</a>
+  <section class="up" id="up">
+    <h2>Need more? 2 sets for 318 ₾</h2>
+    <p>2 folding beds with mattresses and covers. Free delivery.</p>
+    <a class="btn btn-up" id="up-btn" href="https://wa.me/995599703991" target="_blank" rel="noopener">Change my order</a>
+  </section>
   <a class="back" href="../">Back to the website</a>
 </main>
 <script>
@@ -39,8 +48,14 @@
   const q = new URLSearchParams(location.search);
   const id = (q.get("id") || "").slice(0, 40), n = parseInt(q.get("n"), 10), v = parseFloat(q.get("v"));
   const ok = id && n > 0 && n < 100 && v > 0 && v < 100000;
-  if (ok) { const el = document.getElementById("sum"); el.textContent = "{n} pcs · {v} ₾ incl. delivery · cash to the courier".replace("{n}", n).replace("{v}", v); el.hidden = false; }
+  const dl = parseFloat(q.get("dl"));
+  if (ok) { const el = document.getElementById("sum"); el.textContent = (dl === 0 ? "{n} pcs · {v} ₾ · free delivery · cash to the courier" : "{n} pcs · {v} ₾ incl. delivery · cash to the courier").replace("{n}", n).replace("{v}", v); el.hidden = false; }
+  /* допродажа: открывает WhatsApp с готовым текстом (заказ уже отправлен, второй заказ в форме не создаём) */
+  const upBtn = document.getElementById("up-btn");
+  upBtn.href = "https://wa.me/995599703991?text=" + encodeURIComponent("Hello! My order №{id}. I would like 2 sets (2 beds + mattresses + covers) for 318 ₾ with free delivery.".replace("{id}", id || "—"));
+  upBtn.addEventListener("click", function () { if (window.fbq) fbq("trackCustom", "UpsellClick", { value: 318, currency: "GEL", lang: "en" }); });
 
+  
   /* пиксель Meta: как на сайте — работает, если человек не нажал «Отказаться» */
   let c = null; try { c = localStorage.getItem("odra.consent.ads"); } catch (e) {}
   if (c === "no") return;
