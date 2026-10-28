@@ -418,7 +418,7 @@
       <div class="packs-title" data-i18n="packsTitle"></div>
       <div class="packs" role="radiogroup">
         <label class="pack">
-          <input type="radio" name="pack" value="bed" checked>
+          <input type="radio" name="pack" value="bed">
           <span><span class="nm" data-i18n="o1n"></span><span class="ds" data-i18n="o1d"></span></span>
           <span class="pr"><span data-price="bed"></span></span>
         </label>
@@ -429,7 +429,7 @@
         </label>
         <label class="pack">
           <span class="flag" data-i18n="o3flag"></span>
-          <input type="radio" name="pack" value="set">
+          <input type="radio" name="pack" value="set" checked>
           <span><span class="nm" data-i18n="o3n"></span><span class="ds" data-i18n="o3d"></span></span>
           <span class="pr"><span data-price="set"></span></span>
         </label>
@@ -715,7 +715,7 @@ const REVIEWS = [
 const I18N = {
   ka: {
     pageTitle: "ODRA JET — დასაკეცი საწოლი მატრასით · თბილისი",
-    promo: "საწოლი <b>{bed}</b>-დან · საწოლი + მატრასი + ჩანთა <b>{set}</b> — მიწოდება თბილისში უფასოა",
+    promo: "საწოლი მატრასით + შესანახი ჩანთა + უფასო მიწოდება თბილისში — <b>{set}</b>",
     slogan: "სტუმრისთვის. ერთ წუთში.",
     kgLabel: "კგ-მდე",
     altMain: "დასაკეცი საწოლი მატრასით ოთახში",
@@ -813,7 +813,7 @@ const I18N = {
   },
   ru: {
     pageTitle: "ODRA JET — раскладушка с матрасом · Тбилиси",
-    promo: "Раскладушка от <b>{bed}</b> · комплект с матрасом и чехлом — <b>{set}</b>, доставка по Тбилиси бесплатно",
+    promo: "Раскладушка с матрасом + чехол для хранения + бесплатная доставка по Тбилиси — <b>{set}</b>",
     slogan: "Гостю. За минуту.",
     kgLabel: "кг нагрузка",
     altMain: "Раскладушка с матрасом в комнате",
@@ -911,7 +911,7 @@ const I18N = {
   },
   en: {
     pageTitle: "ODRA JET — folding bed with mattress · Tbilisi",
-    promo: "Folding bed from <b>{bed}</b> · bed + mattress + cover <b>{set}</b> with free delivery in Tbilisi",
+    promo: "Folding bed with mattress + storage cover + free delivery in Tbilisi — <b>{set}</b>",
     slogan: "For guests. In a minute.",
     kgLabel: "kg max load",
     altMain: "Folding bed with mattress in a room",
@@ -1034,8 +1034,8 @@ const I18N = {
   };
   const OFFER_NAME_KEY = { bed: "o1n", mat: "o2n", set: "o3n", wholesale: "ow" };
   const OFFER_RU = { bed: "раскладушка БЕЗ матраса", mat: "раскладушка С МАТРАСОМ", set: "КОМПЛЕКТ раскладушка+матрас+чехол", wholesale: "ОПТ" };
-  let pick = "bed";      // выбранный вариант на странице
-  let offer = "bed";     // вариант в корзине (pick или wholesale)
+  let pick = "set";      // выбранный вариант на странице
+  let offer = "set";     // вариант в корзине (pick или wholesale)
   function calc() {
     const o = OFFERS[offer], goods = o.price * o.qty;
     const sel = document.querySelector('#lead-form select[name="city"]');
