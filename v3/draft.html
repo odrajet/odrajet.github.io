@@ -362,7 +362,7 @@
 </head>
 <body>
 
-<div id="draft-bar" style="background:#111;color:#ffd24d;font:700 13px/1.3 system-ui,sans-serif;text-align:center;padding:6px 10px;position:relative;z-index:99">ЧЕРНОВИК · 269 / 179 / 159 · заказы тестовые, пиксель выключен</div>
+<div id="draft-bar" style="background:#111;color:#ffd24d;font:700 13px/1.3 system-ui,sans-serif;text-align:center;padding:6px 10px;position:relative;z-index:99">ЧЕРНОВИК · 269 / 179 / 159 · Премиум с бельём · заказы тестовые, пиксель выключен</div>
 <div class="promo" data-i18n-html="promo"></div>
 
 <header class="top">
@@ -381,7 +381,7 @@
   <div class="product">
     <div class="gallery">
       <div class="main" id="slides">
-        <div class="slide"><img src="form2/ka/hero.jpg" data-src-lang="form2/{lang}/hero.jpg" alt="" fetchpriority="high"></div>
+        <div class="slide"><img src="form/ka/hero.jpg" data-src-lang="form/{lang}/hero.jpg" alt="" fetchpriority="high"></div>
         <div class="slide"><img src="form/ka/p1.jpg" data-src-lang="form/{lang}/p1.jpg" alt="" loading="lazy"></div>
         <div class="slide"><img src="form/ka/p2.jpg" data-src-lang="form/{lang}/p2.jpg" alt="" loading="lazy"></div>
         <div class="slide"><img src="form/ka/p3.jpg" data-src-lang="form/{lang}/p3.jpg" alt="" loading="lazy"></div>
@@ -390,7 +390,7 @@
         <div class="slide"><video src="../video/odra.mp4" poster="../video/odra-poster.jpg" muted loop playsinline preload="none"></video><button type="button" class="snd" aria-label="Sound">🔇</button></div>
       </div>
       <div class="thumbs" id="thumbs">
-        <button type="button"><img src="form2/ka/hero.jpg" data-src-lang="form2/{lang}/hero.jpg" alt=""></button>
+        <button type="button"><img src="form/ka/hero.jpg" data-src-lang="form/{lang}/hero.jpg" alt=""></button>
         <button type="button"><img src="form/ka/p1.jpg" data-src-lang="form/{lang}/p1.jpg" alt=""></button>
         <button type="button"><img src="form/ka/p2.jpg" data-src-lang="form/{lang}/p2.jpg" alt=""></button>
         <button type="button"><img src="form/ka/p3.jpg" data-src-lang="form/{lang}/p3.jpg" alt=""></button>
@@ -560,7 +560,7 @@
     <div class="product">
       <div class="gallery gallery2">
         <div class="main" id="slides2">
-        <div class="slide"><img src="form2/ka/hero.jpg" data-src-lang="form2/{lang}/hero.jpg" alt="" loading="lazy"></div>
+        <div class="slide"><img src="form/ka/hero.jpg" data-src-lang="form/{lang}/hero.jpg" alt="" loading="lazy"></div>
         <div class="slide"><img src="form/ka/p1.jpg" data-src-lang="form/{lang}/p1.jpg" alt="" loading="lazy"></div>
         <div class="slide"><img src="form/ka/p2.jpg" data-src-lang="form/{lang}/p2.jpg" alt="" loading="lazy"></div>
         <div class="slide"><img src="form/ka/p3.jpg" data-src-lang="form/{lang}/p3.jpg" alt="" loading="lazy"></div>
@@ -644,7 +644,7 @@
     <div class="dr-body" id="dr-body">
       <div class="dr-strip" data-dr="deadline"></div>
       <div class="line-item">
-        <img src="form2/ka/hero.jpg" data-src-lang="form2/{lang}/hero.jpg" alt="">
+        <img src="form/ka/hero.jpg" data-src-lang="form/{lang}/hero.jpg" alt="">
         <div>
           <div class="t" id="li-name"></div>
           
@@ -704,7 +704,7 @@ const CONFIG = {
   priceBed: 159,            // раскладушка без матраса + доставка
   priceMat: 169,            // раскладушка с матрасом + доставка
   priceSet: 179,            // раскладушка + матрас + чехол, доставка по Тбилиси бесплатно
-  pricePremium: 269,        // премиум: комплект + плед + постельное бельё, доставка по Тбилиси бесплатно
+  pricePremium: 269,        // премиум: комплект + постельное бельё, доставка по Тбилиси бесплатно
   priceSetTwo: 339,         // допродажа на «Спасибо»: 2 комплекта, доставка бесплатно
   priceWholesale: 145,
   wholesaleMin: 5,
@@ -779,7 +779,7 @@ const I18N = {
     o1n: "დასაკეცი საწოლი მატრასის გარეშე", o1d: "+ მიწოდება",
     o2n: "დასაკეცი საწოლი მატრასით", o2d: "+ მიწოდება",
     o3flag: "ყველაზე მომგებიანი", o3n: "დასაკეცი საწოლი მატრასით + შესანახი ჩანთა", o3d: "+ უფასო მიწოდება თბილისში",
-    o4n: "პრემიუმი: საწოლი მატრასით + შესანახი ჩანთა + პლედი + თეთრეული", o4d: "+ უფასო მიწოდება თბილისში",
+    o4n: "პრემიუმი: საწოლი მატრასით + შესანახი ჩანთა + თეთრეული", o4d: "+ უფასო მიწოდება თბილისში",
     ow: "დასაკეცი საწოლი მატრასით, საბითუმო ({min} ც.)", free: "უფასო",
     stock: "მარაგშია თბილისის საწყობში",
     cta: "შეკვეთა — გადახდა მიღებისას", ctaShort: "შეკვეთა",
@@ -787,12 +787,12 @@ const I18N = {
     tl1: "შეკვეთა", tl2: "თბილისი", tl3: "რუსთავი",
     today: "დღეს", tomorrow: "ხვალ", rustaviEta: "2–3 სამუშაო დღე",
     c1: "იშლება ერთი მოძრაობით, აწყობა არ სჭირდება",
-    c2: "6 სმ მატრასი — ვარიანტებში „მატრასით“ და „კომპლექტი“",
+    c2: "6 სმ მატრასი — კომპლექტში და პრემიუმში",
     c3: "მეტალის კარკასი 150 კგ-მდე, არ იღუნება",
     kitTitle: "კომპლექტში",
     kit1: "დასაკეცი საწოლი", kit1s: "ლითონის კარკასი, 150\u00a0კგ-მდე",
     kit2: "მატრასი", kit2s: "6 სმ, სინთეპონი · მატრასიან ვარიანტებში",
-    kit3: "ჩანთა", kit3s: "მხოლოდ კომპლექტში {set} · 21×17×101 სმ",
+    kit3: "ჩანთა", kit3s: "კომპლექტში {set} და პრემიუმში · 21×17×101 სმ",
     mediaTitle: "მყიდველების ფოტოები და ვიდეოები",
     mediaSub: "ნამდვილი ფოტოები და ვიდეოები მყიდველებისგან. დააჭირეთ სანახავად.",
     paybox: "გადახდა მხოლოდ ნაღდი ფულით, კურიერთან მიღებისას",
@@ -829,7 +829,7 @@ const I18N = {
       ["რა ღირს მიწოდება?", "{delivery} თბილისსა და რუსთავში. კომპლექტით {set} მიწოდება თბილისში უფასოა."],
       ["გამიძლებს?", "კარკასი 150 კგ-მდე დატვირთვას უძლებს. საძინებელი ადგილი 190×68 სმ."],
       ["მატრასი თხელი ხომ არ არის?", "მატრასი 6 სმ-ია, სინთეპონის შიგთავსით, რბილი ქსოვილით."],
-      ["რა შედის კომპლექტში?", "დამოკიდებულია ვარიანტზე: საწოლი მატრასის გარეშე ({bed}); საწოლი, მატრასი და ჩანთა ({set}, მიწოდება თბილისში უფასოა); პრემიუმი — იგივე + პლედი და თეთრეული ({prem}, მიწოდება თბილისში უფასოა)."],
+      ["რა შედის კომპლექტში?", "დამოკიდებულია ვარიანტზე: საწოლი მატრასის გარეშე ({bed}); საწოლი, მატრასი და ჩანთა ({set}, მიწოდება თბილისში უფასოა); პრემიუმი — იგივე + თეთრეული ({prem}, მიწოდება თბილისში უფასოა)."],
       ["როგორ დაგიკავშირდებით?", "შეკვეთის შემდეგ მოგწერთ WhatsApp-ში, დავაზუსტებთ მისამართსა და დროს."]
     ],
     finalTitle: "შეუკვეთეთ დღეს — გადაიხდით მიღებისას",
@@ -878,7 +878,7 @@ const I18N = {
     o1n: "Раскладушка без матраса", o1d: "+ доставка",
     o2n: "Раскладушка с матрасом", o2d: "+ доставка",
     o3flag: "Выгоднее всего", o3n: "Раскладушка с матрасом + чехол для хранения", o3d: "+ бесплатная доставка по Тбилиси",
-    o4n: "Премиум: раскладушка с матрасом + чехол + плед + постельное бельё", o4d: "+ бесплатная доставка по Тбилиси",
+    o4n: "Премиум: раскладушка с матрасом + чехол + постельное бельё", o4d: "+ бесплатная доставка по Тбилиси",
     ow: "Раскладушка с матрасом, опт ({min} шт.)", free: "Бесплатно",
     stock: "В наличии на складе в Тбилиси",
     cta: "Заказать — оплата при получении", ctaShort: "Заказать",
@@ -886,12 +886,12 @@ const I18N = {
     tl1: "Заказ", tl2: "Тбилиси", tl3: "Рустави",
     today: "сегодня", tomorrow: "завтра", rustaviEta: "2–3 рабочих дня",
     c1: "Раскладывается одним движением, без сборки",
-    c2: "Матрас 6 см — в вариантах «с матрасом» и «комплект»",
+    c2: "Матрас 6 см — в комплекте и Премиуме",
     c3: "Металлический каркас до 150 кг, не прогибается",
     kitTitle: "В комплекте",
     kit1: "Раскладушка", kit1s: "металлический каркас, до 150\u00a0кг",
     kit2: "Матрас", kit2s: "6 см, синтепон · в вариантах с матрасом",
-    kit3: "Чехол", kit3s: "только в комплекте за {set} · 21×17×101 см",
+    kit3: "Чехол", kit3s: "в комплекте за {set} и в Премиуме · 21×17×101 см",
     mediaTitle: "Фото и видео покупателей",
     mediaSub: "Настоящие фото и видео от покупателей. Нажмите, чтобы посмотреть.",
     paybox: "Оплата только наличными курьеру при получении",
@@ -928,7 +928,7 @@ const I18N = {
       ["Сколько стоит доставка?", "{delivery} по Тбилиси и Рустави. С комплектом за {set} доставка по Тбилиси бесплатная."],
       ["Выдержит ли меня?", "Каркас рассчитан на нагрузку до 150 кг. Спальное место 190×68 см."],
       ["Матрас не тонкий?", "Матрас 6 см, наполнитель синтепон, мягкая ткань."],
-      ["Что в комплекте?", "Зависит от варианта: раскладушка без матраса ({bed}); раскладушка, матрас и чехол для переноски ({set}, доставка по Тбилиси бесплатно); премиум — то же + плед и постельное бельё ({prem}, доставка по Тбилиси бесплатно)."],
+      ["Что в комплекте?", "Зависит от варианта: раскладушка без матраса ({bed}); раскладушка, матрас и чехол для переноски ({set}, доставка по Тбилиси бесплатно); премиум — то же + постельное бельё ({prem}, доставка по Тбилиси бесплатно)."],
       ["Как со мной свяжутся?", "После заказа напишем вам в WhatsApp и уточним адрес и время."]
     ],
     finalTitle: "Закажите сегодня — платите при получении",
@@ -977,7 +977,7 @@ const I18N = {
     o1n: "Folding bed, no mattress", o1d: "+ delivery",
     o2n: "Folding bed with mattress", o2d: "+ delivery",
     o3flag: "Best value", o3n: "Folding bed with mattress + storage cover", o3d: "+ free delivery in Tbilisi",
-    o4n: "Premium: folding bed with mattress + storage cover + blanket + bed linen", o4d: "+ free delivery in Tbilisi",
+    o4n: "Premium: folding bed with mattress + storage cover + bed linen", o4d: "+ free delivery in Tbilisi",
     ow: "Folding bed with mattress, wholesale ({min} pcs)", free: "Free",
     stock: "In stock at our Tbilisi warehouse",
     cta: "Order — pay on delivery", ctaShort: "Order",
@@ -985,12 +985,12 @@ const I18N = {
     tl1: "Order", tl2: "Tbilisi", tl3: "Rustavi",
     today: "today", tomorrow: "tomorrow", rustaviEta: "2–3 working days",
     c1: "Opens in one move, no assembly",
-    c2: "6 cm mattress in the “with mattress” and “set” options",
+    c2: "6 cm mattress in the set and Premium options",
     c3: "Metal frame holds up to 150 kg, doesn't sag",
     kitTitle: "In the box",
     kit1: "Folding bed", kit1s: "metal frame, up to 150\u00a0kg",
     kit2: "Mattress", kit2s: "6 cm, polyester fibre · with-mattress options",
-    kit3: "Carry cover", kit3s: "set option only ({set}) · 21×17×101 cm",
+    kit3: "Carry cover", kit3s: "in the set ({set}) and Premium · 21×17×101 cm",
     mediaTitle: "Buyer photos and videos",
     mediaSub: "Real photos and videos from buyers. Tap to view.",
     paybox: "Cash only, paid to the courier on delivery",
@@ -1027,7 +1027,7 @@ const I18N = {
       ["How much is delivery?", "{delivery} in Tbilisi and Rustavi. With the {set} set, delivery in Tbilisi is free."],
       ["Will it hold me?", "The frame is rated for up to 150 kg. Sleeping area 190×68 cm."],
       ["Is the mattress thin?", "It is 6 cm, filled with polyester fibre, with a soft fabric cover."],
-      ["What's in the box?", "Depends on the option: bed without mattress ({bed}); bed + mattress + carry cover ({set}, free delivery in Tbilisi); premium: the same + blanket and bed linen ({prem}, free delivery in Tbilisi)."],
+      ["What's in the box?", "Depends on the option: bed without mattress ({bed}); bed + mattress + carry cover ({set}, free delivery in Tbilisi); premium: the same + bed linen ({prem}, free delivery in Tbilisi)."],
       ["How will you contact me?", "After you order we message you on WhatsApp to confirm the address and time."]
     ],
     finalTitle: "Order today — pay on delivery",
@@ -1087,7 +1087,7 @@ const I18N = {
     wholesale: { price: CONFIG.priceWholesale, qty: CONFIG.wholesaleMin, free: false }
   };
   const OFFER_NAME_KEY = { bed: "o1n", mat: "o2n", set: "o3n", prem: "o4n", wholesale: "ow" };
-  const OFFER_RU = { bed: "раскладушка БЕЗ матраса", mat: "раскладушка С МАТРАСОМ", set: "КОМПЛЕКТ раскладушка+матрас+чехол", prem: "ПРЕМИУМ комплект+плед+бельё", wholesale: "ОПТ" };
+  const OFFER_RU = { bed: "раскладушка БЕЗ матраса", mat: "раскладушка С МАТРАСОМ", set: "КОМПЛЕКТ раскладушка+матрас+чехол", prem: "ПРЕМИУМ комплект+бельё", wholesale: "ОПТ" };
   let pick = "set";      // выбранный вариант на странице
   let offer = "set";     // вариант в корзине (pick или wholesale)
   function calc() {
