@@ -155,6 +155,7 @@
 
   .packs-title { font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; text-align: center; margin: 18px 0 8px; color: var(--muted); }
   .packs { display: grid; gap: 8px; }
+  .packs[hidden], .line-item[hidden] { display: none; }
   .pack {
     display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 12px;
     border: 1.5px solid var(--line); border-radius: 12px; padding: 12px 14px; cursor: pointer; position: relative; background: #fff;
@@ -299,10 +300,10 @@
     display: flex; gap: 12px; align-items: center; transition: transform .2s;
   }
   .sticky.tucked { transform: translateY(120%); }
-  .sticky .p { flex: 0 0 auto; line-height: 1.1; }
-  .sticky .p s { color: var(--muted); font-size: 13px; }
-  .sticky .p b { display: block; font-size: 20px; }
-  .sticky .p small { display: block; font-size: 11.5px; color: var(--muted); margin-top: 2px; }
+  
+  
+  
+  
   .sticky .btn { flex: 1 1 auto; }
   .lead-form input[aria-invalid="true"] { border-color: #c62828; outline: 2px solid #c62828; }
   .sticky .btn { min-height: 48px; font-size: 16px; }
@@ -654,8 +655,7 @@
   </div>
 </footer>
 
-<div class="sticky" id="sticky">
-  <div class="p"><b data-i18n="stickyFrom"></b><small data-i18n="stickyPay"></small></div>
+<div class="sticky tucked" id="sticky">
   <button type="button" class="btn" data-open-order><span data-i18n="ctaShort"></span></button>
 </div>
 
@@ -665,7 +665,12 @@
     <div class="dr-head"><b data-i18n="drTitle"></b><button type="button" class="x" data-close aria-label="Close">×</button></div>
     <div class="dr-body" id="dr-body">
       <div class="dr-strip" data-dr="deadline"></div>
-      <div class="line-item">
+      <div class="packs" id="dr-packs" role="radiogroup" hidden>
+        <label class="pack prem"><input type="radio" name="fpack" value="prem"><span class="rows"><span class="row"><span class="nm"><span data-i18n="o4n"></span> <span data-i18n="o4d"></span></span><span class="pr" data-price="prem"></span></span></span></label>
+        <label class="pack"><input type="radio" name="fpack" value="set"><span class="rows"><span class="row"><span class="nm"><span data-i18n="o3n"></span> <span data-i18n="o3d"></span></span><span class="pr" data-price="set"></span></span></span></label>
+        <label class="pack"><input type="radio" name="fpack" value="bed"><span class="rows"><span class="row"><span class="nm" data-i18n="o1n"></span><span class="pr" data-price="bed"></span></span><span class="row"><span class="nm" data-i18n="o1d"></span><span class="pr" data-price="delivery"></span></span></span></label>
+      </div>
+      <div class="line-item" id="li-row">
         <img src="../v3/form/ka/hero.jpg" data-src-lang="../v3/form/{lang}/hero.jpg" alt="">
         <div>
           <div class="t" id="li-name"></div>
@@ -683,12 +688,7 @@
       <form class="lead-form" id="lead-form" novalidate>
         <label><span data-i18n="fName"></span><input name="name" autocomplete="given-name" required maxlength="60"></label>
         <label><span data-i18n="fPhone"></span><input name="phone" type="tel" inputmode="tel" autocomplete="tel" required placeholder="+995 XXX XX XX XX"></label>
-        <label><span data-i18n="fCity"></span>
-          <select name="city">
-            <option value="Tbilisi" data-i18n="cityTbilisi"></option>
-            <option value="Rustavi" data-i18n="cityRustavi"></option>
-          </select>
-        </label>
+        <input type="hidden" name="city" value="уточнить в WhatsApp">
         <input type="checkbox" name="botcheck" class="bot" tabindex="-1" autocomplete="off">
         <input type="hidden" name="qty"><input type="hidden" name="offer"><input type="hidden" name="total"><input type="hidden" name="lang"><input type="hidden" name="source"><input type="hidden" name="campaign">
         <p class="form-msg" hidden></p>
@@ -1119,8 +1119,7 @@ const I18N = {
   let offer = "set";     // вариант в корзине (pick или wholesale)
   function calc() {
     const o = OFFERS[offer], goods = o.price * o.qty;
-    const sel = document.querySelector('#lead-form select[name="city"]');
-    const dl = o.free && (!sel || sel.value === "Tbilisi") ? 0 : CONFIG.delivery;
+    const dl = o.free ? 0 : CONFIG.delivery;   // город уточняет оператор в WhatsApp, наценки за Рустави нет
     return { qty: o.qty, unit: o.price, goods: goods, dl: dl, sum: goods + dl };
   }
 
@@ -1293,7 +1292,7 @@ const I18N = {
   galImgs.forEach((im, i) => im.addEventListener("click", () => openLb(galImgs.map(x => x.src), i)));
 
   /* ---------- пакеты ---------- */
-  $$('input[name="pack"], input[name="pack2"]').forEach(r => r.addEventListener("change", () => { pick = offer = r.value; renderPrices(); renderCart(); }));
+  $$('input[name="pack"], input[name="pack2"], input[name="fpack"]').forEach(r => r.addEventListener("change", () => { pick = offer = r.value; renderPrices(); renderCart(); }));
   const gal2 = $$("#slides2 img");
   gal2.forEach((im, i) => im.addEventListener("click", () => openLb(gal2.map(x => x.src), i)));
 
@@ -1308,23 +1307,39 @@ const I18N = {
     $("#t-del").textContent = c.dl ? money(c.dl) : t.free;
     $("#t-sum").textContent = money(c.sum);
     $("#btn-sum").textContent = money(c.sum);
-    $$('input[name="pack"], input[name="pack2"]').forEach(x => { x.checked = x.value === offer; });
+    $$('input[name="pack"], input[name="pack2"], input[name="fpack"]').forEach(x => { x.checked = x.value === offer; });
   }
 
   $$("[data-open-order]").forEach(b => b.addEventListener("click", () => {
     offer = b.dataset.offer || pick;
+    const fromBar = !!b.closest("#sticky");   // с плавающей кнопки вариант ещё не выбран: показываем выбор из трёх
+    $("#dr-packs").hidden = !fromBar; $("#li-row").hidden = fromBar;
     renderCart(); renderDelivery();
-    dlg.showModal();
+    dlg.showModal(); window.dispatchEvent(new Event("resize"));
     track("OpenOrderForm", b.id || "cta");
   }));
   $$("[data-close]").forEach(b => b.addEventListener("click", () => dlg.close()));
   dlg.addEventListener("click", e => { if (e.target === dlg) dlg.close(); });
 
-  /* ---------- липкая панель прячется, пока видна главная кнопка ---------- */
-  if ("IntersectionObserver" in window) {
-    new IntersectionObserver(es => $("#sticky").classList.toggle("tucked", es[0].isIntersecting), { threshold: 0.5 })
-      .observe($("#main-cta"));
-  }
+  /* ---------- липкая панель: только после блока «в комплекте» и после главной кнопки ---------- */
+  (function () {
+    const bar = $("#sticky"), cta = $("#main-cta"), kit = document.querySelector(".kit-title");
+    if (!bar || !cta || !kit) return;
+    let raf = 0;
+    function update() {
+      raf = 0;
+      const vh = window.innerHeight || document.documentElement.clientHeight;
+      const reached = kit.getBoundingClientRect().top < vh * 0.85;
+      const passed = cta.getBoundingClientRect().bottom < 0;
+      bar.classList.toggle("tucked", !(reached && passed) || dlg.open);
+    }
+    function req() { if (!raf) raf = requestAnimationFrame(update); }
+    window.addEventListener("scroll", req, { passive: true });
+    window.addEventListener("resize", req);
+    dlg.addEventListener("close", req);
+    dlg.addEventListener("cancel", req);
+    update();
+  })();
 
   /* ---------- аналитика ---------- */
   function track(event, channel) {
@@ -1368,7 +1383,6 @@ const I18N = {
     checkoutSent = true;
     track("InitiateCheckout", "phone");
   }
-  $("#lead-form").elements.city.addEventListener("change", renderCart);
   ["input", "change", "blur"].forEach(t => {
     $("#lead-form").elements.phone.addEventListener(t, checkCheckout);
     $("#lead-form").elements.name.addEventListener(t, checkCheckout);
