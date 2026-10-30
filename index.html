@@ -302,6 +302,9 @@
   .sticky .p { flex: 0 0 auto; line-height: 1.1; }
   .sticky .p s { color: var(--muted); font-size: 13px; }
   .sticky .p b { display: block; font-size: 20px; }
+  .sticky .p small { display: block; font-size: 11.5px; color: var(--muted); margin-top: 2px; }
+  .sticky .btn { flex: 1 1 auto; }
+  .lead-form input[aria-invalid="true"] { border-color: #c62828; outline: 2px solid #c62828; }
   .sticky .btn { min-height: 48px; font-size: 16px; }
   @media (min-width: 900px) { .sticky { display: none; } body { padding-bottom: var(--cookie-h, 0px); } }
 
@@ -652,6 +655,7 @@
 </footer>
 
 <div class="sticky" id="sticky">
+  <div class="p"><b data-i18n="stickyFrom"></b><small data-i18n="stickyPay"></small></div>
   <button type="button" class="btn" data-open-order><span data-i18n="ctaShort"></span></button>
 </div>
 
@@ -689,6 +693,7 @@
         <input type="hidden" name="qty"><input type="hidden" name="offer"><input type="hidden" name="total"><input type="hidden" name="lang"><input type="hidden" name="source"><input type="hidden" name="campaign">
         <p class="form-msg" hidden></p>
         <button class="btn" type="submit"><span data-i18n="fSubmit"></span> · <span id="btn-sum"></span></button>
+        <p class="pay-note" data-i18n="payNote"></p>
         <p class="consent" data-i18n="fConsent"></p>
       </form>
     </div>
@@ -868,6 +873,7 @@ const I18N = {
     fSubmit: "შეკვეთა",
     fConsent: "ღილაკზე დაჭერით თანხმდებით, რომ ნომერი დამუშავდეს თქვენთან დასაკავშირებლად.",
     fNeed: "მიუთითეთ სახელი და ნომერი.",
+    stickyFrom: "{bed}-დან", stickyPay: "წინასწარი გადახდა არ არის", fPhoneBad: "შეიყვანეთ ნომერი სრულად, მაგ. 5XX XX XX XX",
     fErr: "გაგზავნა ვერ მოხერხდა. სცადეთ ხელახლა ან მოგვწერეთ WhatsApp-ში.",
     okTitle: "მადლობა! შეკვეთა მიღებულია",
     okText: "მალე მოგწერთ WhatsApp-ში. არ გინდათ ლოდინი? მოგვწერეთ თავად: +995 599 703 991",
@@ -967,6 +973,7 @@ const I18N = {
     fSubmit: "Заказать",
     fConsent: "Нажимая кнопку, вы соглашаетесь на обработку номера, чтобы мы с вами связались.",
     fNeed: "Укажите имя и номер.",
+    stickyFrom: "от {bed}", stickyPay: "Оплата при получении", fPhoneBad: "Введите номер полностью, например 5XX XX XX XX",
     fErr: "Отправить не удалось. Попробуйте ещё раз или напишите нам в WhatsApp.",
     okTitle: "Спасибо! Заказ принят",
     okText: "Скоро напишем вам в WhatsApp. Не хотите ждать? Напишите нам сами: +995 599 703 991",
@@ -1066,6 +1073,7 @@ const I18N = {
     fSubmit: "Order",
     fConsent: "By pressing the button you agree that we process your number to contact you.",
     fNeed: "Please enter your name and number.",
+    stickyFrom: "from {bed}", stickyPay: "Pay on delivery", fPhoneBad: "Enter the full number, e.g. 5XX XX XX XX",
     fErr: "Couldn't send. Please try again or message us on WhatsApp.",
     okTitle: "Thank you! Order received",
     okText: "We'll message you on WhatsApp shortly. Don't want to wait? Message us: +995 599 703 991",
@@ -1336,6 +1344,23 @@ const I18N = {
     if (/^(\d)\1+$/.test(d.slice(1)) || "123456789".includes(d) || "987654321".includes(d)) return false;
     return true;
   }
+  /* приводим любой формат номера (8 555…, 0555…, 00995…, +995…, с пробелами/скобками) к +995 5XX XX XX XX */
+  function normPhone(v) {
+    let d = String(v).replace(/\D/g, "");
+    if (d.startsWith("00")) d = d.slice(2);
+    if (d.startsWith("995") && d.length >= 12) d = d.slice(3);
+    else if ((d[0] === "0" || d[0] === "8") && d.length === 10) d = d.slice(1);
+    if (d.length !== 9) return null;
+    return "+995 " + d.slice(0, 3) + " " + d.slice(3, 5) + " " + d.slice(5, 7) + " " + d.slice(7);
+  }
+  function fixPhone(force) {
+    const p = $("#lead-form").elements.phone, n = normPhone(p.value);
+    if (n && n !== p.value) p.value = n;
+    if (n) p.removeAttribute("aria-invalid");
+  }
+  $("#lead-form").elements.phone.addEventListener("input", () => fixPhone());
+  $("#lead-form").elements.phone.addEventListener("blur", () => fixPhone());
+  $("#lead-form").elements.phone.addEventListener("paste", () => setTimeout(fixPhone, 0));
   let checkoutSent = false;
   function checkCheckout() {
     const F = $("#lead-form").elements;
@@ -1354,9 +1379,14 @@ const I18N = {
   form.addEventListener("submit", async ev => {
     ev.preventDefault();
     const t = I18N[lang];
+    fixPhone();
     const F = form.elements, name = F.name.value.trim(), phone = F.phone.value.trim();
+    F.name.removeAttribute("aria-invalid"); F.phone.removeAttribute("aria-invalid");
     if (!name || phone.replace(/\D/g, "").length < 9) {
-      msg.className = "form-msg err"; msg.textContent = t.fNeed; msg.hidden = false; return;
+      const noName = !name;
+      (noName ? F.name : F.phone).setAttribute("aria-invalid", "true");
+      msg.className = "form-msg err"; msg.textContent = noName ? t.fNeed : t.fPhoneBad; msg.hidden = false;
+      (noName ? F.name : F.phone).focus(); return;
     }
     const c = calc(), sum = c.sum;
     F.qty.value = c.qty; F.offer.value = offer;
@@ -1422,6 +1452,7 @@ const I18N = {
     const bar = $("#cookie-bar"); bar.hidden = false;
     const measure = () => !bar.hidden && setCookieH(bar.getBoundingClientRect().height);
     measure(); window.addEventListener("resize", measure);
+    if (window.ResizeObserver) new ResizeObserver(measure).observe(bar);
     const decide = v => { try { localStorage.setItem(CONSENT_KEY, v); } catch (e) {} bar.hidden = true; setCookieH(0); if (v === "no" && window.fbq) window.fbq("consent", "revoke"); };
     $("#cookie-yes").addEventListener("click", () => decide("yes"));
     $("#cookie-no").addEventListener("click", () => decide("no"));
