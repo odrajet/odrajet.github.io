@@ -275,10 +275,6 @@
   .rv-ph img { width: 100%; height: 100%; object-fit: cover; }
   .rv-src { font-size: 13px; color: var(--muted); text-align: center; margin-top: 14px; }
 
-  .b2b { background: var(--ink); color: #fff; border-radius: var(--radius); padding: 24px 20px; display: grid; gap: 12px; }
-  .b2b h2 { color: #fff; }
-  .b2b .px { font-size: 22px; font-weight: 800; color: #ffb4a6; }
-  .b2b p { margin: 0; opacity: .85; }
 
   .faq { margin-top: 18px; display: grid; gap: 8px; }
   .faq details { border: 1px solid var(--line); border-radius: 12px; padding: 0 16px; }
@@ -620,16 +616,6 @@
     </div>
   </section>
 
-  <!-- ======= опт ======= -->
-  <section style="padding-top:8px">
-    <div class="b2b">
-      <h2 data-i18n="b2bTitle"></h2>
-      <div class="px" data-i18n="b2bPrice"></div>
-      <p data-i18n="b2bText"></p>
-      <button type="button" class="btn" data-open-order data-offer="wholesale" style="max-width:360px"><span data-i18n="b2bCta"></span></button>
-    </div>
-  </section>
-
   <!-- ======= FAQ ======= -->
   <section style="padding-top:8px">
     <h2 class="center" data-i18n="faqTitle"></h2>
@@ -726,9 +712,7 @@ const CONFIG = {
   priceSet: 159,            // раскладушка + матрас + чехол, доставка по Тбилиси бесплатно (31.10: −20 ₾, было 179)
   pricePremium: 249,        // премиум: комплект + постельное бельё, доставка по Тбилиси бесплатно (31.10: −20 ₾, было 269)
   priceSetTwo: 299,         // допродажа на «Спасибо»: 2 комплекта, доставка бесплатно
-  priceWholesale: 125,      // опт от 5 шт. (было 145; 31.10 опущено ниже розницы 139)
   was: { bed: 159, set: 179, prem: 269 },   // старые цены для зачёркивания и бейджа −%
-  wholesaleMin: 5,
   delivery: 15,
   cutoff: "10:30",          // до этого времени (Тбилиси, пн–сб) обещаем доставку сегодня
   legal: {
@@ -801,7 +785,7 @@ const I18N = {
     o2n: "დასაკეცი საწოლი მატრასით", o2d: "+ მიწოდება",
     o3flag: "ყველაზე მომგებიანი", o3n: "დასაკეცი საწოლი მატრასით + შესანახი ჩანთა", o3d: "+ უფასო მიწოდება თბილისში",
     o4n: "პრემიუმი: საწოლი მატრასით + შესანახი ჩანთა + თეთრეული", o4d: "+ უფასო მიწოდება თბილისში",
-    ow: "დასაკეცი საწოლი მატრასით, საბითუმო ({min} ც.)", free: "უფასო",
+    free: "უფასო",
     stock: "მარაგშია თბილისის საწყობში",
     cta: "შეკვეთა — გადახდა მიღებისას", ctaShort: "შეკვეთა",
     payNote: "წინასწარი გადახდა არ არის · ნაღდი ფულით კურიერთან",
@@ -839,10 +823,6 @@ const I18N = {
     rvTitle: "რას წერენ მყიდველები",
     rvCount: "2334 შეფასება",
     verified: "✓ დადასტურებული შეძენა",
-    b2bTitle: "ჰოსტელი, სასტუმრო ან ბანაკი?",
-    b2bPrice: "{min} ცალიდან — თითო {wholesale}",
-    b2bText: "პარტიის ვადებსა და მიწოდებას შევათანხმებთ WhatsApp-ში.",
-    b2bCta: "საბითუმო შეკვეთა",
     faqTitle: "ხშირი კითხვები",
     faq: [
       ["როგორ გადავიხადო?", "ნაღდი ფულით კურიერთან, მიღებისას. წინასწარი გადახდა არ არის."],
@@ -863,8 +843,6 @@ const I18N = {
     upAdd1: "დაამატეთ კიდევ ერთი — თითოეული {pair} ღირს, ეკონომია {save}",
     upBtn: "+ კიდევ ერთი",
     upPair: "✓ აქციის ფასი: თითო {pair}",
-    upWholesale: "✓ საბითუმო ფასი: თითო {wholesale}",
-    upToWholesale: "კიდევ {n} ცალი და ფასი გახდება თითო {wholesale}",
     tGoods: "საქონელი", tSave: "ეკონომია", tDelivery: "მიწოდება", tTotal: "სულ (კურიერს)",
     fName: "სახელი", fPhone: "WhatsApp-ის ნომერი", fCity: "ქალაქი",
     cityTbilisi: "თბილისი", cityRustavi: "რუსთავი",
@@ -900,7 +878,7 @@ const I18N = {
     o2n: "Раскладушка с матрасом", o2d: "+ доставка",
     o3flag: "Выгоднее всего", o3n: "Раскладушка с матрасом + чехол для хранения", o3d: "+ бесплатная доставка по Тбилиси",
     o4n: "Премиум: раскладушка с матрасом + чехол + постельное бельё", o4d: "+ бесплатная доставка по Тбилиси",
-    ow: "Раскладушка с матрасом, опт ({min} шт.)", free: "Бесплатно",
+    free: "Бесплатно",
     stock: "В наличии на складе в Тбилиси",
     cta: "Заказать — оплата при получении", ctaShort: "Заказать",
     payNote: "Без предоплаты · наличными курьеру",
@@ -938,10 +916,6 @@ const I18N = {
     rvTitle: "Что пишут покупатели",
     rvCount: "2334 отзыва",
     verified: "✓ Подтверждённая покупка",
-    b2bTitle: "Хостел, гостиница или лагерь?",
-    b2bPrice: "От {min} штук — {wholesale} за штуку",
-    b2bText: "Сроки и доставку партии согласуем в WhatsApp.",
-    b2bCta: "Оптовый заказ",
     faqTitle: "Частые вопросы",
     faq: [
       ["Как оплатить?", "Наличными курьеру при получении. Без предоплаты."],
@@ -962,8 +936,6 @@ const I18N = {
     upAdd1: "Добавьте вторую — каждая будет по {pair}, экономия {save}",
     upBtn: "+ ещё одну",
     upPair: "✓ Цена по акции: {pair} за штуку",
-    upWholesale: "✓ Оптовая цена: {wholesale} за штуку",
-    upToWholesale: "Ещё {n} шт. — и цена станет {wholesale} за штуку",
     tGoods: "Товар", tSave: "Экономия", tDelivery: "Доставка", tTotal: "Итого (курьеру)",
     fName: "Имя", fPhone: "Номер с WhatsApp", fCity: "Город",
     cityTbilisi: "Тбилиси", cityRustavi: "Рустави",
@@ -999,7 +971,7 @@ const I18N = {
     o2n: "Folding bed with mattress", o2d: "+ delivery",
     o3flag: "Best value", o3n: "Folding bed with mattress + storage cover", o3d: "+ free delivery in Tbilisi",
     o4n: "Premium: folding bed with mattress + storage cover + bed linen", o4d: "+ free delivery in Tbilisi",
-    ow: "Folding bed with mattress, wholesale ({min} pcs)", free: "Free",
+    free: "Free",
     stock: "In stock at our Tbilisi warehouse",
     cta: "Order — pay on delivery", ctaShort: "Order",
     payNote: "No prepayment · cash to the courier",
@@ -1037,10 +1009,6 @@ const I18N = {
     rvTitle: "What buyers say",
     rvCount: "2,334 reviews",
     verified: "✓ Verified purchase",
-    b2bTitle: "Hostel, hotel or camp?",
-    b2bPrice: "From {min} units — {wholesale} each",
-    b2bText: "We agree timing and delivery for bulk orders on WhatsApp.",
-    b2bCta: "Wholesale order",
     faqTitle: "FAQ",
     faq: [
       ["How do I pay?", "Cash to the courier on delivery. No prepayment."],
@@ -1061,8 +1029,6 @@ const I18N = {
     upAdd1: "Add a second one — each becomes {pair}, you save {save}",
     upBtn: "+ add one more",
     upPair: "✓ Offer price: {pair} each",
-    upWholesale: "✓ Wholesale price: {wholesale} each",
-    upToWholesale: "{n} more and the price drops to {wholesale} each",
     tGoods: "Items", tSave: "You save", tDelivery: "Delivery", tTotal: "Total (to the courier)",
     fName: "Name", fPhone: "WhatsApp number", fCity: "City",
     cityTbilisi: "Tbilisi", cityRustavi: "Rustavi",
@@ -1100,18 +1066,17 @@ const I18N = {
     return "ka";
   }
   let lang = pickLang();
-  /* варианты: bed — без матраса, mat — с матрасом, set — матрас + чехол (доставка по Тбилиси бесплатно), wholesale — опт через блок внизу */
+  /* варианты: bed — без матраса, mat — с матрасом, set — матрас + чехол (доставка по Тбилиси бесплатно) */
   const OFFERS = {
     bed: { price: CONFIG.priceBed, qty: 1, free: false },
     mat: { price: CONFIG.priceMat, qty: 1, free: false },
     set: { price: CONFIG.priceSet, qty: 1, free: true },
     prem: { price: CONFIG.pricePremium, qty: 1, free: true },
-    wholesale: { price: CONFIG.priceWholesale, qty: CONFIG.wholesaleMin, free: false }
   };
-  const OFFER_NAME_KEY = { bed: "o1n", mat: "o2n", set: "o3n", prem: "o4n", wholesale: "ow" };
-  const OFFER_RU = { bed: "раскладушка БЕЗ матраса", mat: "раскладушка С МАТРАСОМ", set: "КОМПЛЕКТ раскладушка+матрас+чехол", prem: "ПРЕМИУМ комплект+бельё", wholesale: "ОПТ" };
+  const OFFER_NAME_KEY = { bed: "o1n", mat: "o2n", set: "o3n", prem: "o4n" };
+  const OFFER_RU = { bed: "раскладушка БЕЗ матраса", mat: "раскладушка С МАТРАСОМ", set: "КОМПЛЕКТ раскладушка+матрас+чехол", prem: "ПРЕМИУМ комплект+бельё" };
   let pick = "set";      // выбранный вариант на странице
-  let offer = "set";     // вариант в корзине (pick или wholesale)
+  let offer = "set";     // вариант в корзине
   function calc() {
     const o = OFFERS[offer], goods = o.price * o.qty;
     const sel = document.querySelector('#lead-form select[name="city"]');
@@ -1122,7 +1087,6 @@ const I18N = {
   function fill(str, extra) {
     const v = Object.assign({
       bed: money(CONFIG.priceBed), mat: money(CONFIG.priceMat), set: money(CONFIG.priceSet), prem: money(CONFIG.pricePremium),
-      wholesale: money(CONFIG.priceWholesale), min: String(CONFIG.wholesaleMin),
       delivery: money(CONFIG.delivery), cutoff: CONFIG.cutoff,
       seller: CONFIG.legal.seller, id: CONFIG.legal.id, address: CONFIG.legal.address
     }, extra || {});
@@ -1167,7 +1131,7 @@ const I18N = {
   function renderPrices() {
     const P = {
       bed: money(CONFIG.priceBed), mat: money(CONFIG.priceMat), set: money(CONFIG.priceSet), prem: money(CONFIG.pricePremium),
-      cur: money(OFFERS[pick].price), delivery: money(CONFIG.delivery), wholesale: money(CONFIG.priceWholesale)
+      cur: money(OFFERS[pick].price), delivery: money(CONFIG.delivery)
     };
     $$("[data-price]").forEach(el => {
       const k = el.dataset.price, w = CONFIG.was[k];
