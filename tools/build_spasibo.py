@@ -43,8 +43,8 @@ T = {
         "home": "../",
     },
 }
-UPSELL_PRICE = 339  # 2 комплекта (матрас + чехол) вместо 2 × 179 = 358, доставка по Тбилиси бесплатно (Родион 28.10)
-UPSELL_FULL = 358
+UPSELL_PRICE = 299  # 2 комплекта (матрас + чехол) вместо 2 × 159 = 318, доставка по Тбилиси бесплатно (31.10: цены −20 ₾)
+UPSELL_FULL = 318
 UPSELL = {'ka': ('2 კომპლექტი — {price} ₾ <s>{full} ₾</s>', '2 დასაკეცი საწოლი მატრასებითა და შესანახი ჩანთებით + უფასო მიწოდება თბილისში. ეკონომია {save} ₾.', 'შეკვეთის შეცვლა', 'გამარჯობა! ჩემი შეკვეთა №{id}. მინდა 2 კომპლექტი (2 საწოლი + მატრასები + ჩანთები) {price} ₾-ად, უფასო მიწოდებით თბილისში.', '{n} ც. · {v} ₾ · მიწოდება უფასოა · გადახდა კურიერთან, ნაღდი ფულით'), 'ru': ('2 комплекта — {price} ₾ <s>{full} ₾</s>', '2 раскладушки с матрасами и чехлами для хранения + бесплатная доставка по Тбилиси. Экономия {save} ₾.', 'Изменить заказ', 'Здравствуйте! Мой заказ №{id}. Хочу 2 комплекта (2 раскладушки + матрасы + чехлы) за {price} ₾ с бесплатной доставкой по Тбилиси.', '{n} шт. · {v} ₾ · доставка бесплатно · оплата курьеру наличными'), 'en': ('2 sets for {price} ₾ <s>{full} ₾</s>', '2 folding beds with mattresses and storage covers + free delivery in Tbilisi. You save {save} ₾.', 'Change my order', 'Hello! My order №{id}. I would like 2 sets (2 beds + mattresses + covers) for {price} ₾ with free delivery in Tbilisi.', '{n} pcs · {v} ₾ · free delivery · cash to the courier')}
 DRAFT = "--draft" in sys.argv
 OUT = {"ka": "spasibo/index.html", "ru": "ru/spasibo/index.html", "en": "en/spasibo/index.html"}

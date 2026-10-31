@@ -155,7 +155,6 @@
 
   .packs-title { font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; text-align: center; margin: 18px 0 8px; color: var(--muted); }
   .packs { display: grid; gap: 8px; }
-  .packs[hidden], .line-item[hidden] { display: none; }
   .pack {
     display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 12px;
     border: 1.5px solid var(--line); border-radius: 12px; padding: 12px 14px; cursor: pointer; position: relative; background: #fff;
@@ -171,6 +170,8 @@
   .gallery2 .main { margin-top: 0; }
   .pack .pr { text-align: right; font-weight: 800; }
   .pack .pr s { display: block; font-weight: 400; color: var(--muted); font-size: 13px; }
+  .pr .was, .pack .pr s.was { display: inline; text-decoration: line-through; font-weight: 400; color: var(--muted); font-size: .82em; margin-right: 6px; }
+  .pr .disc { font-style: normal; font-weight: 800; font-size: 11px; color: #fff; background: #d92d20; border-radius: 6px; padding: 2px 5px; margin-left: 6px; vertical-align: 1px; }
   .pack .flag {
     position: absolute; top: -10px; right: 12px; background: var(--accent); color: #fff;
     font-size: 11px; font-weight: 800; border-radius: 999px; padding: 2px 9px; letter-spacing: .03em;
@@ -300,12 +301,9 @@
     display: flex; gap: 12px; align-items: center; transition: transform .2s;
   }
   .sticky.tucked { transform: translateY(120%); }
-  
-  
-  
-  
-  .sticky .btn { flex: 1 1 auto; }
-  .lead-form input[aria-invalid="true"] { border-color: #c62828; outline: 2px solid #c62828; }
+  .sticky .p { flex: 0 0 auto; line-height: 1.1; }
+  .sticky .p s { color: var(--muted); font-size: 13px; }
+  .sticky .p b { display: block; font-size: 20px; }
   .sticky .btn { min-height: 48px; font-size: 16px; }
   @media (min-width: 900px) { .sticky { display: none; } body { padding-bottom: var(--cookie-h, 0px); } }
 
@@ -655,7 +653,7 @@
   </div>
 </footer>
 
-<div class="sticky tucked" id="sticky">
+<div class="sticky" id="sticky">
   <button type="button" class="btn" data-open-order><span data-i18n="ctaShort"></span></button>
 </div>
 
@@ -665,12 +663,7 @@
     <div class="dr-head"><b data-i18n="drTitle"></b><button type="button" class="x" data-close aria-label="Close">×</button></div>
     <div class="dr-body" id="dr-body">
       <div class="dr-strip" data-dr="deadline"></div>
-      <div class="packs" id="dr-packs" role="radiogroup" hidden>
-        <label class="pack prem"><input type="radio" name="fpack" value="prem"><span class="rows"><span class="row"><span class="nm"><span data-i18n="o4n"></span> <span data-i18n="o4d"></span></span><span class="pr" data-price="prem"></span></span></span></label>
-        <label class="pack"><input type="radio" name="fpack" value="set"><span class="rows"><span class="row"><span class="nm"><span data-i18n="o3n"></span> <span data-i18n="o3d"></span></span><span class="pr" data-price="set"></span></span></span></label>
-        <label class="pack"><input type="radio" name="fpack" value="bed"><span class="rows"><span class="row"><span class="nm" data-i18n="o1n"></span><span class="pr" data-price="bed"></span></span><span class="row"><span class="nm" data-i18n="o1d"></span><span class="pr" data-price="delivery"></span></span></span></label>
-      </div>
-      <div class="line-item" id="li-row">
+      <div class="line-item">
         <img src="../v3/form/ka/hero.jpg" data-src-lang="../v3/form/{lang}/hero.jpg" alt="">
         <div>
           <div class="t" id="li-name"></div>
@@ -688,12 +681,16 @@
       <form class="lead-form" id="lead-form" novalidate>
         <label><span data-i18n="fName"></span><input name="name" autocomplete="given-name" required maxlength="60"></label>
         <label><span data-i18n="fPhone"></span><input name="phone" type="tel" inputmode="tel" autocomplete="tel" required placeholder="+995 XXX XX XX XX"></label>
-        <input type="hidden" name="city" value="уточнить в WhatsApp">
+        <label><span data-i18n="fCity"></span>
+          <select name="city">
+            <option value="Tbilisi" data-i18n="cityTbilisi"></option>
+            <option value="Rustavi" data-i18n="cityRustavi"></option>
+          </select>
+        </label>
         <input type="checkbox" name="botcheck" class="bot" tabindex="-1" autocomplete="off">
         <input type="hidden" name="qty"><input type="hidden" name="offer"><input type="hidden" name="total"><input type="hidden" name="lang"><input type="hidden" name="source"><input type="hidden" name="campaign">
         <p class="form-msg" hidden></p>
         <button class="btn" type="submit"><span data-i18n="fSubmit"></span> · <span id="btn-sum"></span></button>
-        <p class="pay-note" data-i18n="payNote"></p>
         <p class="consent" data-i18n="fConsent"></p>
       </form>
     </div>
@@ -724,12 +721,13 @@ const CONFIG = {
   pixelId: "1047116104717565",
   formEndpoint: "https://api.web3forms.com/submit",
   formKey: "e10cfa26-080d-46a5-9d72-45ee5bd1d8b3",
-  priceBed: 159,            // раскладушка без матраса + доставка
-  priceMat: 169,            // раскладушка с матрасом + доставка
-  priceSet: 179,            // раскладушка + матрас + чехол, доставка по Тбилиси бесплатно
-  pricePremium: 269,        // премиум: комплект + постельное бельё, доставка по Тбилиси бесплатно
-  priceSetTwo: 339,         // допродажа на «Спасибо»: 2 комплекта, доставка бесплатно
-  priceWholesale: 145,
+  priceBed: 139,            // раскладушка без матраса + доставка (31.10: −20 ₾, было 159)
+  priceMat: 149,            // раскладушка с матрасом + доставка (не показывается; было 169)
+  priceSet: 159,            // раскладушка + матрас + чехол, доставка по Тбилиси бесплатно (31.10: −20 ₾, было 179)
+  pricePremium: 249,        // премиум: комплект + постельное бельё, доставка по Тбилиси бесплатно (31.10: −20 ₾, было 269)
+  priceSetTwo: 299,         // допродажа на «Спасибо»: 2 комплекта, доставка бесплатно
+  priceWholesale: 125,      // опт от 5 шт. (было 145; 31.10 опущено ниже розницы 139)
+  was: { bed: 159, set: 179, prem: 269 },   // старые цены для зачёркивания и бейджа −%
   wholesaleMin: 5,
   delivery: 15,
   cutoff: "10:30",          // до этого времени (Тбилиси, пн–сб) обещаем доставку сегодня
@@ -873,7 +871,6 @@ const I18N = {
     fSubmit: "შეკვეთა",
     fConsent: "ღილაკზე დაჭერით თანხმდებით, რომ ნომერი დამუშავდეს თქვენთან დასაკავშირებლად.",
     fNeed: "მიუთითეთ სახელი და ნომერი.",
-    stickyFrom: "3 ვარიანტი", stickyPay: "წინასწარი გადახდა არ არის", fPhoneBad: "შეიყვანეთ ნომერი სრულად, მაგ. 5XX XX XX XX",
     fErr: "გაგზავნა ვერ მოხერხდა. სცადეთ ხელახლა ან მოგვწერეთ WhatsApp-ში.",
     okTitle: "მადლობა! შეკვეთა მიღებულია",
     okText: "მალე მოგწერთ WhatsApp-ში. არ გინდათ ლოდინი? მოგვწერეთ თავად: +995 599 703 991",
@@ -973,7 +970,6 @@ const I18N = {
     fSubmit: "Заказать",
     fConsent: "Нажимая кнопку, вы соглашаетесь на обработку номера, чтобы мы с вами связались.",
     fNeed: "Укажите имя и номер.",
-    stickyFrom: "3 варианта на выбор", stickyPay: "Оплата при получении", fPhoneBad: "Введите номер полностью, например 5XX XX XX XX",
     fErr: "Отправить не удалось. Попробуйте ещё раз или напишите нам в WhatsApp.",
     okTitle: "Спасибо! Заказ принят",
     okText: "Скоро напишем вам в WhatsApp. Не хотите ждать? Напишите нам сами: +995 599 703 991",
@@ -1073,7 +1069,6 @@ const I18N = {
     fSubmit: "Order",
     fConsent: "By pressing the button you agree that we process your number to contact you.",
     fNeed: "Please enter your name and number.",
-    stickyFrom: "3 options to choose from", stickyPay: "Pay on delivery", fPhoneBad: "Enter the full number, e.g. 5XX XX XX XX",
     fErr: "Couldn't send. Please try again or message us on WhatsApp.",
     okTitle: "Thank you! Order received",
     okText: "We'll message you on WhatsApp shortly. Don't want to wait? Message us: +995 599 703 991",
@@ -1119,7 +1114,8 @@ const I18N = {
   let offer = "set";     // вариант в корзине (pick или wholesale)
   function calc() {
     const o = OFFERS[offer], goods = o.price * o.qty;
-    const dl = o.free ? 0 : CONFIG.delivery;   // город уточняет оператор в WhatsApp, наценки за Рустави нет
+    const sel = document.querySelector('#lead-form select[name="city"]');
+    const dl = o.free && (!sel || sel.value === "Tbilisi") ? 0 : CONFIG.delivery;
     return { qty: o.qty, unit: o.price, goods: goods, dl: dl, sum: goods + dl };
   }
 
@@ -1173,7 +1169,13 @@ const I18N = {
       bed: money(CONFIG.priceBed), mat: money(CONFIG.priceMat), set: money(CONFIG.priceSet), prem: money(CONFIG.pricePremium),
       cur: money(OFFERS[pick].price), delivery: money(CONFIG.delivery), wholesale: money(CONFIG.priceWholesale)
     };
-    $$("[data-price]").forEach(el => { el.textContent = P[el.dataset.price]; });
+    $$("[data-price]").forEach(el => {
+      const k = el.dataset.price, w = CONFIG.was[k];
+      if (w && el.closest(".pack, .row")) {
+        const pct = Math.round((w - CONFIG[{ bed: "priceBed", set: "priceSet", prem: "pricePremium" }[k]]) / w * 100);
+        el.innerHTML = '<s class="was">' + money(w) + '</s>' + P[k] + '<i class="disc">−' + pct + '%</i>';
+      } else el.textContent = P[k];
+    });
   }
 
   function render() {
@@ -1292,7 +1294,7 @@ const I18N = {
   galImgs.forEach((im, i) => im.addEventListener("click", () => openLb(galImgs.map(x => x.src), i)));
 
   /* ---------- пакеты ---------- */
-  $$('input[name="pack"], input[name="pack2"], input[name="fpack"]').forEach(r => r.addEventListener("change", () => { pick = offer = r.value; renderPrices(); renderCart(); }));
+  $$('input[name="pack"], input[name="pack2"]').forEach(r => r.addEventListener("change", () => { pick = offer = r.value; renderPrices(); renderCart(); }));
   const gal2 = $$("#slides2 img");
   gal2.forEach((im, i) => im.addEventListener("click", () => openLb(gal2.map(x => x.src), i)));
 
@@ -1307,39 +1309,23 @@ const I18N = {
     $("#t-del").textContent = c.dl ? money(c.dl) : t.free;
     $("#t-sum").textContent = money(c.sum);
     $("#btn-sum").textContent = money(c.sum);
-    $$('input[name="pack"], input[name="pack2"], input[name="fpack"]').forEach(x => { x.checked = x.value === offer; });
+    $$('input[name="pack"], input[name="pack2"]').forEach(x => { x.checked = x.value === offer; });
   }
 
   $$("[data-open-order]").forEach(b => b.addEventListener("click", () => {
     offer = b.dataset.offer || pick;
-    const fromBar = !!b.closest("#sticky");   // с плавающей кнопки вариант ещё не выбран: показываем выбор из трёх
-    $("#dr-packs").hidden = !fromBar; $("#li-row").hidden = fromBar;
     renderCart(); renderDelivery();
-    dlg.showModal(); window.dispatchEvent(new Event("resize"));
+    dlg.showModal();
     track("OpenOrderForm", b.id || "cta");
   }));
   $$("[data-close]").forEach(b => b.addEventListener("click", () => dlg.close()));
   dlg.addEventListener("click", e => { if (e.target === dlg) dlg.close(); });
 
-  /* ---------- липкая панель: только после блока «в комплекте» и после главной кнопки ---------- */
-  (function () {
-    const bar = $("#sticky"), cta = $("#main-cta"), kit = document.querySelector(".kit-title");
-    if (!bar || !cta || !kit) return;
-    let raf = 0;
-    function update() {
-      raf = 0;
-      const vh = window.innerHeight || document.documentElement.clientHeight;
-      const reached = kit.getBoundingClientRect().top < vh * 0.85;
-      const passed = cta.getBoundingClientRect().bottom < 0;
-      bar.classList.toggle("tucked", !(reached && passed) || dlg.open);
-    }
-    function req() { if (!raf) raf = requestAnimationFrame(update); }
-    window.addEventListener("scroll", req, { passive: true });
-    window.addEventListener("resize", req);
-    dlg.addEventListener("close", req);
-    dlg.addEventListener("cancel", req);
-    update();
-  })();
+  /* ---------- липкая панель прячется, пока видна главная кнопка ---------- */
+  if ("IntersectionObserver" in window) {
+    new IntersectionObserver(es => $("#sticky").classList.toggle("tucked", es[0].isIntersecting), { threshold: 0.5 })
+      .observe($("#main-cta"));
+  }
 
   /* ---------- аналитика ---------- */
   function track(event, channel) {
@@ -1359,23 +1345,6 @@ const I18N = {
     if (/^(\d)\1+$/.test(d.slice(1)) || "123456789".includes(d) || "987654321".includes(d)) return false;
     return true;
   }
-  /* приводим любой формат номера (8 555…, 0555…, 00995…, +995…, с пробелами/скобками) к +995 5XX XX XX XX */
-  function normPhone(v) {
-    let d = String(v).replace(/\D/g, "");
-    if (d.startsWith("00")) d = d.slice(2);
-    if (d.startsWith("995") && d.length >= 12) d = d.slice(3);
-    else if ((d[0] === "0" || d[0] === "8") && d.length === 10) d = d.slice(1);
-    if (d.length !== 9) return null;
-    return "+995 " + d.slice(0, 3) + " " + d.slice(3, 5) + " " + d.slice(5, 7) + " " + d.slice(7);
-  }
-  function fixPhone(force) {
-    const p = $("#lead-form").elements.phone, n = normPhone(p.value);
-    if (n && n !== p.value) p.value = n;
-    if (n) p.removeAttribute("aria-invalid");
-  }
-  $("#lead-form").elements.phone.addEventListener("input", () => fixPhone());
-  $("#lead-form").elements.phone.addEventListener("blur", () => fixPhone());
-  $("#lead-form").elements.phone.addEventListener("paste", () => setTimeout(fixPhone, 0));
   let checkoutSent = false;
   function checkCheckout() {
     const F = $("#lead-form").elements;
@@ -1383,6 +1352,7 @@ const I18N = {
     checkoutSent = true;
     track("InitiateCheckout", "phone");
   }
+  $("#lead-form").elements.city.addEventListener("change", renderCart);
   ["input", "change", "blur"].forEach(t => {
     $("#lead-form").elements.phone.addEventListener(t, checkCheckout);
     $("#lead-form").elements.name.addEventListener(t, checkCheckout);
@@ -1393,14 +1363,9 @@ const I18N = {
   form.addEventListener("submit", async ev => {
     ev.preventDefault();
     const t = I18N[lang];
-    fixPhone();
     const F = form.elements, name = F.name.value.trim(), phone = F.phone.value.trim();
-    F.name.removeAttribute("aria-invalid"); F.phone.removeAttribute("aria-invalid");
     if (!name || phone.replace(/\D/g, "").length < 9) {
-      const noName = !name;
-      (noName ? F.name : F.phone).setAttribute("aria-invalid", "true");
-      msg.className = "form-msg err"; msg.textContent = noName ? t.fNeed : t.fPhoneBad; msg.hidden = false;
-      (noName ? F.name : F.phone).focus(); return;
+      msg.className = "form-msg err"; msg.textContent = t.fNeed; msg.hidden = false; return;
     }
     const c = calc(), sum = c.sum;
     F.qty.value = c.qty; F.offer.value = offer;
@@ -1466,7 +1431,6 @@ const I18N = {
     const bar = $("#cookie-bar"); bar.hidden = false;
     const measure = () => !bar.hidden && setCookieH(bar.getBoundingClientRect().height);
     measure(); window.addEventListener("resize", measure);
-    if (window.ResizeObserver) new ResizeObserver(measure).observe(bar);
     const decide = v => { try { localStorage.setItem(CONSENT_KEY, v); } catch (e) {} bar.hidden = true; setCookieH(0); if (v === "no" && window.fbq) window.fbq("consent", "revoke"); };
     $("#cookie-yes").addEventListener("click", () => decide("yes"));
     $("#cookie-no").addEventListener("click", () => decide("no"));

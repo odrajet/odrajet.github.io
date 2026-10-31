@@ -151,6 +151,8 @@
   .gallery2 .main { margin-top: 0; }
   .pack .pr { text-align: right; font-weight: 800; }
   .pack .pr s { display: block; font-weight: 400; color: var(--muted); font-size: 13px; }
+  .pr .was, .pack .pr s.was { display: inline; text-decoration: line-through; font-weight: 400; color: var(--muted); font-size: .82em; margin-right: 6px; }
+  .pr .disc { font-style: normal; font-weight: 800; font-size: 11px; color: #fff; background: #d92d20; border-radius: 6px; padding: 2px 5px; margin-left: 6px; vertical-align: 1px; }
   .pack .flag {
     position: absolute; top: -10px; right: 12px; background: var(--accent); color: #fff;
     font-size: 11px; font-weight: 800; border-radius: 999px; padding: 2px 9px; letter-spacing: .03em;
@@ -701,12 +703,13 @@ const CONFIG = {
   pixelId: "1047116104717565",
   formEndpoint: "https://api.web3forms.com/submit",
   formKey: "e10cfa26-080d-46a5-9d72-45ee5bd1d8b3",
-  priceBed: 159,            // раскладушка без матраса + доставка
-  priceMat: 169,            // раскладушка с матрасом + доставка
-  priceSet: 179,            // раскладушка + матрас + чехол, доставка по Тбилиси бесплатно
-  pricePremium: 269,        // премиум: комплект + постельное бельё, доставка по Тбилиси бесплатно
-  priceSetTwo: 339,         // допродажа на «Спасибо»: 2 комплекта, доставка бесплатно
-  priceWholesale: 145,
+  priceBed: 139,            // раскладушка без матраса + доставка (31.10: −20 ₾, было 159)
+  priceMat: 149,            // раскладушка с матрасом + доставка (не показывается; было 169)
+  priceSet: 159,            // раскладушка + матрас + чехол, доставка по Тбилиси бесплатно (31.10: −20 ₾, было 179)
+  pricePremium: 249,        // премиум: комплект + постельное бельё, доставка по Тбилиси бесплатно (31.10: −20 ₾, было 269)
+  priceSetTwo: 299,         // допродажа на «Спасибо»: 2 комплекта, доставка бесплатно
+  priceWholesale: 125,      // опт от 5 шт. (было 145; 31.10 опущено ниже розницы 139)
+  was: { bed: 159, set: 179, prem: 269 },   // старые цены для зачёркивания и бейджа −%
   wholesaleMin: 5,
   delivery: 15,
   cutoff: "10:30",          // до этого времени (Тбилиси, пн–сб) обещаем доставку сегодня
@@ -1147,7 +1150,13 @@ const I18N = {
       bed: money(CONFIG.priceBed), mat: money(CONFIG.priceMat), set: money(CONFIG.priceSet), prem: money(CONFIG.pricePremium),
       cur: money(OFFERS[pick].price), delivery: money(CONFIG.delivery), wholesale: money(CONFIG.priceWholesale)
     };
-    $$("[data-price]").forEach(el => { el.textContent = P[el.dataset.price]; });
+    $$("[data-price]").forEach(el => {
+      const k = el.dataset.price, w = CONFIG.was[k];
+      if (w && el.closest(".pack, .row")) {
+        const pct = Math.round((w - CONFIG[{ bed: "priceBed", set: "priceSet", prem: "pricePremium" }[k]]) / w * 100);
+        el.innerHTML = '<s class="was">' + money(w) + '</s>' + P[k] + '<i class="disc">−' + pct + '%</i>';
+      } else el.textContent = P[k];
+    });
   }
 
   function render() {

@@ -39,7 +39,7 @@
   <p class="sum" id="sum" hidden></p>
   <a class="btn btn-wa" href="https://wa.me/995599703991?text=%E1%83%92%E1%83%90%E1%83%9B%E1%83%90%E1%83%A0%E1%83%AF%E1%83%9D%E1%83%91%E1%83%90%21%20%E1%83%A1%E1%83%90%E1%83%98%E1%83%A2%E1%83%96%E1%83%94%20%E1%83%A8%E1%83%94%E1%83%95%E1%83%A3%E1%83%99%E1%83%95%E1%83%94%E1%83%97%E1%83%94%20%E1%83%93%E1%83%90%E1%83%A1%E1%83%90%E1%83%99%E1%83%94%E1%83%AA%E1%83%98%20%E1%83%A1%E1%83%90%E1%83%AC%E1%83%9D%E1%83%9A%E1%83%98." target="_blank" rel="noopener">მოგვწერეთ WhatsApp-ში</a>
   <section class="up" id="up">
-    <h2>2 კომპლექტი — 339 ₾ <s>358 ₾</s></h2>
+    <h2>2 კომპლექტი — 299 ₾ <s>318 ₾</s></h2>
     <p>2 დასაკეცი საწოლი მატრასებითა და შესანახი ჩანთებით + უფასო მიწოდება თბილისში. ეკონომია 19 ₾.</p>
     <a class="btn btn-up" id="up-btn" href="https://wa.me/995599703991" target="_blank" rel="noopener">შეკვეთის შეცვლა</a>
   </section>
@@ -54,8 +54,8 @@
   /* состав и сумму заказа не показываем: одна общая страница для всех вариантов (Родион 28.10) */
   /* допродажа: открывает WhatsApp с готовым текстом (заказ уже отправлен, второй заказ в форме не создаём) */
   const upBtn = document.getElementById("up-btn");
-  upBtn.href = "https://wa.me/995599703991?text=" + encodeURIComponent("გამარჯობა! ჩემი შეკვეთა №{id}. მინდა 2 კომპლექტი (2 საწოლი + მატრასები + ჩანთები) 339 ₾-ად, უფასო მიწოდებით თბილისში.".replace("{id}", id || "—"));
-  upBtn.addEventListener("click", function () { if (window.fbq) fbq("trackCustom", "UpsellClick", { value: 339, currency: "GEL", lang: "ka" }); });
+  upBtn.href = "https://wa.me/995599703991?text=" + encodeURIComponent("გამარჯობა! ჩემი შეკვეთა №{id}. მინდა 2 კომპლექტი (2 საწოლი + მატრასები + ჩანთები) 299 ₾-ად, უფასო მიწოდებით თბილისში.".replace("{id}", id || "—"));
+  upBtn.addEventListener("click", function () { if (window.fbq) fbq("trackCustom", "UpsellClick", { value: 299, currency: "GEL", lang: "ka" }); });
 
   return;  /* черновик: пикселя нет */
   /* пиксель Meta: как на сайте — работает, если человек не нажал «Отказаться» */
